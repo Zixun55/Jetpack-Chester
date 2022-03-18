@@ -6,4 +6,3 @@ int main(){
 }
 4s6u5y5rtflyigyueixrtic;yciidfhjll
 
-//Реактивный ранец Честер
