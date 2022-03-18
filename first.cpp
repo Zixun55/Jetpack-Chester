@@ -5,5 +5,4 @@ int main(){
 	cout << "fuck you" << endl;
 	return 0;
 }
-4s6u5y5rtflyigyueixrtic;yciidfhjll
 
