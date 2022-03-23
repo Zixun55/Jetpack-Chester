@@ -79,7 +79,8 @@ namespace game_framework {
 		//
 		// 開始載入資料
 		//
-		logo.LoadBitmap(".\\Bitmaps\\blood.bmp", RGB(255, 255, 255));
+		logo.LoadBitmap(".\\Bitmaps\\background_true.bmp");
+		start.LoadBitmap(".\\Bitmaps\\background_startbutton.bmp",RGB(255,255,255));
 		//title.LoadBitmap("./game_image/background.bmp");
 		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
@@ -99,20 +100,31 @@ namespace game_framework {
 			GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
 		else if (nChar == KEY_ESC)								// Demo 關閉遊戲的方法
 			PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
+		//bool MOUSE_START = FALSE;
+	
+
 	}
 
-	void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
+	void CGameStateInit::OnLButtonUp(UINT nFlags, CPoint point)
 	{
+		CPoint start0(243,250);
+		CPoint start1(539,337);
+		CPoint zero(0,0);
+		if(point - start )
 		GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
 	}
+
+
 
 	void CGameStateInit::OnShow()
 	{
 		//
 		// 貼上logo
 		//
-		logo.SetTopLeft((SIZE_X - logo.Width()) / 2, SIZE_Y / 8);
+		logo.SetTopLeft(0,0);
 		logo.ShowBitmap();
+		start.SetTopLeft(243, 250);
+		start.ShowBitmap();
 		//
 		// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
 		//
