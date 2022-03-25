@@ -79,8 +79,9 @@ namespace game_framework {
 		//
 		// 開始載入資料
 		//
-		logo.LoadBitmap(".\\Bitmaps\\background_true.bmp");
+		title.LoadBitmap(".\\Bitmaps\\background_true.bmp");
 		start.LoadBitmap(".\\Bitmaps\\background_startbutton.bmp",RGB(255,255,255));
+		start_dark.LoadBitmap(".\\Bitmaps\\blood.bmp",RGB(255,255,255));
 		//title.LoadBitmap("./game_image/background.bmp");
 		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
@@ -90,21 +91,27 @@ namespace game_framework {
 
 	void CGameStateInit::OnBeginState()
 	{
+		in = false;
 	}
-
-	void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+	void CGameStateInit::OnMouseMove(UINT nFlags, CPoint point)
 	{
-		const char KEY_ESC = 27;
-		const char KEY_SPACE = 32;
-		//if (nChar == KEY_SPACE)
-			//GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
-		//else if (nChar == KEY_ESC)								// Demo 關閉遊戲的方法
-			//PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
-		//bool MOUSE_START = FALSE;
-	
-
+		CPoint start0(243, 250);
+		int allx = 296;
+		int ally = 87;
+		CPoint new_point = point - start0;
+		if (new_point.x > 0 && new_point.y > 0) {
+			if (new_point.x < allx && new_point.y < ally) {
+				in = true;
+			}
+			else {
+				in = false;
+			}
+		}
+		else
+		{
+			in = false;
+		}
 	}
-
 	void CGameStateInit::OnLButtonUp(UINT nFlags, CPoint point)
 	{
 		CPoint start0(243,250);
@@ -115,23 +122,26 @@ namespace game_framework {
 		if (new_point.x > 0 && new_point.y > 0) {
 			if (new_point.x < allx && new_point.y < ally) {
 				GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
-
 			}
 		}
 		//if(point - start )
 	}
-
-
-
 	void CGameStateInit::OnShow()
 	{
 		//
 		// 貼上logo
 		//
-		logo.SetTopLeft(0,0);
-		logo.ShowBitmap();
-		start.SetTopLeft(243, 250);
-		start.ShowBitmap();
+		title.SetTopLeft(0,0);
+		title.ShowBitmap();
+
+		if (in) {
+			start_dark.SetTopLeft(243, 250);
+			start_dark.ShowBitmap();
+		}
+		else {
+			start.SetTopLeft(243, 250);
+			start.ShowBitmap();
+		}
 		//
 		// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
 		//
