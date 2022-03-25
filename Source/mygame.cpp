@@ -96,10 +96,10 @@ namespace game_framework {
 	{
 		const char KEY_ESC = 27;
 		const char KEY_SPACE = 32;
-		if (nChar == KEY_SPACE)
-			GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
-		else if (nChar == KEY_ESC)								// Demo 關閉遊戲的方法
-			PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
+		//if (nChar == KEY_SPACE)
+			//GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
+		//else if (nChar == KEY_ESC)								// Demo 關閉遊戲的方法
+			//PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);	// 關閉遊戲
 		//bool MOUSE_START = FALSE;
 	
 
@@ -109,9 +109,16 @@ namespace game_framework {
 	{
 		CPoint start0(243,250);
 		CPoint start1(539,337);
-		CPoint zero(0,0);
-		if(point - start )
-		GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
+		CPoint new_point = point - start0;
+		int allx = 539 - 243;
+		int ally = 337 - 250;
+		if (new_point.x > 0 && new_point.y > 0) {
+			if (new_point.x < allx && new_point.y < ally) {
+				GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
+
+			}
+		}
+		//if(point - start )
 	}
 
 
