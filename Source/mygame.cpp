@@ -170,9 +170,9 @@ namespace game_framework {
 
 	void CGameStateOver::OnMove()
 	{
-		counter--;
-		if (counter < 0)
-			GotoGameState(GAME_STATE_INIT);
+		//counter--;
+		//if (counter < 0)
+			//GotoGameState(GAME_STATE_INIT);
 	}
 
 	void CGameStateOver::OnBeginState()
@@ -195,23 +195,87 @@ namespace game_framework {
 		// 最終進度為100%
 		//
 		ShowInitProgress(100);
+		lost.LoadBitmap(".\\Bitmaps\\lost.bmp");
+		again.LoadBitmap(".\\Bitmaps\\againbutton.bmp");
+		menu.LoadBitmap(".\\Bitmaps\\menubutton.bmp");
 	}
 
 	void CGameStateOver::OnShow()
 	{
-		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+		lost.ShowBitmap();
+
+		again.SetTopLeft(243, 180);
+		again.ShowBitmap();
+
+		menu.SetTopLeft(243, 280);
+		menu.ShowBitmap();
+
+		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC      521,265
 		CFont f, *fp;
 		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
 		fp = pDC->SelectObject(&f);					// 選用 font f
 		pDC->SetBkColor(RGB(0, 0, 0));
 		pDC->SetTextColor(RGB(255, 255, 0));
-		char str[80];								// Demo 數字對字串的轉換
-		sprintf(str, "Game Over ! (%d)", counter / 30);
-		pDC->TextOut(240, 210, str);
+		//char str[80];								// Demo 數字對字串的轉換
+		//sprintf(str, "Game Over ! (%d)", counter / 30);
+		//pDC->TextOut(240, 210, str);
 		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	}
-
+	void CGameStateOver::OnMouseMove(UINT nFlags, CPoint point)
+	{
+		CPoint start0(243, 180);
+		int allx = 296;
+		int ally = 87;
+		CPoint new_point = point - start0;
+		if (new_point.x > 0 && new_point.y > 0) {
+			if (new_point.x < allx && new_point.y < ally) {
+				in = true;
+			}
+			else {
+				in = false;
+			}
+		}
+		else
+		{
+			in = false;
+		}
+		CPoint start1(243,280);
+		CPoint ne_point = point - start1;
+		if (ne_point.x > 0 && ne_point.y > 0) {
+			if (ne_point.x < allx && ne_point.y < ally) {
+				in1 = true;
+			}
+			else {
+				in1 = false;
+			}
+		}
+		else
+		{
+			in1 = false;
+		}
+	}
+	void CGameStateOver::OnLButtonUp(UINT nFlags, CPoint point)
+	{
+		CPoint start0(243, 180);
+		CPoint new_point = point - start0;
+		int allx = 278;
+		int ally = 85;
+		if (new_point.x > 0 && new_point.y > 0) {
+			if (new_point.x < allx && new_point.y < ally) {
+				GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
+			}
+		}
+		CPoint start1(243, 280);
+		CPoint ne_point = point - start1;
+		int alx = 278;
+		int aly = 85;
+		if (ne_point.x > 0 && ne_point.y > 0) {
+			if (ne_point.x < allx && ne_point.y < ally) {
+				GotoGameState(GAME_STATE_INIT);		// 切換至GAME_STATE_RUN
+			}
+		}
+	}
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲執行物件，主要的遊戲程式都在這裡
 	/////////////////////////////////////////////////////////////////////////////
@@ -245,7 +309,7 @@ namespace game_framework {
 			ball[i].SetIsAlive(true);
 		}
 		eraser.Initialize();
-		background.SetTopLeft(BACKGROUND_X, 0);				// 設定背景的起始座標
+		background.SetTopLeft(0, 0);				// 設定背景的起始座標
 		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 		hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 		hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
@@ -265,9 +329,13 @@ namespace game_framework {
 		//
 		// 移動背景圖的座標
 		//
-		if (background.Top() > SIZE_Y)
-			background.SetTopLeft(60, -background.Height());
-		background.SetTopLeft(background.Left(), background.Top() + 1);
+		//if (background.Top() > SIZE_Y)
+			//background.SetTopLeft(60, -background.Height());
+
+		if (background.Left() > -640) {                                       //畫面移動
+			background.SetTopLeft(background.Left() - 1, background.Top());
+		}
+		
 		//
 		// 移動球
 		//
@@ -285,7 +353,7 @@ namespace game_framework {
 			if (ball[i].IsAlive() && ball[i].HitEraser(&eraser)) {
 				ball[i].SetIsAlive(false);
 				CAudio::Instance()->Play(AUDIO_DING);
-				hits_left.Add(-1);
+				hits_left.Add(-10);
 				//
 				// 若剩餘碰撞次數為0，則跳到Game Over狀態
 				//
@@ -315,7 +383,7 @@ namespace game_framework {
 		for (i = 0; i < NUMBALLS; i++)
 			ball[i].LoadBitmap();								// 載入第i個球的圖形
 		eraser.LoadBitmap();
-		background.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
+		background.LoadBitmap(".\\Bitmaps\\bg1_test.bmp");					// 載入遊戲中背景的圖形
 		//
 		// 完成部分Loading動作，提高進度
 		//

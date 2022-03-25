@@ -72,7 +72,6 @@ namespace game_framework {
 		CMovingBitmap title;                            // init的封面
 		CMovingBitmap start;                            // start的按鈕
 		CMovingBitmap start_dark;                       // start的按鈕_暗掉
-
 		bool in;
 	};
 
@@ -120,11 +119,18 @@ namespace game_framework {
 		CGameStateOver(CGame *g);
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnInit();
+		void OnMouseMove(UINT nFlags, CPoint point);
+		void OnLButtonUp(UINT nFlags, CPoint point);
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		int counter;	// 倒數之計數器
+		CMovingBitmap lost;         //結束畫面
+		CMovingBitmap again;        //again button
+		CMovingBitmap menu;         //menu button
+		bool in;
+		bool in1;
 	};
 
 }
