@@ -124,7 +124,6 @@ namespace game_framework {
 				GotoGameState(GAME_STATE_RUN);		// ¤Á´«¦ÜGAME_STATE_RUN
 			}
 		}
-		//if(point - start )
 	}
 	void CGameStateInit::OnShow()
 	{
