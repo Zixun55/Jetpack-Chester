@@ -129,6 +129,8 @@ namespace game_framework {
 		CMovingBitmap lost;         //µ²§ôµe­±
 		CMovingBitmap again;        //again button
 		CMovingBitmap menu;         //menu button
+		CMovingBitmap again_dark;        //again_dark button
+		CMovingBitmap menu_dark;         //menu_dark button
 		bool in;
 		bool in1;
 	};
