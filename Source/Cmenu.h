@@ -16,7 +16,7 @@ namespace game_framework {
 		void SetDelay(int d);	
         void OnLButtonUp(UINT nFlags, CPoint point);							
 	protected:		
-		
+		CMovingBitmap background;
 		CMovingBitmap character_image;
 	private:
 
