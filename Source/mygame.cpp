@@ -81,7 +81,7 @@ namespace game_framework {
 		//
 		title.LoadBitmap(".\\Bitmaps\\background_true.bmp");
 		start.LoadBitmap(".\\Bitmaps\\background_startbutton.bmp",RGB(255,255,255));
-		start_dark.LoadBitmap(".\\Bitmaps\\blood.bmp",RGB(255,255,255));
+		start_dark.LoadBitmap(".\\Bitmaps\\background_startbutton_dark.bmp",RGB(255,255,255));
 		//title.LoadBitmap("./game_image/background.bmp");
 		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
@@ -250,6 +250,8 @@ namespace game_framework {
 		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 		hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 		hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
+
+
 		CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
 		CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
 		CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
