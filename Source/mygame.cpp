@@ -198,17 +198,32 @@ namespace game_framework {
 		lost.LoadBitmap(".\\Bitmaps\\lost.bmp");
 		again.LoadBitmap(".\\Bitmaps\\againbutton.bmp");
 		menu.LoadBitmap(".\\Bitmaps\\menubutton.bmp");
+		again_dark.LoadBitmap(".\\Bitmaps\\againbutton.bmp");
+		menu_dark.LoadBitmap(".\\Bitmaps\\menubutton_dark.bmp");
 	}
 
 	void CGameStateOver::OnShow()
 	{
 		lost.ShowBitmap();
 
-		again.SetTopLeft(243, 180);
-		again.ShowBitmap();
+		if (in) {
+			again_dark.SetTopLeft(243, 180);
+			again_dark.ShowBitmap();
+		}
+		else {
+			again.SetTopLeft(243, 180);
+			again.ShowBitmap();
+		}
+		if (in1) {
+			menu_dark.SetTopLeft(243, 280);
+			menu_dark.ShowBitmap();
+		}
+		else {
+			menu.SetTopLeft(243, 280);
+			menu.ShowBitmap();
+		}
 
-		menu.SetTopLeft(243, 280);
-		menu.ShowBitmap();
+
 
 		CDC *pDC = CDDraw::GetBackCDC();			// ¨ú±o Back Plain ªº CDC      521,265
 		CFont f, *fp;
