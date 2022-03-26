@@ -215,7 +215,7 @@ namespace game_framework {
 			again.ShowBitmap();
 		}
 
-		if (in) {                              //目前兩個按鈕會同時暗，需修改
+		if (in1) {                              //目前兩個按鈕會同時暗，需修改
 			menu_dark.SetTopLeft(243,280);
 			menu_dark.ShowBitmap();
 		}
