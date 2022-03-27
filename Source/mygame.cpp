@@ -207,22 +207,22 @@ namespace game_framework {
 		lost.ShowBitmap();
 
 
-		if (in) {
-			again_dark.SetTopLeft(243, 180);
-			again_dark.ShowBitmap();
-		}
-		else {
+		if (!in) {
 			again.SetTopLeft(243, 180);
 			again.ShowBitmap();
 		}
-
-		if (in1) {                              //目前兩個按鈕會同時暗，需修改
-			menu_dark.SetTopLeft(243,280);
-			menu_dark.ShowBitmap();
-		}
 		else {
+			again_dark.SetTopLeft(243, 180);
+			again_dark.ShowBitmap();
+		}
+
+		if (!in1) {                              //目前兩個按鈕會同時暗，需修改
 			menu.SetTopLeft(243, 280);
 			menu.ShowBitmap();
+		}
+		else {
+			menu_dark.SetTopLeft(243,280);
+			menu_dark.ShowBitmap();
 		}
 		
 
