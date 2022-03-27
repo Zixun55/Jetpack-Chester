@@ -198,11 +198,7 @@ namespace game_framework {
 		lost.LoadBitmap(".\\Bitmaps\\lost.bmp");
 		again.LoadBitmap(".\\Bitmaps\\againbutton.bmp");
 		menu.LoadBitmap(".\\Bitmaps\\menubutton.bmp");
-<<<<<<< HEAD
 		again_dark.LoadBitmap(".\\Bitmaps\\againbutton_dark.bmp");
-=======
-		again_dark.LoadBitmap(".\\Bitmaps\\againbutton.bmp");
->>>>>>> a6b3913b45ff1da0a0fc48ce84bf3621bffeda10
 		menu_dark.LoadBitmap(".\\Bitmaps\\menubutton_dark.bmp");
 	}
 
@@ -210,11 +206,8 @@ namespace game_framework {
 	{
 		lost.ShowBitmap();
 
-<<<<<<< HEAD
-		if(in) {
-=======
+
 		if (in) {
->>>>>>> a6b3913b45ff1da0a0fc48ce84bf3621bffeda10
 			again_dark.SetTopLeft(243, 180);
 			again_dark.ShowBitmap();
 		}
@@ -222,7 +215,6 @@ namespace game_framework {
 			again.SetTopLeft(243, 180);
 			again.ShowBitmap();
 		}
-<<<<<<< HEAD
 
 		if (in1) {                              //目前兩個按鈕會同時暗，需修改
 			menu_dark.SetTopLeft(243,280);
@@ -233,18 +225,7 @@ namespace game_framework {
 			menu.ShowBitmap();
 		}
 		
-=======
-		if (in1) {
-			menu_dark.SetTopLeft(243, 280);
-			menu_dark.ShowBitmap();
-		}
-		else {
-			menu.SetTopLeft(243, 280);
-			menu.ShowBitmap();
-		}
 
-
->>>>>>> a6b3913b45ff1da0a0fc48ce84bf3621bffeda10
 
 		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC      
 		CFont f, *fp;

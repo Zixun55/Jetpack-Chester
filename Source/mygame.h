@@ -129,15 +129,10 @@ namespace game_framework {
 		CMovingBitmap lost;         //µ²§ôµe­±
 		CMovingBitmap again;        //again button
 		CMovingBitmap menu;         //menu button
-<<<<<<< HEAD
 		CMovingBitmap again_dark;        //again_dark button
 		CMovingBitmap menu_dark;         //menu_dark button
-=======
-		CMovingBitmap again_dark;   //again button dark
-		CMovingBitmap menu_dark;    //menu button dark
->>>>>>> a6b3913b45ff1da0a0fc48ce84bf3621bffeda10
-		bool in;
-		bool in1;
+		bool in = false;
+		bool in1 = false;
 	};
 
 }
