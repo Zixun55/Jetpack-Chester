@@ -198,11 +198,8 @@ namespace game_framework {
 		lost.LoadBitmap(".\\Bitmaps\\lost.bmp");
 		again.LoadBitmap(".\\Bitmaps\\againbutton.bmp");
 		menu.LoadBitmap(".\\Bitmaps\\menubutton.bmp");
-<<<<<<< HEAD
+
 		again_dark.LoadBitmap(".\\Bitmaps\\againbutton_dark.bmp");
-=======
-		again_dark.LoadBitmap(".\\Bitmaps\\againbutton.bmp");
->>>>>>> a6b3913b45ff1da0a0fc48ce84bf3621bffeda10
 		menu_dark.LoadBitmap(".\\Bitmaps\\menubutton_dark.bmp");
 	}
 
@@ -210,41 +207,28 @@ namespace game_framework {
 	{
 		lost.ShowBitmap();
 
-<<<<<<< HEAD
-		if(in) {
-=======
-		if (in) {
->>>>>>> a6b3913b45ff1da0a0fc48ce84bf3621bffeda10
-			again_dark.SetTopLeft(243, 180);
-			again_dark.ShowBitmap();
-		}
-		else {
+
+		if (!in) {
 			again.SetTopLeft(243, 180);
 			again.ShowBitmap();
 		}
-<<<<<<< HEAD
-
-		if (in1) {                              //目前兩個按鈕會同時暗，需修改
-			menu_dark.SetTopLeft(243,280);
-			menu_dark.ShowBitmap();
-		}
 		else {
+			again_dark.SetTopLeft(243, 180);
+			again_dark.ShowBitmap();
+			
+		}
+
+		if (!in1) {
 			menu.SetTopLeft(243, 280);
 			menu.ShowBitmap();
 		}
-		
-=======
-		if (in1) {
+		else {
 			menu_dark.SetTopLeft(243, 280);
 			menu_dark.ShowBitmap();
-		}
-		else {
-			menu.SetTopLeft(243, 280);
-			menu.ShowBitmap();
+			
 		}
 
 
->>>>>>> a6b3913b45ff1da0a0fc48ce84bf3621bffeda10
 
 		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC      
 		CFont f, *fp;
@@ -349,7 +333,7 @@ namespace game_framework {
 		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 		hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 		hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
-
+		character.SetTopLeft(300, 300);                     //設定角色的起始座標
 
 		CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
 		CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
@@ -368,10 +352,14 @@ namespace game_framework {
 		//if (background.Top() > SIZE_Y)
 			//background.SetTopLeft(60, -background.Height());
 
-		if (background.Left() > -640) {                                       //畫面移動
-			background.SetTopLeft(background.Left() - 1, background.Top());
-		}
+		//if (background.Left() > -640) {                                       //畫面移動
+		//	background.SetTopLeft(background.Left() - 1, background.Top());
+		//}
 		
+		if (character.Top() < 300) {                                            //角色下降
+			character.SetTopLeft(character.Left(), character.Top() + 3);
+		}
+
 		//
 		// 移動球
 		//
@@ -433,6 +421,9 @@ namespace game_framework {
 		corner.ShowBitmap(background);							// 將corner貼到background
 		bball.LoadBitmap();										// 載入圖形
 		hits_left.LoadBitmap();
+		character.LoadBitmap(".\\Bitmaps\\ch2.bmp", RGB(255, 255, 255));
+		steam.LoadBitmap(".\\Bitmaps\\steam.bmp", RGB(255, 255, 255));
+
 		CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
 		CAudio::Instance()->Load(AUDIO_LAKE, "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
 		CAudio::Instance()->Load(AUDIO_NTUT, "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
@@ -455,6 +446,17 @@ namespace game_framework {
 			eraser.SetMovingUp(true);
 		if (nChar == KEY_DOWN)
 			eraser.SetMovingDown(true);
+
+		if (nChar == KEY_LEFT) {
+			background.SetTopLeft(background.Left() + 10, background.Top());
+			character.SetTopLeft(character.Left(), character.Top()-30);
+		}
+			
+		if (nChar == KEY_RIGHT) {
+			background.SetTopLeft(background.Left() - 10, background.Top());
+			character.SetTopLeft(character.Left(), character.Top() - 30);
+		}
+
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -471,6 +473,11 @@ namespace game_framework {
 			eraser.SetMovingUp(false);
 		if (nChar == KEY_DOWN)
 			eraser.SetMovingDown(false);
+
+		//if (nChar == KEY_LEFT)
+		//	character.SetTopLeft(character.Left() - 1, character.Top());
+		//if (nChar == KEY_RIGHT)
+		//	character.SetTopLeft(character.Left() - 1, character.Top());
 	}
 
 	void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
@@ -515,6 +522,8 @@ namespace game_framework {
 			ball[i].OnShow();				// 貼上第i號球
 		bball.OnShow();						// 貼上彈跳的球
 		eraser.OnShow();					// 貼上擦子
+		character.ShowBitmap();
+		
 		//
 		//  貼上左上及右下角落的圖
 		//

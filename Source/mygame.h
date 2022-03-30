@@ -107,6 +107,8 @@ namespace game_framework {
 		CEraser			eraser;		// 拍子
 		CInteger		hits_left;	// 剩下的撞擊數
 		CBouncingBall   bball;		// 反覆彈跳的球
+		CMovingBitmap character;    // 角色
+		CMovingBitmap steam;        // 噴氣
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -129,13 +131,8 @@ namespace game_framework {
 		CMovingBitmap lost;         //結束畫面
 		CMovingBitmap again;        //again button
 		CMovingBitmap menu;         //menu button
-<<<<<<< HEAD
-		CMovingBitmap again_dark;        //again_dark button
-		CMovingBitmap menu_dark;         //menu_dark button
-=======
 		CMovingBitmap again_dark;   //again button dark
 		CMovingBitmap menu_dark;    //menu button dark
->>>>>>> a6b3913b45ff1da0a0fc48ce84bf3621bffeda10
 		bool in;
 		bool in1;
 	};
