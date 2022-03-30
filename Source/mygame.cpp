@@ -198,7 +198,6 @@ namespace game_framework {
 		lost.LoadBitmap(".\\Bitmaps\\lost.bmp");
 		again.LoadBitmap(".\\Bitmaps\\againbutton.bmp");
 		menu.LoadBitmap(".\\Bitmaps\\menubutton.bmp");
-
 		again_dark.LoadBitmap(".\\Bitmaps\\againbutton_dark.bmp");
 		menu_dark.LoadBitmap(".\\Bitmaps\\menubutton_dark.bmp");
 	}
@@ -215,21 +214,19 @@ namespace game_framework {
 		else {
 			again_dark.SetTopLeft(243, 180);
 			again_dark.ShowBitmap();
-			
 		}
 
-		if (!in1) {
+
+		if (!in1) {                              //目前兩個按鈕會同時暗，需修改
 			menu.SetTopLeft(243, 280);
 			menu.ShowBitmap();
 		}
 		else {
 			menu_dark.SetTopLeft(243, 280);
 			menu_dark.ShowBitmap();
-			
 		}
 
-
-
+		
 		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC      
 		CFont f, *fp;
 		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
