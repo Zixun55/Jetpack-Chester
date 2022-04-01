@@ -14,6 +14,7 @@ namespace game_framework {
 	Ccharacter::Ccharacter()
 	{
 		Initialize();
+		animation.SetDelayCount(1);
 	}
 
 	int Ccharacter::GetX1()
@@ -48,13 +49,13 @@ namespace game_framework {
 	void Ccharacter::LoadBitmap()
 	{
 		animation.AddBitmap(".\\Bitmaps\\ch2.bmp", RGB(255, 255, 255));
+		animation.AddBitmap(".\\Bitmaps\\ch2reverse.bmp", RGB(255, 255, 255));
 		steam.LoadBitmap(".\\Bitmaps\\steam.bmp", RGB(255, 255, 255));
 	}
 
 	void Ccharacter::OnMove()
 	{
 		const int STEP_SIZE = 20;
-		animation.OnMove();
 		if (y <= 0 && isMovingLeft) {
 			y = 0;
 		}
@@ -64,9 +65,18 @@ namespace game_framework {
 		else {
 			if (isMovingLeft) {
 				y -= STEP_SIZE;
+				if (con) {
+					
+					animation.OnMove();
+					con = false;
+				}
 			}
 			if (isMovingRight) {
 				y -= STEP_SIZE;
+				if (!con) {
+					animation.OnMove();
+					con = true;
+				}
 			}
 			if (GetY2() < 512) {
 				y += 7;
@@ -94,11 +104,11 @@ namespace game_framework {
 
 	void Ccharacter::OnShow() // ¦w¦w 
 	{
-		if (isMovingLeft) {
+		if (isMovingRight) {
 			steam.SetTopLeft(x - animation.Width() + 30, y + animation.Height() - 10);
 			steam.ShowBitmap();
 		}
-		if (isMovingRight) {
+		if (isMovingLeft) {
 			steam.SetTopLeft(x + animation.Width() - 30, y + animation.Height() - 10);
 			steam.ShowBitmap();
 		}
