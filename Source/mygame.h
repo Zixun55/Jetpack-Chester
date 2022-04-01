@@ -42,6 +42,7 @@
 #include "CBall.h"
 #include "CBouncingBall.h"
 #include "Ccharacter.h"
+#include "CMap.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -110,7 +111,7 @@ namespace game_framework {
 		CBouncingBall   bball;		// 反覆彈跳的球
 		CMovingBitmap steam;        // 噴氣
 
-
+		CMap       map;             // 地圖
 		Ccharacter chtest;          // 角色
 	};
 

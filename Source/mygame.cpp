@@ -327,8 +327,9 @@ namespace game_framework {
 		}
 		eraser.Initialize();
 		chtest.Initialize();
+		map.Initialize();
 
-		background.SetTopLeft(0, 0);				// 設定背景的起始座標
+		//background.SetTopLeft(0, 0);				// 設定背景的起始座標
 		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 		hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 		hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
@@ -366,6 +367,7 @@ namespace game_framework {
 		//
 		eraser.OnMove();
 		chtest.OnMove();
+		map.OnMove();
 		//
 		// 判斷擦子是否碰到球
 		//
@@ -404,8 +406,9 @@ namespace game_framework {
 			ball[i].LoadBitmap();								// 載入第i個球的圖形
 		eraser.LoadBitmap();
 		chtest.LoadBitmap();
+		map.LoadBitmap();
 
-		background.LoadBitmap(".\\Bitmaps\\bg1_test.bmp");					// 載入遊戲中背景的圖形
+		//background.LoadBitmap(".\\Bitmaps\\bg1_test.bmp");					// 載入遊戲中背景的圖形
 		//
 		// 完成部分Loading動作，提高進度
 		//
@@ -416,7 +419,7 @@ namespace game_framework {
 		//
 		help.LoadBitmap(IDB_HELP, RGB(255, 255, 255));				// 載入說明的圖形
 		corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形
-		corner.ShowBitmap(background);							// 將corner貼到background
+		//corner.ShowBitmap(background);							// 將corner貼到background
 		bball.LoadBitmap();										// 載入圖形
 		hits_left.LoadBitmap();
 		steam.LoadBitmap(".\\Bitmaps\\steam.bmp", RGB(255, 255, 255));
@@ -444,19 +447,21 @@ namespace game_framework {
 		if (nChar == KEY_DOWN)
 			eraser.SetMovingDown(true);
 
-		if (nChar == KEY_LEFT) {
-			background.SetTopLeft(background.Left() + 20, background.Top());
-		}
+		//if (nChar == KEY_LEFT) {
+		//	background.SetTopLeft(background.Left() + 20, background.Top());
+		//}
 
-		if (nChar == KEY_RIGHT) {
-			background.SetTopLeft(background.Left() - 20, background.Top());
-		}
+		//if (nChar == KEY_RIGHT) {
+		//	background.SetTopLeft(background.Left() - 20, background.Top());
+		//}
 
 		if (nChar == KEY_LEFT) {
 			chtest.SetMovingLeft(true);
+			map.SetMovingLeft(true);
 		}
 		if (nChar == KEY_RIGHT) {
 			chtest.SetMovingRight(true);
+			map.SetMovingRight(true);
 		}
 	}
 
@@ -475,10 +480,14 @@ namespace game_framework {
 		if (nChar == KEY_DOWN)
 			eraser.SetMovingDown(false);
 
-		if (nChar == KEY_LEFT)
+		if (nChar == KEY_LEFT) {
 			chtest.SetMovingLeft(false);
-		if (nChar == KEY_RIGHT)
+			map.SetMovingLeft(false);
+		}
+		if (nChar == KEY_RIGHT) {
 			chtest.SetMovingRight(false);
+			map.SetMovingRight(false);
+		}
 		//if (nChar == KEY_LEFT)
 		//	character.SetTopLeft(character.Left() - 1, character.Top());
 		//if (nChar == KEY_RIGHT)
@@ -520,15 +529,15 @@ namespace game_framework {
 		//
 		//  貼上背景圖、撞擊數、球、擦子、彈跳的球
 		//
-		background.ShowBitmap();			// 貼上背景圖
+		//background.ShowBitmap();			// 貼上背景圖
 		help.ShowBitmap();					// 貼上說明圖
 		hits_left.ShowBitmap();
 		for (int i = 0; i < NUMBALLS; i++)
 			ball[i].OnShow();				// 貼上第i號球
+		map.OnShow();
 		bball.OnShow();						// 貼上彈跳的球
 		eraser.OnShow();					// 貼上擦子
 		chtest.OnShow();
-
 
 
 		//

@@ -39,7 +39,7 @@ namespace game_framework {
 
 	void Ccharacter::Initialize()
 	{
-		const int X_POS = 340;
+		const int X_POS = 340; //340
 		const int Y_POS = 414;
 		x = X_POS;
 		y = Y_POS;
@@ -51,6 +51,7 @@ namespace game_framework {
 		animation.AddBitmap(".\\Bitmaps\\ch2.bmp", RGB(255, 255, 255));
 		animation.AddBitmap(".\\Bitmaps\\ch2reverse.bmp", RGB(255, 255, 255));
 		steam.LoadBitmap(".\\Bitmaps\\steam.bmp", RGB(255, 255, 255));
+		steamR.LoadBitmap(".\\Bitmaps\\steamreverse.bmp", RGB(255, 255, 255));
 	}
 
 	void Ccharacter::OnMove()
@@ -58,15 +59,22 @@ namespace game_framework {
 		const int STEP_SIZE = 20;
 		if (y <= 0 && isMovingLeft) {
 			y = 0;
+			if (con) {
+				animation.OnMove();
+				con = false;
+			}
 		}
 		if (y <= 0 && isMovingRight) {
 			y = 0;
+			if (!con) {
+				animation.Reset();
+				con = true;
+			}
 		}
 		else {
 			if (isMovingLeft) {
 				y -= STEP_SIZE;
 				if (con) {
-					
 					animation.OnMove();
 					con = false;
 				}
@@ -74,7 +82,7 @@ namespace game_framework {
 			if (isMovingRight) {
 				y -= STEP_SIZE;
 				if (!con) {
-					animation.OnMove();
+					animation.Reset();
 					con = true;
 				}
 			}
@@ -82,6 +90,14 @@ namespace game_framework {
 				y += 7;
 			}
 		}
+		//if (x != 340) {
+			//if (isMovingLeft) {
+				//x -= 5;
+			//}
+			//if (isMovingRight) {
+				//x += 5;
+			//}
+		//}
 	}
 
 
@@ -105,12 +121,12 @@ namespace game_framework {
 	void Ccharacter::OnShow() // ¦w¦w 
 	{
 		if (isMovingRight) {
-			steam.SetTopLeft(x - animation.Width() + 30, y + animation.Height() - 10);
+			steam.SetTopLeft(x - animation.Width() + 40, y + animation.Height() - 10);
 			steam.ShowBitmap();
 		}
 		if (isMovingLeft) {
-			steam.SetTopLeft(x + animation.Width() - 30, y + animation.Height() - 10);
-			steam.ShowBitmap();
+			steamR.SetTopLeft(x + animation.Width() - 5, y + animation.Height() - 10);
+			steamR.ShowBitmap();
 		}
 		animation.SetTopLeft(x, y);
 		animation.OnShow();

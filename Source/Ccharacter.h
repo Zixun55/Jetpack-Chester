@@ -18,7 +18,7 @@ namespace game_framework {
 		void SetXY(int nx, int ny);
 	protected:
 		CAnimation animation;
-		CMovingBitmap steam;
+		CMovingBitmap steam,steamR;
 		int x, y;
 		bool isMovingDown;
 		bool isMovingLeft;
