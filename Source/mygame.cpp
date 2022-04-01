@@ -80,8 +80,8 @@ namespace game_framework {
 		// 開始載入資料
 		//
 		title.LoadBitmap(".\\Bitmaps\\background_true.bmp");
-		start.LoadBitmap(".\\Bitmaps\\background_startbutton.bmp",RGB(255,255,255));
-		start_dark.LoadBitmap(".\\Bitmaps\\background_startbutton_dark.bmp",RGB(255,255,255));
+		start.LoadBitmap(".\\Bitmaps\\background_startbutton.bmp", RGB(255, 255, 255));
+		start_dark.LoadBitmap(".\\Bitmaps\\background_startbutton_dark.bmp", RGB(255, 255, 255));
 		//title.LoadBitmap("./game_image/background.bmp");
 		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
@@ -114,8 +114,8 @@ namespace game_framework {
 	}
 	void CGameStateInit::OnLButtonUp(UINT nFlags, CPoint point)
 	{
-		CPoint start0(243,250);
-		CPoint start1(539,337);
+		CPoint start0(243, 250);
+		CPoint start1(539, 337);
 		CPoint new_point = point - start0;
 		int allx = 539 - 243;
 		int ally = 337 - 250;
@@ -130,7 +130,7 @@ namespace game_framework {
 		//
 		// 貼上logo
 		//
-		title.SetTopLeft(0,0);
+		title.SetTopLeft(0, 0);
 		title.ShowBitmap();
 
 		if (in) {
@@ -226,7 +226,7 @@ namespace game_framework {
 			menu_dark.ShowBitmap();
 		}
 
-		
+
 		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC      
 		CFont f, *fp;
 		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
@@ -257,7 +257,7 @@ namespace game_framework {
 		{
 			in = false;
 		}
-		CPoint start1(243,280);
+		CPoint start1(243, 280);
 		CPoint ne_point = point - start1;
 		if (ne_point.x > 0 && ne_point.y > 0) {
 			if (ne_point.x < allx && ne_point.y < ally) {
@@ -326,15 +326,16 @@ namespace game_framework {
 			ball[i].SetIsAlive(true);
 		}
 		eraser.Initialize();
+		chtest.Initialize();
+
 		background.SetTopLeft(0, 0);				// 設定背景的起始座標
 		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 		hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 		hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
-		character.SetTopLeft(300, 300);                     //設定角色的起始座標
 
-		CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
-		CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
-		CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
+		//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
+		//CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
+		//CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
 	}
 
 	void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -352,10 +353,7 @@ namespace game_framework {
 		//if (background.Left() > -640) {                                       //畫面移動
 		//	background.SetTopLeft(background.Left() - 1, background.Top());
 		//}
-		
-		if (character.Top() < 300) {                                            //角色下降
-			character.SetTopLeft(character.Left(), character.Top() + 3);
-		}
+
 
 		//
 		// 移動球
@@ -367,6 +365,7 @@ namespace game_framework {
 		// 移動擦子
 		//
 		eraser.OnMove();
+		chtest.OnMove();
 		//
 		// 判斷擦子是否碰到球
 		//
@@ -404,6 +403,8 @@ namespace game_framework {
 		for (i = 0; i < NUMBALLS; i++)
 			ball[i].LoadBitmap();								// 載入第i個球的圖形
 		eraser.LoadBitmap();
+		chtest.LoadBitmap();
+
 		background.LoadBitmap(".\\Bitmaps\\bg1_test.bmp");					// 載入遊戲中背景的圖形
 		//
 		// 完成部分Loading動作，提高進度
@@ -418,7 +419,6 @@ namespace game_framework {
 		corner.ShowBitmap(background);							// 將corner貼到background
 		bball.LoadBitmap();										// 載入圖形
 		hits_left.LoadBitmap();
-		character.LoadBitmap(".\\Bitmaps\\ch2.bmp", RGB(255, 255, 255));
 		steam.LoadBitmap(".\\Bitmaps\\steam.bmp", RGB(255, 255, 255));
 
 		CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
@@ -445,15 +445,19 @@ namespace game_framework {
 			eraser.SetMovingDown(true);
 
 		if (nChar == KEY_LEFT) {
-			background.SetTopLeft(background.Left() + 10, background.Top());
-			character.SetTopLeft(character.Left(), character.Top()-30);
-		}
-			
-		if (nChar == KEY_RIGHT) {
-			background.SetTopLeft(background.Left() - 10, background.Top());
-			character.SetTopLeft(character.Left(), character.Top() - 30);
+			background.SetTopLeft(background.Left() + 20, background.Top());
 		}
 
+		if (nChar == KEY_RIGHT) {
+			background.SetTopLeft(background.Left() - 20, background.Top());
+		}
+
+		if (nChar == KEY_LEFT) {
+			chtest.SetMovingLeft(true);
+		}
+		if (nChar == KEY_RIGHT) {
+			chtest.SetMovingRight(true);
+		}
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -471,6 +475,10 @@ namespace game_framework {
 		if (nChar == KEY_DOWN)
 			eraser.SetMovingDown(false);
 
+		if (nChar == KEY_LEFT)
+			chtest.SetMovingLeft(false);
+		if (nChar == KEY_RIGHT)
+			chtest.SetMovingRight(false);
 		//if (nChar == KEY_LEFT)
 		//	character.SetTopLeft(character.Left() - 1, character.Top());
 		//if (nChar == KEY_RIGHT)
@@ -519,8 +527,10 @@ namespace game_framework {
 			ball[i].OnShow();				// 貼上第i號球
 		bball.OnShow();						// 貼上彈跳的球
 		eraser.OnShow();					// 貼上擦子
-		character.ShowBitmap();
-		
+		chtest.OnShow();
+
+
+
 		//
 		//  貼上左上及右下角落的圖
 		//
