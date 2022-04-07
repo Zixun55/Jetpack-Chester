@@ -516,6 +516,7 @@ namespace game_framework {
 
 	void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
+		GotoGameState(GAME_STATE_OVER);
 		eraser.SetMovingRight(false);
 	}
 
@@ -531,13 +532,13 @@ namespace game_framework {
 		//
 		//background.ShowBitmap();			// 貼上背景圖
 		help.ShowBitmap();					// 貼上說明圖
-		hits_left.ShowBitmap();
 		for (int i = 0; i < NUMBALLS; i++)
 			ball[i].OnShow();				// 貼上第i號球
-		map.OnShow();
-		bball.OnShow();						// 貼上彈跳的球
 		eraser.OnShow();					// 貼上擦子
+		bball.OnShow();						// 貼上彈跳的球
+		map.OnShow();
 		chtest.OnShow();
+		hits_left.ShowBitmap();
 
 
 		//

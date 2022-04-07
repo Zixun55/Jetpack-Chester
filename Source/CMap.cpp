@@ -55,9 +55,12 @@ namespace game_framework {
 	{
 		const int STEP_SIZE = 5;
 		animation.OnMove();
-		if (x < 340) {
+		if (x < 100) {
 			if (isMovingLeft && x >= 0) {
 				x = 0;
+			}
+			else if (isMovingRight && x <= -2324) {
+				x = -2324;
 			}
 			else {
 				if (isMovingLeft) {
