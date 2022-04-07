@@ -47,7 +47,7 @@ namespace game_framework {
 
 	void CMap::LoadBitmap()
 	{
-		animation.AddBitmap(".\\Bitmaps\\bg1_test.bmp", RGB(255, 255, 255));
+		animation.AddBitmap(".\\Bitmaps\\bg12.bmp", RGB(255, 255, 255));
 
 	}
 
