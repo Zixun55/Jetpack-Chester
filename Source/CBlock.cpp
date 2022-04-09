@@ -46,7 +46,9 @@ namespace game_framework {
 	void CBlock::LoadBitmap()
 	{
 		bmp.AddBitmap(".//Bitmaps//laser.bmp", RGB(255, 255, 255));			// 更瞴瓜
-		bmp.AddBitmap(".//Bitmaps//prick.bmp", RGB(255, 255, 255));			// 更瞴瓜
+		bmp.AddBitmap(".//Bitmaps//laser2.bmp", RGB(255, 255, 255));			// 更瞴瓜
+		bmp.AddBitmap(".//Bitmaps//laser7.bmp", RGB(255, 255, 255));			// 更瞴瓜
+		bmp.AddBitmap(".//Bitmaps//laser8.bmp", RGB(255, 255, 255));			// 更瞴瓜
 	}
 
 	void CBlock::OnMove()
