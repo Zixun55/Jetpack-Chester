@@ -43,6 +43,7 @@
 #include "CBouncingBall.h"
 #include "Ccharacter.h"
 #include "CMap.h"
+#include "CBlock.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -102,6 +103,7 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		const int		NUMBALLS;	// 球的總數
+		const int       NUMLASER;   // 雷射總數
 		CMovingBitmap	background;	// 背景圖
 		CMovingBitmap	help;		// 說明圖
 		CBall			*ball;		// 球的陣列
@@ -113,6 +115,8 @@ namespace game_framework {
 
 		CMap       map;             // 地圖
 		Ccharacter chtest;          // 角色
+		CBlock     *laser;           // 雷射
+		CInteger   life;            // 生命
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
