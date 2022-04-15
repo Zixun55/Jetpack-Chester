@@ -16,6 +16,7 @@ namespace game_framework {
 		void SetMovingLeft(bool flag);
 		void SetMovingRight(bool flag);
 		void SetXY(int nx, int ny);
+		void CantMoving(bool flag);
 	protected:
 		CAnimation animation;
 		CMovingBitmap steam,steamR;
@@ -24,6 +25,7 @@ namespace game_framework {
 		bool isMovingLeft;
 		bool isMovingRight;
 		bool isMovingUp;
+		bool cantMoving;
 	private:
 		bool con = true;
 	};

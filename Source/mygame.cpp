@@ -298,14 +298,16 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	CGameStateRun::CGameStateRun(CGame *g)
-		: CGameState(g), NUMBALLS(28) ,NUMLASER(10)
+		: CGameState(g), NUMBALLS(28) ,NUMLASER(10), NUMBOXES(10)
 	{
 		ball = new CBall[NUMBALLS];
 		laser = new CBlock[NUMLASER];
+		boxes = new CBox[NUMBOXES];
 	}
 
 	CGameStateRun::~CGameStateRun()
 	{
+		delete[] boxes;
 		delete[] laser;
 		delete[] ball;
 	}
@@ -331,6 +333,9 @@ namespace game_framework {
 			laser[i].SetXY((i + 1) * 500, 50);
 			laser[i].SetIsAlive(true);
 		}
+		for (int i = 0; i < NUMBOXES; i++) {
+			boxes[i].SetXY((i + 1) * 1000, 280);
+		}
 		eraser.Initialize();
 		chtest.Initialize();
 		map.Initialize();
@@ -344,7 +349,25 @@ namespace game_framework {
 		//CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
 		//CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
 	}
-
+	int  CGameStateRun::ClosestBox() {
+		int x[100];
+		for (int i = 0; i < NUMBOXES; i++) {
+			x[i] = abs(boxes[i].BoxX1() - chtest.GetX2());
+		}
+		for (int i = 0; i < NUMBOXES; i = i + 1)
+		{
+			for (int j = i + 1; j < NUMBOXES; j = j + 1)
+			{
+				if (x[i] > x[j])
+				{
+					int tmp = x[i];
+					x[i] = x[j];
+					x[j] = tmp;
+				}
+			}
+		}
+		return x[0];
+	}
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
 		//
@@ -372,7 +395,6 @@ namespace game_framework {
 		// 移動擦子
 		//
 		eraser.OnMove();
-		chtest.OnMove();
 		map.OnMove();
 		//
 		// 判斷擦子是否碰到球
@@ -401,6 +423,37 @@ namespace game_framework {
 				}
 			}
 		}
+		int check_box = 0;
+		int check_ch = 0;
+		for (int i = 0; i < NUMBOXES; i++) {
+			if (boxes[i].HitEraser(&chtest)) {
+				check_box = 1;
+			}
+		}
+		int close_box = CGameStateRun::ClosestBox();
+		if (boxes[close_box].ChxBigThanBox(&chtest)) {
+			check_ch = 1;
+		}
+		for (int i = 0; i < NUMBOXES; i++) {
+			if (check_box) {
+				boxes[i].CantMoving(true);
+				if (check_ch) {
+					chtest.CantMoving(true);
+				}
+			}
+			else {
+				boxes[i].CantMoving(false);
+				if (!check_ch) {
+					chtest.CantMoving(false);
+				}
+			}
+			boxes[i].OnMove();
+		}
+		chtest.OnMove();
+		check_box = 0;
+		check_ch = 0;
+
+
 		//
 		// 移動彈跳的球
 		//
@@ -425,6 +478,9 @@ namespace game_framework {
 		map.LoadBitmap();
 		for (int i = 0; i < NUMLASER; i++) {
 			laser[i].LoadBitmap();
+		}
+		for (int i = 0; i < NUMBOXES; i++) {
+			boxes[i].LoadBitmap();
 		}
 		//background.LoadBitmap(".\\Bitmaps\\bg1_test.bmp");					// 載入遊戲中背景的圖形
 		//
@@ -471,6 +527,7 @@ namespace game_framework {
 			map.SetMovingLeft(true);
 			for (int i = 0; i < NUMLASER; i++) {
 				laser[i].SetMovingLeft(true);
+				boxes[i].SetMovingLeft(true);
 			}
 		}
 		if (nChar == KEY_RIGHT) {
@@ -478,6 +535,7 @@ namespace game_framework {
 			map.SetMovingRight(true);
 			for (int i = 0; i < NUMLASER; i++) {
 				laser[i].SetMovingRight(true);
+				boxes[i].SetMovingRight(true);
 			}
 		}
 	}
@@ -502,6 +560,7 @@ namespace game_framework {
 			map.SetMovingLeft(false);
 			for (int i = 0; i < NUMLASER; i++) {
 				laser[i].SetMovingLeft(false);
+				boxes[i].SetMovingLeft(false);
 			}
 		}
 		if (nChar == KEY_RIGHT) {
@@ -509,6 +568,7 @@ namespace game_framework {
 			map.SetMovingRight(false);
 			for (int i = 0; i < NUMLASER; i++) {
 				laser[i].SetMovingRight(false);
+				boxes[i].SetMovingRight(false);
 			}
 		}
 		//if (nChar == KEY_LEFT)
@@ -564,6 +624,7 @@ namespace game_framework {
 		hits_left.ShowBitmap();
 		for (int i = 0; i < NUMLASER; i++) {
 			laser[i].OnShow();
+			boxes[i].OnShow();
 		}
 
 

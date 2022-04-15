@@ -131,4 +131,7 @@ namespace game_framework {
 		animation.SetTopLeft(x, y);
 		animation.OnShow();
 	}
+	void Ccharacter::CantMoving(bool flag) {
+		cantMoving = flag;
+	}
 }
