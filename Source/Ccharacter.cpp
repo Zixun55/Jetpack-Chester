@@ -48,8 +48,8 @@ namespace game_framework {
 
 	void Ccharacter::LoadBitmap()
 	{
-		animation.AddBitmap(".\\Bitmaps\\ch3.bmp", RGB(255, 255, 255));
-		animation.AddBitmap(".\\Bitmaps\\ch3reverse.bmp", RGB(255, 255, 255));
+		animation.AddBitmap(".\\Bitmaps\\character.bmp", RGB(255, 255, 255));
+		animation.AddBitmap(".\\Bitmaps\\characterreverse.bmp", RGB(255, 255, 255));
 		steam.LoadBitmap(".\\Bitmaps\\steam.bmp", RGB(255, 255, 255));
 		steamR.LoadBitmap(".\\Bitmaps\\steamreverse.bmp", RGB(255, 255, 255));
 	}
