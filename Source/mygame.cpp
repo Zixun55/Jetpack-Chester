@@ -465,13 +465,6 @@ namespace game_framework {
 		if (nChar == KEY_DOWN)
 			eraser.SetMovingDown(true);
 
-		//if (nChar == KEY_LEFT) {
-		//	background.SetTopLeft(background.Left() + 20, background.Top());
-		//}
-
-		//if (nChar == KEY_RIGHT) {
-		//	background.SetTopLeft(background.Left() - 20, background.Top());
-		//}
 
 		if (nChar == KEY_LEFT) {
 			chtest.SetMovingLeft(true);
