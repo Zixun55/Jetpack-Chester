@@ -56,11 +56,13 @@ namespace game_framework {
 		bmp.OnMove();
 		if (!is_alive)
 			return;
-		if (isMovingRight) {
-			dx -= 5;
-		}
-		if (isMovingLeft) {
-			dx += 5;
+		if (!cantMoving) {
+			if (isMovingRight) {
+				dx -= 5;
+			}
+			if (isMovingLeft) {
+				dx += 5;
+			}
 		}
 		//delay_counter--;
 		//if (delay_counter < 0) {
@@ -109,5 +111,8 @@ namespace game_framework {
 	void CBlock::SetMovingRight(bool flag)
 	{
 		isMovingRight = flag;
+	}
+	void CBlock::CantMoving(bool flag) {
+		cantMoving = flag;
 	}
 }

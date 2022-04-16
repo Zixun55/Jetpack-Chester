@@ -42,7 +42,7 @@ namespace game_framework {
 		const int Y_POS = 0;
 		x = X_POS;
 		y = Y_POS;
-		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
+		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = cantMoving = false;
 	}
 
 	void CMap::LoadBitmap()
@@ -54,7 +54,6 @@ namespace game_framework {
 	void CMap::OnMove()
 	{
 		const int STEP_SIZE = 5;
-		animation.OnMove();
 		if (x < 100) {
 			if (isMovingLeft && x >= 0) {
 				x = 0;
@@ -63,12 +62,14 @@ namespace game_framework {
 				x = -2324;
 			}
 			else {
-				if (isMovingLeft) {
-					x += STEP_SIZE;
-				}
-				if (isMovingRight) {
+				if (!cantMoving) {
+					if (isMovingLeft) {
+						x += STEP_SIZE;
+					}
+					if (isMovingRight) {
 
-					x -= STEP_SIZE;
+						x -= STEP_SIZE;
+					}
 				}
 			}
 		}
@@ -94,5 +95,8 @@ namespace game_framework {
 	{
 		animation.SetTopLeft(x, y);
 		animation.OnShow();
+	}
+	void CMap::CantMoving(bool flag) {
+		cantMoving = flag;
 	}
 }

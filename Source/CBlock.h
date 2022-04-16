@@ -18,6 +18,7 @@ namespace game_framework {
 		void SetDelay(int d);									// 設定旋轉的速度
 		void SetMovingLeft(bool flag);
 		void SetMovingRight(bool flag);
+		void CantMoving(bool flag);
 	protected:
 		CAnimation bmp;			// 球的圖	
 		int x, y;					// 圓心的座標
@@ -28,6 +29,7 @@ namespace game_framework {
 		bool is_alive;				// 是否活著
 		bool isMovingLeft;
 		bool isMovingRight;
+		bool cantMoving;
 	private:
 		bool HitRectangle(int tx1, int ty1, int tx2, int ty2);	// 是否碰到參數範圍的矩形
 	};

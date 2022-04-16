@@ -43,7 +43,7 @@ namespace game_framework {
 		const int Y_POS = 414;
 		x = X_POS;
 		y = Y_POS;
-		isMovingLeft = isMovingRight = false;
+		isMovingLeft = isMovingRight = cantMoving = false;
 	}
 
 	void Ccharacter::LoadBitmap()
@@ -86,8 +86,10 @@ namespace game_framework {
 					con = true;
 				}
 			}
-			if (GetY2() < 512) {
-				y += 7;
+			if (!cantMoving) {
+				if (GetY2() < 512) {
+					y += 7;
+				}
 			}
 		}
 		//if (x != 340) {

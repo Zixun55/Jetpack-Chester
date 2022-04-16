@@ -18,6 +18,7 @@ namespace game_framework {
 		void SetMovingRight(bool flag); 
 		void SetMovingUp(bool flag);	
 		void SetXY(int nx, int ny);		
+		void CantMoving(bool flag);
 	protected:
 		CAnimation animation;		
 		int x, y;					
@@ -25,5 +26,6 @@ namespace game_framework {
 		bool isMovingLeft;			
 		bool isMovingRight;		
 		bool isMovingUp;
+		bool cantMoving;
 	};
 }

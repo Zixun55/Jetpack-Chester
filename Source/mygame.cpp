@@ -298,7 +298,7 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	CGameStateRun::CGameStateRun(CGame *g)
-		: CGameState(g), NUMBALLS(28) ,NUMLASER(10), NUMBOXES(10)
+		: CGameState(g), NUMBALLS(28), NUMLASER(10), NUMBOXES(10)
 	{
 		ball = new CBall[NUMBALLS];
 		laser = new CBlock[NUMLASER];
@@ -388,7 +388,7 @@ namespace game_framework {
 		//
 		// 移動球
 		//
-		
+
 		for (int i = 0; i < NUMBALLS; i++)
 			ball[i].OnMove();
 		//
@@ -437,12 +437,16 @@ namespace game_framework {
 		for (int i = 0; i < NUMBOXES; i++) {
 			if (check_box) {
 				boxes[i].CantMoving(true);
+				laser[i].CantMoving(true);
+				map.CantMoving(true);
 				if (check_ch) {
 					chtest.CantMoving(true);
 				}
 			}
 			else {
 				boxes[i].CantMoving(false);
+				laser[i].CantMoving(false);
+				map.CantMoving(false);
 				if (!check_ch) {
 					chtest.CantMoving(false);
 				}
@@ -470,7 +474,7 @@ namespace game_framework {
 		//
 		// 開始載入資料
 		//
-		
+
 		for (int i = 0; i < NUMBALLS; i++)
 			ball[i].LoadBitmap();								// 載入第i個球的圖形
 		eraser.LoadBitmap();
@@ -482,7 +486,7 @@ namespace game_framework {
 		for (int i = 0; i < NUMBOXES; i++) {
 			boxes[i].LoadBitmap();
 		}
-		//background.LoadBitmap(".\\Bitmaps\\bg1_test.bmp");					// 載入遊戲中背景的圖形
+
 		//
 		// 完成部分Loading動作，提高進度
 		//
