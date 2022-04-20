@@ -121,7 +121,7 @@ namespace game_framework {
 		int ally = 337 - 250;
 		if (new_point.x > 0 && new_point.y > 0) {
 			if (new_point.x < allx && new_point.y < ally) {
-				GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
+				GotoGameState(GAME_STATE_CHOOSE);		// 切換至GAME_STATE_RUN
 			}
 		}
 	}
@@ -640,4 +640,98 @@ namespace game_framework {
 		corner.SetTopLeft(SIZE_X - corner.Width(), SIZE_Y - corner.Height());
 		corner.ShowBitmap();
 	}
+
+
+	///////地圖選擇
+
+	CGameStateChoose::CGameStateChoose(CGame *g)
+		: CGameState(g)
+	{
+	}
+
+	void CGameStateChoose::OnInit()
+	{
+		//
+		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
+		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
+		//
+		ShowInitProgress(0);	// 一開始的loading進度為0%
+		//
+		// 開始載入資料
+		//
+		select.LoadBitmap(".\\Bitmaps\\mapselect.bmp");
+
+		//title.LoadBitmap("./game_image/background.bmp");
+		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+		//
+		// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
+		//
+	}
+
+	void CGameStateChoose::OnBeginState()
+	{
+		in = false;
+	}
+	//void CGameStateChoose::OnMouseMove(UINT nFlags, CPoint point)
+	//{
+	//	CPoint start0(243, 250);
+	//	int allx = 296;
+	//	int ally = 87;
+	//	CPoint new_point = point - start0;
+	//	if (new_point.x > 0 && new_point.y > 0) {
+	//		if (new_point.x < allx && new_point.y < ally) {
+	//			in = true;
+	//		}
+	//		else {
+	//			in = false;
+	//		}
+	//	}
+	//	else
+	//	{
+	//		in = false;
+	//	}
+	//}
+	void CGameStateChoose::OnLButtonUp(UINT nFlags, CPoint point)
+	{
+		CPoint start_return0(28, 345);               //返回鍵
+		CPoint start_return1(125, 460);
+		CPoint new_point = point - start_return0;
+		int allx = 125 - 28;
+		int ally = 460 - 345;
+		if (new_point.x > 0 && new_point.y > 0) {
+			if (new_point.x < allx && new_point.y < ally) {
+				GotoGameState(GAME_STATE_INIT);		// 切換至GAME_STATE_INIT
+			}
+		}
+
+
+		CPoint start_map0(154, 67);                  //關卡一
+		CPoint start_map1(351, 272);
+		CPoint new_point1 = point - start_map0;
+		int allx1 = 351 - 154;
+		int ally1 = 272 - 67;
+		if (new_point1.x > 0 && new_point1.y > 0) {
+			if (new_point1.x < allx1 && new_point1.y < ally1) {
+				GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
+			}
+		}
+	}
+	void CGameStateChoose::OnShow()
+	{
+		select.SetTopLeft(0, 0);
+		select.ShowBitmap();
+		//if (in) {
+		//	start_dark.SetTopLeft(243, 250);
+		//	start_dark.ShowBitmap();
+		//}
+		//else {
+		//	start.SetTopLeft(243, 250);
+		//	start.ShowBitmap();
+		//}
+	}
 }
+
+//154 67   351 272   地圖一
+//465 68   663 273   地圖二
+//154 291  351 497   地圖三
+//466 292  663 497   地圖四
