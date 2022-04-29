@@ -59,6 +59,7 @@
 #include "gamelib.h"
 #include "mygame.h"
 
+int maps;
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
@@ -303,6 +304,7 @@ namespace game_framework {
 		ball = new CBall[NUMBALLS];
 		laser = new CBlock[NUMLASER];
 		boxes = new CBox[NUMBOXES];
+		map = CMap();
 	}
 
 	CGameStateRun::~CGameStateRun()
@@ -310,6 +312,7 @@ namespace game_framework {
 		delete[] boxes;
 		delete[] laser;
 		delete[] ball;
+		TRACE("del\n");
 	}
 
 	void CGameStateRun::OnBeginState()
@@ -339,8 +342,9 @@ namespace game_framework {
 		eraser.Initialize();
 		chtest.Initialize();
 		map.Initialize();
-
-		//background.SetTopLeft(0, 0);				// 設定背景的起始座標
+		map.chooseMap(maps);
+		map.LoadBitmap();
+		TRACE("%d\n", maps);
 		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 		hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 		hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
@@ -474,12 +478,12 @@ namespace game_framework {
 		//
 		// 開始載入資料
 		//
-
 		for (int i = 0; i < NUMBALLS; i++)
 			ball[i].LoadBitmap();								// 載入第i個球的圖形
 		eraser.LoadBitmap();
 		chtest.LoadBitmap();
-		map.LoadBitmap();
+
+
 		for (int i = 0; i < NUMLASER; i++) {
 			laser[i].LoadBitmap();
 		}
@@ -712,6 +716,40 @@ namespace game_framework {
 		int ally1 = 272 - 67;
 		if (new_point1.x > 0 && new_point1.y > 0) {
 			if (new_point1.x < allx1 && new_point1.y < ally1) {
+				maps = 1;
+				GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
+			}
+		}
+		CPoint start_map2(465, 68);                  //關卡二
+		CPoint start_map3(663, 273);
+		CPoint new_point2 = point - start_map2;
+		int allx2 = 663 - 465;
+		int ally2 = 273 - 68;
+		if (new_point2.x > 0 && new_point2.y > 0) {
+			if (new_point2.x < allx2 && new_point2.y < ally2) {
+				maps = 2;
+				GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
+			}
+		}
+		CPoint start_map4(154, 291);                  //關卡三
+		CPoint start_map5(351, 497);
+		CPoint new_point3 = point - start_map4;
+		int allx3 = 351 - 154;
+		int ally3 = 497 - 291;
+		if (new_point3.x > 0 && new_point3.y > 0) {
+			if (new_point3.x < allx3 && new_point3.y < ally3) {
+				maps = 3;
+				GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
+			}
+		}
+		CPoint start_map6(466, 292);                  //關卡四
+		CPoint start_map7(663, 497);
+		CPoint new_point4 = point - start_map6;
+		int allx4 = 663 - 466;
+		int ally4 = 497 - 292;
+		if (new_point4.x > 0 && new_point4.y > 0) {
+			if (new_point4.x < allx4 && new_point4.y < ally4) {
+				maps = 4;
 				GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
 			}
 		}

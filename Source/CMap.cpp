@@ -47,8 +47,11 @@ namespace game_framework {
 
 	void CMap::LoadBitmap()
 	{
-		animation.AddBitmap(".\\Bitmaps\\bg12.bmp", RGB(255, 255, 255));
-
+		animation.SetDelayCount(1);
+		animation.AddBitmap(".\\Bitmaps\\bg12.bmp");
+		animation.AddBitmap(".\\Bitmaps\\bg22.bmp");
+		animation.AddBitmap(".\\Bitmaps\\bg3.bmp");
+		animation.AddBitmap(".\\Bitmaps\\bg4.bmp");
 	}
 
 	void CMap::OnMove()
@@ -72,6 +75,28 @@ namespace game_framework {
 					}
 				}
 			}
+		}
+		if (map == 1) {
+			animation.Reset();
+			map = 0;
+		}
+		else if (map == 2) {
+			animation.Reset();
+			animation.OnMove();
+			map = 0;
+		}
+		else if (map == 3) {
+			animation.Reset();
+			animation.OnMove();
+			animation.OnMove();
+			map = 0;
+		}
+		else if (map == 4) {
+			animation.Reset();
+			animation.OnMove();
+			animation.OnMove();
+			animation.OnMove();
+			map = 0;
 		}
 	}
 
@@ -98,5 +123,8 @@ namespace game_framework {
 	}
 	void CMap::CantMoving(bool flag) {
 		cantMoving = flag;
+	}
+	void CMap::chooseMap(int maps) {
+		map = maps;
 	}
 }
