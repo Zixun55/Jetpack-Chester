@@ -19,7 +19,7 @@ namespace game_framework {
 		void CantMoving(bool flag);
 	protected:
 		CAnimation animation;
-		CMovingBitmap steam, steam1, steam2,steamR;
+		CMovingBitmap steam, steam1, steam2,steamR, steamR1, steamR2;
 		int x, y;
 		bool isMovingDown;
 		bool isMovingLeft;
