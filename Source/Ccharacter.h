@@ -19,7 +19,7 @@ namespace game_framework {
 		void CantMoving(bool flag);
 	protected:
 		CAnimation animation;
-		CMovingBitmap steam,steamR;
+		CMovingBitmap steam, steam1, steam2,steamR;
 		int x, y;
 		bool isMovingDown;
 		bool isMovingLeft;
@@ -28,6 +28,7 @@ namespace game_framework {
 		bool cantMoving;
 	private:
 		bool con = true;
+		int counter;
 	};
 	
 }

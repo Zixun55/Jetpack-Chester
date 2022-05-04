@@ -500,11 +500,14 @@ namespace game_framework {
 		// 繼續載入其他資料
 		//
 		help.LoadBitmap(IDB_HELP, RGB(255, 255, 255));				// 載入說明的圖形
-		corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形
+		corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形stea
 		//corner.ShowBitmap(background);							// 將corner貼到background
 		bball.LoadBitmap();										// 載入圖形
 		hits_left.LoadBitmap();
 		steam.LoadBitmap(".\\Bitmaps\\steam.bmp", RGB(255, 255, 255));
+		steam1.LoadBitmap(".\\Bitmaps\\steam1.bmp", RGB(255, 255, 255));
+		steam2.LoadBitmap(".\\Bitmaps\\steam2.bmp", RGB(255, 255, 255));
+
 
 		CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
 		CAudio::Instance()->Load(AUDIO_LAKE, "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
@@ -664,6 +667,7 @@ namespace game_framework {
 		// 開始載入資料
 		//
 		select.LoadBitmap(".\\Bitmaps\\mapselect.bmp");
+		return_dark.LoadBitmap(".\\Bitmaps\\return.bmp");
 
 		//title.LoadBitmap("./game_image/background.bmp");
 		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
@@ -676,25 +680,6 @@ namespace game_framework {
 	{
 		in = false;
 	}
-	//void CGameStateChoose::OnMouseMove(UINT nFlags, CPoint point)
-	//{
-	//	CPoint start0(243, 250);
-	//	int allx = 296;
-	//	int ally = 87;
-	//	CPoint new_point = point - start0;
-	//	if (new_point.x > 0 && new_point.y > 0) {
-	//		if (new_point.x < allx && new_point.y < ally) {
-	//			in = true;
-	//		}
-	//		else {
-	//			in = false;
-	//		}
-	//	}
-	//	else
-	//	{
-	//		in = false;
-	//	}
-	//}
 	void CGameStateChoose::OnLButtonUp(UINT nFlags, CPoint point)
 	{
 		CPoint start_return0(28, 345);               //返回鍵
@@ -758,14 +743,33 @@ namespace game_framework {
 	{
 		select.SetTopLeft(0, 0);
 		select.ShowBitmap();
-		//if (in) {
-		//	start_dark.SetTopLeft(243, 250);
-		//	start_dark.ShowBitmap();
-		//}
-		//else {
-		//	start.SetTopLeft(243, 250);
-		//	start.ShowBitmap();
-		//}
+		if (!in) {
+			select.SetTopLeft(0, 0);
+			select.ShowBitmap();
+		}
+		else {
+			return_dark.SetTopLeft(28, 345);
+			return_dark.ShowBitmap();
+		}
+	}
+	void CGameStateChoose::OnMouseMove(UINT nFlags, CPoint point)
+	{
+		CPoint start0(28, 345);               //返回鍵
+		int allx = 125 - 28;
+		int ally = 460 - 345;
+		CPoint new_point = point - start0;
+		if (new_point.x > 0 && new_point.y > 0) {
+			if (new_point.x < allx && new_point.y < ally) {
+				in = true;
+			}
+			else {
+				in = false;
+			}
+		}
+		else
+		{
+			in = false;
+		}
 	}
 }
 

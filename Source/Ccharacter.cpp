@@ -51,11 +51,18 @@ namespace game_framework {
 		animation.AddBitmap(".\\Bitmaps\\character.bmp", RGB(255, 255, 255));
 		animation.AddBitmap(".\\Bitmaps\\characterreverse.bmp", RGB(255, 255, 255));
 		steam.LoadBitmap(".\\Bitmaps\\steam.bmp", RGB(255, 255, 255));
+		steam1.LoadBitmap(".\\Bitmaps\\steam1.bmp", RGB(255, 255, 255));
+		steam2.LoadBitmap(".\\Bitmaps\\steam2.bmp", RGB(255, 255, 255));
 		steamR.LoadBitmap(".\\Bitmaps\\steamreverse.bmp", RGB(255, 255, 255));
+		counter = 1;
 	}
 
 	void Ccharacter::OnMove()
 	{
+		counter++;
+		if (counter > 9) {
+			counter = 1;
+		}
 		const int STEP_SIZE = 20;
 		if (y <= 0 && isMovingLeft) {
 			y = 0;
@@ -122,9 +129,20 @@ namespace game_framework {
 
 	void Ccharacter::OnShow() // ¦w¦w 
 	{
+		
 		if (isMovingRight) {
-			steam.SetTopLeft(x - animation.Width() + 40, y + animation.Height() - 10);
-			steam.ShowBitmap();
+			if (counter > 0 && counter < 4) {
+				steam.SetTopLeft(x - animation.Width() + 40, y + animation.Height() - 10);
+				steam.ShowBitmap();
+			}
+			else if (counter > 3 && counter < 7) {
+				steam1.SetTopLeft(x - animation.Width() + 40, y + animation.Height() - 10);
+				steam1.ShowBitmap();
+			}
+			else {
+				steam2.SetTopLeft(x - animation.Width() + 40, y + animation.Height() - 10);
+				steam2.ShowBitmap();
+			}
 		}
 		if (isMovingLeft) {
 			steamR.SetTopLeft(x + animation.Width() - 5, y + animation.Height() - 10);
