@@ -58,6 +58,7 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "mygame.h"
+#include <stdlib.h>
 
 int maps;
 namespace game_framework {
@@ -320,7 +321,7 @@ namespace game_framework {
 		const int BALL_GAP = 90;
 		const int BALL_XY_OFFSET = 45;
 		const int BALL_PER_ROW = 7;
-		const int HITS_LEFT = 10;
+		const int HITS_LEFT = 100;
 		const int HITS_LEFT_X = 590;
 		const int HITS_LEFT_Y = 0;
 		const int BACKGROUND_X = 60;
@@ -332,10 +333,35 @@ namespace game_framework {
 			ball[i].SetDelay(x_pos);
 			ball[i].SetIsAlive(true);
 		}
-		for (int i = 0; i < NUMLASER; i++) {
-			laser[i].SetXY((i + 1) * 500, 50);
-			laser[i].SetIsAlive(true);
-		}
+
+		laser[0].SetXY(500, 50);
+		laser[0].SetIsAlive(true);
+		laser[1].SetXY(1000, 200);
+		laser[1].SetIsAlive(true);
+		laser[2].SetXY(1500, 400);
+		laser[2].SetIsAlive(true);
+		laser[3].SetXY(2000, 150);
+		laser[3].SetIsAlive(true);
+		laser[4].SetXY(2500, 500);
+		laser[4].SetIsAlive(true);
+		laser[5].SetXY(3000, 175);
+		laser[5].SetIsAlive(true);
+		laser[6].SetXY(3500, 350);
+		laser[6].SetIsAlive(true);
+		laser[7].SetXY(4000, 135);
+		laser[7].SetIsAlive(true);
+		laser[8].SetXY(4500, 375);
+		laser[8].SetIsAlive(true);
+		laser[9].SetXY(5000, 185);
+		laser[9].SetIsAlive(true);
+
+
+		//for (int i = 0; i < NUMLASER; i++) {
+		//	laser[i].SetXY((i + 1) * 500, 50);
+		//	laser[i].SetIsAlive(true);
+		//}
+
+
 		for (int i = 0; i < NUMBOXES; i++) {
 			boxes[i].SetXY((i + 1) * 1000, 280);
 		}
@@ -407,7 +433,7 @@ namespace game_framework {
 			if (ball[i].IsAlive() && ball[i].HitEraser(&eraser)) {
 				ball[i].SetIsAlive(false);
 				CAudio::Instance()->Play(AUDIO_DING);
-				hits_left.Add(-10);
+				hits_left.Add(-1);
 				//
 				// 若剩餘碰撞次數為0，則跳到Game Over狀態
 				//
@@ -420,8 +446,8 @@ namespace game_framework {
 		for (int i = 0; i < NUMLASER; i++) {
 			laser[i].OnMove();
 			if (laser[i].IsAlive() && laser[i].HitEraser(&chtest)) {
-				laser[i].SetIsAlive(false);
-				hits_left.Add(0);
+				laser[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失
+				hits_left.Add(-1);                                        //扣命
 				if (hits_left.GetInteger() <= 0) {
 					GotoGameState(GAME_STATE_OVER);
 				}
