@@ -45,7 +45,7 @@
 #include "CMap.h"
 #include "CBlock.h"
 #include "CBox.h"
-
+#include <time.h> 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// Constants
