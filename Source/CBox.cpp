@@ -34,7 +34,7 @@ namespace game_framework {
 		return (tx2 >= x1 && tx1 <= x2 && ty2 >= y1 && ty1 <= y2);
 	}
 	bool CBox::ChxBigThanBox(Ccharacter *character) {
-		return character->GetX2() > (x + dx);
+		return character->GetX2() > (x + dx) && character->GetY2() <= (y + dy + 8);
 	}
 	int  CBox::BoxX1() {
 		return x + dx;

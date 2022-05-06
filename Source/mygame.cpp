@@ -405,19 +405,17 @@ namespace game_framework {
 	}
 	int  CGameStateRun::ClosestBox() {
 		int x[100][100];
-		int closet = 0;
 		for (int i = 0; i < NUMBOXES; i++) {
 			x[i][0] = abs(boxes[i].BoxX1() - chtest.GetX2());
 			x[i][1] = i;
 		}
-		for (int i = 0; i < NUMBOXES; i = i + 1)
+		int min = x[0][0];
+		int closet = 0;
+		for (int i = 1; i < NUMBOXES;i++)
 		{
-			for (int j = i + 1; j < NUMBOXES; j = j + 1)
-			{
-				if (x[i][0] > x[j][0])
-				{
-					closet = x[i][1];
-				}
+			if (x[i][0] < min) {
+				min = x[i][0];
+				closet = x[i][1];
 			}
 		}
 		TRACE("closet = %d\n",closet);
@@ -510,22 +508,24 @@ namespace game_framework {
 				if (check_ch) {
 					chtest.CantMoving(true);
 				}
+				else {
+					chtest.CantMoving(false);
+				}
 			}
 			else {
 				boxes[i].CantMoving(false);
 				laser[i].CantMoving(false);
 				laser2[i].CantMoving(false);
 				map.CantMoving(false);
-				if (!check_ch) {
-					chtest.CantMoving(false);
-				}
+				chtest.CantMoving(false);
 			}
 			boxes[i].OnMove();
 		}
 		chtest.OnMove();
+		TRACE("check_box = %d\n",check_box);
+		TRACE("check = %d\n",check_ch);
 		check_box = 0;
 		check_ch = 0;
-
 
 		//
 		// ²¾°Ê¼u¸õªº²y
