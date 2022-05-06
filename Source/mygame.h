@@ -44,6 +44,7 @@
 #include "Ccharacter.h"
 #include "CMap.h"
 #include "CBlock.h"
+#include "Claser.h"
 #include "CBox.h"
 
 namespace game_framework {
@@ -106,6 +107,7 @@ namespace game_framework {
 	private:
 		const int		NUMBALLS;	// 球的總數
 		const int       NUMLASER;   // 雷射總數
+		const int       NUMLASER2;   // 雷射總數
 		const int       NUMBOXES;   // 箱子總數
 		CMovingBitmap	background;	// 背景圖
 		CMovingBitmap	help;		// 說明圖
@@ -121,6 +123,7 @@ namespace game_framework {
 		CMap       map;             // 地圖
 		Ccharacter chtest;          // 角色
 		CBlock     *laser;          // 雷射
+		Claser     *laser2;          // 雷射
 		CInteger   life;            // 生命
 		CBox       *boxes;          // 箱子
 	};

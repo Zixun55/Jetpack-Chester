@@ -300,10 +300,11 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	CGameStateRun::CGameStateRun(CGame *g)
-		: CGameState(g), NUMBALLS(28), NUMLASER(10), NUMBOXES(10)
+		: CGameState(g), NUMBALLS(28), NUMLASER(10), NUMLASER2(10),NUMBOXES(10)
 	{
 		ball = new CBall[NUMBALLS];
 		laser = new CBlock[NUMLASER];
+		laser2 = new Claser[NUMLASER2];
 		boxes = new CBox[NUMBOXES];
 		map = CMap();
 	}
@@ -312,6 +313,7 @@ namespace game_framework {
 	{
 		delete[] boxes;
 		delete[] laser;
+		delete[] laser2;
 		delete[] ball;
 		TRACE("del\n");
 	}
@@ -334,6 +336,7 @@ namespace game_framework {
 			ball[i].SetIsAlive(true);
 		}
 
+		//雷射位置
 		laser[0].SetXY(500, 50);
 		laser[0].SetIsAlive(true);
 		laser[1].SetXY(1000, 200);
@@ -354,6 +357,27 @@ namespace game_framework {
 		laser[8].SetIsAlive(true);
 		laser[9].SetXY(5000, 185);
 		laser[9].SetIsAlive(true);
+
+		laser2[0].SetXY(700, 300);
+		laser2[0].SetIsAlive(true);
+		laser2[1].SetXY(1400, 120);
+		laser2[1].SetIsAlive(true);
+		laser2[2].SetXY(1700, 75);
+		laser2[2].SetIsAlive(true);
+		laser2[3].SetXY(2200, 150);
+		laser2[3].SetIsAlive(true);
+		laser2[4].SetXY(2700, 500);
+		laser2[4].SetIsAlive(true);
+		laser2[5].SetXY(3200, 175);
+		laser2[5].SetIsAlive(true);
+		laser2[6].SetXY(3700, 350);
+		laser2[6].SetIsAlive(true);
+		laser2[7].SetXY(4200, 135);
+		laser2[7].SetIsAlive(true);
+		laser2[8].SetXY(4700, 375);
+		laser2[8].SetIsAlive(true);
+		laser2[9].SetXY(5200, 185);
+		laser2[9].SetIsAlive(true);
 
 
 		//for (int i = 0; i < NUMLASER; i++) {
@@ -453,6 +477,18 @@ namespace game_framework {
 				}
 			}
 		}
+
+		for (int i = 0; i < NUMLASER2; i++) {
+			laser2[i].OnMove();
+			if (laser2[i].IsAlive() && laser2[i].HitEraser(&chtest)) {
+				laser2[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失
+				hits_left.Add(-1);                                        //扣命
+				if (hits_left.GetInteger() <= 0) {
+					GotoGameState(GAME_STATE_OVER);
+				}
+			}
+		}
+
 		int check_box = 0;
 		int check_ch = 0;
 		for (int i = 0; i < NUMBOXES; i++) {
@@ -468,6 +504,7 @@ namespace game_framework {
 			if (check_box) {
 				boxes[i].CantMoving(true);
 				laser[i].CantMoving(true);
+				laser2[i].CantMoving(true);
 				map.CantMoving(true);
 				if (check_ch) {
 					chtest.CantMoving(true);
@@ -476,6 +513,7 @@ namespace game_framework {
 			else {
 				boxes[i].CantMoving(false);
 				laser[i].CantMoving(false);
+				laser2[i].CantMoving(false);
 				map.CantMoving(false);
 				if (!check_ch) {
 					chtest.CantMoving(false);
@@ -512,6 +550,9 @@ namespace game_framework {
 
 		for (int i = 0; i < NUMLASER; i++) {
 			laser[i].LoadBitmap();
+		}
+		for (int i = 0; i < NUMLASER2; i++) {
+			laser2[i].LoadBitmap();
 		}
 		for (int i = 0; i < NUMBOXES; i++) {
 			boxes[i].LoadBitmap();
@@ -564,6 +605,7 @@ namespace game_framework {
 			map.SetMovingLeft(true);
 			for (int i = 0; i < NUMLASER; i++) {
 				laser[i].SetMovingLeft(true);
+				laser2[i].SetMovingLeft(true);
 				boxes[i].SetMovingLeft(true);
 			}
 		}
@@ -572,6 +614,7 @@ namespace game_framework {
 			map.SetMovingRight(true);
 			for (int i = 0; i < NUMLASER; i++) {
 				laser[i].SetMovingRight(true);
+				laser2[i].SetMovingRight(true);
 				boxes[i].SetMovingRight(true);
 			}
 		}
@@ -597,6 +640,7 @@ namespace game_framework {
 			map.SetMovingLeft(false);
 			for (int i = 0; i < NUMLASER; i++) {
 				laser[i].SetMovingLeft(false);
+				laser2[i].SetMovingLeft(false);
 				boxes[i].SetMovingLeft(false);
 			}
 		}
@@ -605,6 +649,7 @@ namespace game_framework {
 			map.SetMovingRight(false);
 			for (int i = 0; i < NUMLASER; i++) {
 				laser[i].SetMovingRight(false);
+				laser2[i].SetMovingRight(false);
 				boxes[i].SetMovingRight(false);
 			}
 		}
@@ -661,6 +706,7 @@ namespace game_framework {
 		hits_left.ShowBitmap();
 		for (int i = 0; i < NUMLASER; i++) {
 			laser[i].OnShow();
+			laser2[i].OnShow();
 			boxes[i].OnShow();
 		}
 
