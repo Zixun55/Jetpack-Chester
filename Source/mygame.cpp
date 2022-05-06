@@ -380,23 +380,24 @@ namespace game_framework {
 		//CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
 	}
 	int  CGameStateRun::ClosestBox() {
-		int x[100];
+		int x[100][100];
+		int closet = 0;
 		for (int i = 0; i < NUMBOXES; i++) {
-			x[i] = abs(boxes[i].BoxX1() - chtest.GetX2());
+			x[i][0] = abs(boxes[i].BoxX1() - chtest.GetX2());
+			x[i][1] = i;
 		}
 		for (int i = 0; i < NUMBOXES; i = i + 1)
 		{
 			for (int j = i + 1; j < NUMBOXES; j = j + 1)
 			{
-				if (x[i] > x[j])
+				if (x[i][0] > x[j][0])
 				{
-					int tmp = x[i];
-					x[i] = x[j];
-					x[j] = tmp;
+					closet = x[i][1];
 				}
 			}
 		}
-		return x[0];
+		TRACE("closet = %d\n",closet);
+		return closet;
 	}
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
