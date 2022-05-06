@@ -30,8 +30,8 @@ namespace game_framework {
 	{
 		int x1 = x + dx;				// 球的左上角x座標
 		int y1 = y + dy;				// 球的左上角y座標
-		int x2 = x1 + bmp.Width();	// 球的右下角x座標
-		int y2 = y1 + bmp.Height();	// 球的右下角y座標
+		int x2 = x1 + laser.Width();	// 球的右下角x座標
+		int y2 = y1 + laser.Height();	// 球的右下角y座標
 									//
 									// 檢測球的矩形與參數矩形是否有交集
 									//
@@ -45,15 +45,15 @@ namespace game_framework {
 
 	void CBlock::LoadBitmap()
 	{
-		bmp.AddBitmap(".//Bitmaps//laser.bmp", RGB(255, 255, 255));			// 載入球的圖形
-		bmp.AddBitmap(".//Bitmaps//laser8.bmp", RGB(255, 255, 255));			// 載入球的圖形
-		bmp.AddBitmap(".//Bitmaps//laser7.bmp", RGB(255, 255, 255));			// 載入球的圖形
-		bmp.AddBitmap(".//Bitmaps//laser2.bmp", RGB(255, 255, 255));			// 載入球的圖形
+		laser.AddBitmap(".//Bitmaps//laser.bmp", RGB(255, 255, 255));			// 載入球的圖形
+		laser.AddBitmap(".//Bitmaps//laser8.bmp", RGB(255, 255, 255));			// 載入球的圖形
+		laser.AddBitmap(".//Bitmaps//laser7.bmp", RGB(255, 255, 255));			// 載入球的圖形
+		laser.AddBitmap(".//Bitmaps//laser2.bmp", RGB(255, 255, 255));			// 載入球的圖形
 	}
 
 	void CBlock::OnMove()
 	{
-		bmp.OnMove();
+		laser.OnMove();
 		if (!is_alive)
 			return;
 		if (!cantMoving) {
@@ -99,8 +99,8 @@ namespace game_framework {
 	void CBlock::OnShow()
 	{
 		if (is_alive) {
-			bmp.SetTopLeft(x + dx, y + dy);
-			bmp.OnShow();
+			laser.SetTopLeft(x + dx, y + dy);
+			laser.OnShow();
 		}
 	}
 	void CBlock::SetMovingLeft(bool flag)

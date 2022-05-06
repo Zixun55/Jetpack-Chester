@@ -115,6 +115,8 @@ namespace game_framework {
 		CInteger		hits_left;	// 剩下的撞擊數
 		CBouncingBall   bball;		// 反覆彈跳的球
 		CMovingBitmap steam;        // 噴氣
+		CMovingBitmap steam1;        // 噴氣
+		CMovingBitmap steam2;        // 噴氣
 
 		CMap       map;             // 地圖
 		Ccharacter chtest;          // 角色
@@ -166,7 +168,7 @@ namespace game_framework {
 		//void OnKeyUp(UINT, UINT, UINT);
 		//void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
 		//void OnLButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
-		//void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作 
+		void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作 
 		//void OnRButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
 		//void OnRButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
 
@@ -174,6 +176,7 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		CMovingBitmap select;                            // 地圖選擇畫面
+		CMovingBitmap return_dark;
 		bool in;
 	};
 }
