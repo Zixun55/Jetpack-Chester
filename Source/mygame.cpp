@@ -418,7 +418,6 @@ namespace game_framework {
 				closet = x[i][1];
 			}
 		}
-		TRACE("closet = %d\n",closet);
 		return closet;
 	}
 	void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -522,8 +521,6 @@ namespace game_framework {
 			boxes[i].OnMove();
 		}
 		chtest.OnMove();
-		TRACE("check_box = %d\n",check_box);
-		TRACE("check = %d\n",check_ch);
 		check_box = 0;
 		check_ch = 0;
 
@@ -755,8 +752,8 @@ namespace game_framework {
 	}
 	void CGameStateChoose::OnLButtonUp(UINT nFlags, CPoint point)
 	{
-		CPoint start_return0(28, 345);               //返回鍵
-		CPoint start_return1(125, 460);
+		CPoint start_return0(22, 348);               //返回鍵
+		CPoint start_return1(127, 460);
 		CPoint new_point = point - start_return0;
 		int allx = 125 - 28;
 		int ally = 460 - 345;
@@ -768,7 +765,7 @@ namespace game_framework {
 
 
 		CPoint start_map0(154, 67);                  //關卡一
-		CPoint start_map1(351, 272);
+		CPoint start_map1(379, 272);
 		CPoint new_point1 = point - start_map0;
 		int allx1 = 351 - 154;
 		int ally1 = 272 - 67;
@@ -779,7 +776,7 @@ namespace game_framework {
 			}
 		}
 		CPoint start_map2(465, 68);                  //關卡二
-		CPoint start_map3(663, 273);
+		CPoint start_map3(690, 273);
 		CPoint new_point2 = point - start_map2;
 		int allx2 = 663 - 465;
 		int ally2 = 273 - 68;
@@ -790,7 +787,7 @@ namespace game_framework {
 			}
 		}
 		CPoint start_map4(154, 291);                  //關卡三
-		CPoint start_map5(351, 497);
+		CPoint start_map5(379, 497);
 		CPoint new_point3 = point - start_map4;
 		int allx3 = 351 - 154;
 		int ally3 = 497 - 291;
@@ -801,7 +798,7 @@ namespace game_framework {
 			}
 		}
 		CPoint start_map6(466, 292);                  //關卡四
-		CPoint start_map7(663, 497);
+		CPoint start_map7(690, 497);
 		CPoint new_point4 = point - start_map6;
 		int allx4 = 663 - 466;
 		int ally4 = 497 - 292;
