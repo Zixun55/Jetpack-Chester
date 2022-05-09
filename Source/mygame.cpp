@@ -755,8 +755,8 @@ namespace game_framework {
 		CPoint start_return0(22, 348);               //返回鍵
 		CPoint start_return1(127, 460);
 		CPoint new_point = point - start_return0;
-		int allx = 125 - 28;
-		int ally = 460 - 345;
+		int allx = 125 - 22;
+		int ally = 460 - 348;
 		if (new_point.x > 0 && new_point.y > 0) {
 			if (new_point.x < allx && new_point.y < ally) {
 				GotoGameState(GAME_STATE_INIT);		// 切換至GAME_STATE_INIT
@@ -767,7 +767,7 @@ namespace game_framework {
 		CPoint start_map0(154, 67);                  //關卡一
 		CPoint start_map1(379, 272);
 		CPoint new_point1 = point - start_map0;
-		int allx1 = 351 - 154;
+		int allx1 = 379 - 154;
 		int ally1 = 272 - 67;
 		if (new_point1.x > 0 && new_point1.y > 0) {
 			if (new_point1.x < allx1 && new_point1.y < ally1) {
@@ -778,7 +778,7 @@ namespace game_framework {
 		CPoint start_map2(465, 68);                  //關卡二
 		CPoint start_map3(690, 273);
 		CPoint new_point2 = point - start_map2;
-		int allx2 = 663 - 465;
+		int allx2 = 690 - 465;
 		int ally2 = 273 - 68;
 		if (new_point2.x > 0 && new_point2.y > 0) {
 			if (new_point2.x < allx2 && new_point2.y < ally2) {
@@ -789,7 +789,7 @@ namespace game_framework {
 		CPoint start_map4(154, 291);                  //關卡三
 		CPoint start_map5(379, 497);
 		CPoint new_point3 = point - start_map4;
-		int allx3 = 351 - 154;
+		int allx3 = 379 - 154;
 		int ally3 = 497 - 291;
 		if (new_point3.x > 0 && new_point3.y > 0) {
 			if (new_point3.x < allx3 && new_point3.y < ally3) {
@@ -800,7 +800,7 @@ namespace game_framework {
 		CPoint start_map6(466, 292);                  //關卡四
 		CPoint start_map7(690, 497);
 		CPoint new_point4 = point - start_map6;
-		int allx4 = 663 - 466;
+		int allx4 = 690 - 466;
 		int ally4 = 497 - 292;
 		if (new_point4.x > 0 && new_point4.y > 0) {
 			if (new_point4.x < allx4 && new_point4.y < ally4) {
