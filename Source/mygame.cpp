@@ -51,6 +51,7 @@
  *      1. Demo MP3 support: use lake.mp3 to replace lake.wav.
 */
 
+#include <ctime> 
 #include "stdafx.h"
 #include "Resource.h"
 #include <mmsystem.h>
@@ -323,7 +324,7 @@ namespace game_framework {
 		const int BALL_GAP = 90;
 		const int BALL_XY_OFFSET = 45;
 		const int BALL_PER_ROW = 7;
-		const int HITS_LEFT = 100;
+		const int HITS_LEFT = 3;
 		const int HITS_LEFT_X = 590;
 		const int HITS_LEFT_Y = 0;
 		const int BACKGROUND_X = 60;
@@ -473,6 +474,7 @@ namespace game_framework {
 				if (hits_left.GetInteger() <= 0) {
 					GotoGameState(GAME_STATE_OVER);
 				}
+				
 			}
 		}
 
@@ -572,6 +574,12 @@ namespace game_framework {
 		steam.LoadBitmap(".\\Bitmaps\\steam.bmp", RGB(255, 255, 255));
 		steam1.LoadBitmap(".\\Bitmaps\\steam1.bmp", RGB(255, 255, 255));
 		steam2.LoadBitmap(".\\Bitmaps\\steam2.bmp", RGB(255, 255, 255));
+		aaa.LoadBitmap(".\\Bitmaps\\aaa.bmp", RGB(255, 255, 255));
+		live.LoadBitmap(".\\Bitmaps\\live.bmp", RGB(255, 255, 255));
+		live2.LoadBitmap(".\\Bitmaps\\live.bmp", RGB(255, 255, 255));
+		live3.LoadBitmap(".\\Bitmaps\\live.bmp", RGB(255, 255, 255));
+		nolive.LoadBitmap(".\\Bitmaps\\nolive.bmp", RGB(255, 255, 255));
+		nolive2.LoadBitmap(".\\Bitmaps\\nolive.bmp", RGB(255, 255, 255));
 
 
 		CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
@@ -685,6 +693,7 @@ namespace game_framework {
 
 	void CGameStateRun::OnShow()
 	{
+
 		//
 		//  注意：Show裡面千萬不要移動任何物件的座標，移動座標的工作應由Move做才對，
 		//        否則當視窗重新繪圖時(OnDraw)，物件就會移動，看起來會很怪。換個術語
@@ -716,6 +725,28 @@ namespace game_framework {
 		corner.ShowBitmap();
 		corner.SetTopLeft(SIZE_X - corner.Width(), SIZE_Y - corner.Height());
 		corner.ShowBitmap();
+
+		live.SetTopLeft(580, 10);
+		live.ShowBitmap();
+		live2.SetTopLeft(640, 10);
+		live2.ShowBitmap();
+		live3.SetTopLeft(700, 10);
+		live3.ShowBitmap();
+
+		if (hits_left.GetInteger() <= 2) {
+			aaa.SetTopLeft(700, 10);
+			aaa.ShowBitmap();
+
+
+			nolive.SetTopLeft(700, 10);
+			nolive.ShowBitmap();
+		}
+		if (hits_left.GetInteger() <= 1) {
+			aaa.SetTopLeft(640, 10);
+			aaa.ShowBitmap();
+			nolive2.SetTopLeft(640, 10);
+			nolive2.ShowBitmap();
+		}
 	}
 
 

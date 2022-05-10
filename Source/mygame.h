@@ -119,6 +119,12 @@ namespace game_framework {
 		CMovingBitmap steam;        // 噴氣
 		CMovingBitmap steam1;        // 噴氣
 		CMovingBitmap steam2;        // 噴氣
+		CMovingBitmap aaa;
+		CMovingBitmap live;
+		CMovingBitmap live2;
+		CMovingBitmap live3;
+		CMovingBitmap nolive;
+		CMovingBitmap nolive2;
 
 		CMap       map;             // 地圖
 		Ccharacter chtest;          // 角色
