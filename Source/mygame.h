@@ -104,9 +104,6 @@ namespace game_framework {
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
-		CAnimation live;
-		CAnimation live2;
-		CAnimation live3;
 	private:
 		const int		NUMBALLS;	// 球的總數
 		const int       NUMLASER;   // 雷射總數
@@ -119,12 +116,6 @@ namespace game_framework {
 		CEraser			eraser;		// 拍子
 		CInteger		hits_left;	// 剩下的撞擊數
 		CBouncingBall   bball;		// 反覆彈跳的球
-<<<<<<< HEAD
-		CMovingBitmap steam;        // 噴氣
-		CMovingBitmap steam1;        // 噴氣
-		CMovingBitmap steam2;        // 噴氣
-=======
->>>>>>> d6442ff05dbcd47b35a0da2794f38f212f78e26d
 
 		CLife    Life;
 		CMap       map;             // 地圖

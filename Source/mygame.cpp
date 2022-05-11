@@ -472,17 +472,11 @@ namespace game_framework {
 			if (laser[i].IsAlive() && laser[i].HitEraser(&chtest)) {
 				laser[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失
 				hits_left.Add(-1);                                        //扣命
-<<<<<<< HEAD
-				
-
-				
-=======
 				Life.OnMove();
 				if (hits_left.GetInteger() <= 0) {
 					GotoGameState(GAME_STATE_OVER);
 				}
 
->>>>>>> d6442ff05dbcd47b35a0da2794f38f212f78e26d
 			}
 		}
 
@@ -491,14 +485,10 @@ namespace game_framework {
 			if (laser2[i].IsAlive() && laser2[i].HitEraser(&chtest)) {
 				laser2[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失
 				hits_left.Add(-1);                                        //扣命
-<<<<<<< HEAD
-				
-=======
 				Life.OnMove();
 				if (hits_left.GetInteger() <= 0) {
 					GotoGameState(GAME_STATE_OVER);
 				}
->>>>>>> d6442ff05dbcd47b35a0da2794f38f212f78e26d
 			}
 		}
 
@@ -585,23 +575,6 @@ namespace game_framework {
 		//corner.ShowBitmap(background);							// 將corner貼到background
 		bball.LoadBitmap();										// 載入圖形
 		hits_left.LoadBitmap();
-<<<<<<< HEAD
-		steam.LoadBitmap(".\\Bitmaps\\steam.bmp", RGB(255, 255, 255));
-		steam1.LoadBitmap(".\\Bitmaps\\steam1.bmp", RGB(255, 255, 255));
-		steam2.LoadBitmap(".\\Bitmaps\\steam2.bmp", RGB(255, 255, 255));
-		
-		live.AddBitmap(".\\Bitmaps\\live.bmp", RGB(255, 255, 255));
-		live.AddBitmap(".\\Bitmaps\\aaa.bmp", RGB(255, 255, 255));
-		live.AddBitmap(".\\Bitmaps\\nolive.bmp", RGB(255, 255, 255));
-		live2.AddBitmap(".\\Bitmaps\\live.bmp", RGB(255, 255, 255));
-		live2.AddBitmap(".\\Bitmaps\\aaa.bmp", RGB(255, 255, 255));
-		live2.AddBitmap(".\\Bitmaps\\nolive.bmp", RGB(255, 255, 255));
-		live3.AddBitmap(".\\Bitmaps\\live.bmp", RGB(255, 255, 255));
-		live3.AddBitmap(".\\Bitmaps\\aaa.bmp", RGB(255, 255, 255));
-		live3.AddBitmap(".\\Bitmaps\\nolive.bmp", RGB(255, 255, 255));
-		
-=======
->>>>>>> d6442ff05dbcd47b35a0da2794f38f212f78e26d
 
 
 		CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
@@ -747,41 +720,7 @@ namespace game_framework {
 		corner.ShowBitmap();
 		corner.SetTopLeft(SIZE_X - corner.Width(), SIZE_Y - corner.Height());
 		corner.ShowBitmap();
-<<<<<<< HEAD
-
-		live.SetTopLeft(700, 10);
-		live.OnShow();
-		live2.SetTopLeft(640, 10);
-		live2.OnShow();
-		live3.SetTopLeft(580, 10);
-		live3.OnShow();
-
-		if (hits_left.GetInteger() == 2) {
-			if (live.GetCurrentBitmapNumber() != 2) {
-				live.OnMove();
-			}
-			if (live2.GetCurrentBitmapNumber() != 0) {
-				live2.OnMove();
-			}
-		}
-		if (hits_left.GetInteger() == 1) {
-			if (live2.GetCurrentBitmapNumber() != 2) {
-				live2.OnMove();
-			}
-			if (live3.GetCurrentBitmapNumber() != 0) {
-				live3.OnMove();
-			}
-		}
-		if (hits_left.GetInteger() == 0) {
-			if (live3.GetCurrentBitmapNumber() != 2) {
-				live3.OnMove();
-			}
-			GotoGameState(GAME_STATE_OVER);
-		}
-
-=======
 		//580 10
->>>>>>> d6442ff05dbcd47b35a0da2794f38f212f78e26d
 	}
 
 
