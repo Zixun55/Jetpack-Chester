@@ -301,7 +301,7 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	CGameStateRun::CGameStateRun(CGame *g)
-		: CGameState(g), NUMBALLS(28), NUMLASER(10), NUMLASER2(10),NUMBOXES(10)
+		: CGameState(g), NUMBALLS(28), NUMLASER(10), NUMLASER2(10), NUMBOXES(10)
 	{
 		ball = new CBall[NUMBALLS];
 		laser = new CBlock[NUMLASER];
@@ -399,7 +399,7 @@ namespace game_framework {
 		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 		hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 		hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
-
+		Life.Reset();
 		//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
 		//CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
 		//CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
@@ -412,7 +412,7 @@ namespace game_framework {
 		}
 		int min = x[0][0];
 		int closet = 0;
-		for (int i = 1; i < NUMBOXES;i++)
+		for (int i = 1; i < NUMBOXES; i++)
 		{
 			if (x[i][0] < min) {
 				min = x[i][0];
@@ -457,6 +457,7 @@ namespace game_framework {
 				ball[i].SetIsAlive(false);
 				CAudio::Instance()->Play(AUDIO_DING);
 				hits_left.Add(-1);
+				Life.OnMove();
 				//
 				// 若剩餘碰撞次數為0，則跳到Game Over狀態
 				//
@@ -471,10 +472,11 @@ namespace game_framework {
 			if (laser[i].IsAlive() && laser[i].HitEraser(&chtest)) {
 				laser[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失
 				hits_left.Add(-1);                                        //扣命
+				Life.OnMove();
 				if (hits_left.GetInteger() <= 0) {
 					GotoGameState(GAME_STATE_OVER);
 				}
-				
+
 			}
 		}
 
@@ -483,6 +485,7 @@ namespace game_framework {
 			if (laser2[i].IsAlive() && laser2[i].HitEraser(&chtest)) {
 				laser2[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失
 				hits_left.Add(-1);                                        //扣命
+				Life.OnMove();
 				if (hits_left.GetInteger() <= 0) {
 					GotoGameState(GAME_STATE_OVER);
 				}
@@ -546,6 +549,7 @@ namespace game_framework {
 			ball[i].LoadBitmap();								// 載入第i個球的圖形
 		eraser.LoadBitmap();
 		chtest.LoadBitmap();
+		Life.LoadBitmap();
 
 
 		for (int i = 0; i < NUMLASER; i++) {
@@ -571,15 +575,6 @@ namespace game_framework {
 		//corner.ShowBitmap(background);							// 將corner貼到background
 		bball.LoadBitmap();										// 載入圖形
 		hits_left.LoadBitmap();
-		steam.LoadBitmap(".\\Bitmaps\\steam.bmp", RGB(255, 255, 255));
-		steam1.LoadBitmap(".\\Bitmaps\\steam1.bmp", RGB(255, 255, 255));
-		steam2.LoadBitmap(".\\Bitmaps\\steam2.bmp", RGB(255, 255, 255));
-		aaa.LoadBitmap(".\\Bitmaps\\aaa.bmp", RGB(255, 255, 255));
-		live.LoadBitmap(".\\Bitmaps\\live.bmp", RGB(255, 255, 255));
-		live2.LoadBitmap(".\\Bitmaps\\live.bmp", RGB(255, 255, 255));
-		live3.LoadBitmap(".\\Bitmaps\\live.bmp", RGB(255, 255, 255));
-		nolive.LoadBitmap(".\\Bitmaps\\nolive.bmp", RGB(255, 255, 255));
-		nolive2.LoadBitmap(".\\Bitmaps\\nolive.bmp", RGB(255, 255, 255));
 
 
 		CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
@@ -716,7 +711,7 @@ namespace game_framework {
 			laser2[i].OnShow();
 			boxes[i].OnShow();
 		}
-
+		Life.OnShow();
 
 		//
 		//  貼上左上及右下角落的圖
@@ -725,28 +720,7 @@ namespace game_framework {
 		corner.ShowBitmap();
 		corner.SetTopLeft(SIZE_X - corner.Width(), SIZE_Y - corner.Height());
 		corner.ShowBitmap();
-
-		live.SetTopLeft(580, 10);
-		live.ShowBitmap();
-		live2.SetTopLeft(640, 10);
-		live2.ShowBitmap();
-		live3.SetTopLeft(700, 10);
-		live3.ShowBitmap();
-
-		if (hits_left.GetInteger() <= 2) {
-			aaa.SetTopLeft(700, 10);
-			aaa.ShowBitmap();
-
-
-			nolive.SetTopLeft(700, 10);
-			nolive.ShowBitmap();
-		}
-		if (hits_left.GetInteger() <= 1) {
-			aaa.SetTopLeft(640, 10);
-			aaa.ShowBitmap();
-			nolive2.SetTopLeft(640, 10);
-			nolive2.ShowBitmap();
-		}
+		//580 10
 	}
 
 

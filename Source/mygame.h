@@ -116,16 +116,8 @@ namespace game_framework {
 		CEraser			eraser;		// 拍子
 		CInteger		hits_left;	// 剩下的撞擊數
 		CBouncingBall   bball;		// 反覆彈跳的球
-		CMovingBitmap steam;        // 噴氣
-		CMovingBitmap steam1;        // 噴氣
-		CMovingBitmap steam2;        // 噴氣
-		CMovingBitmap aaa;
-		CMovingBitmap live;
-		CMovingBitmap live2;
-		CMovingBitmap live3;
-		CMovingBitmap nolive;
-		CMovingBitmap nolive2;
 
+		CLife    Life;
 		CMap       map;             // 地圖
 		Ccharacter chtest;          // 角色
 		CBlock     *laser;          // 雷射

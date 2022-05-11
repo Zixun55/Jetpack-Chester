@@ -265,6 +265,19 @@ namespace game_framework {
 		int n;							// 整數值
 		bool isBmpLoaded;				// 是否已經載入圖形
 	};
+	/////////////////////////////////////////////////////////////////////////////
+	class CLife {
+	public:
+		CLife();
+		void LoadBitmap();			// 載入0..9及負號之圖形
+		void OnMove();
+		void OnShow();
+		void Reset();
+	private:
+		CAnimation Life_num; // 儲存0..9及負號之圖形(bitmap)
+		int n;							// 整數值
+		bool isBmpLoaded = false;				// 是否已經載入圖形
+	};
 
 	/////////////////////////////////////////////////////////////////////////////
 	// 宣告尚未定義的class
