@@ -479,7 +479,6 @@ namespace game_framework {
 
 			}
 		}
-
 		for (int i = 0; i < NUMLASER2; i++) {
 			laser2[i].OnMove();
 			if (laser2[i].IsAlive() && laser2[i].HitEraser(&chtest)) {
