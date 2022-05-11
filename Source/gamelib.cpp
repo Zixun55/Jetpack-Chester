@@ -306,7 +306,29 @@ namespace game_framework {
 			digit[10].ShowBitmap();
 		}
 	}
-
+	/////////////////////////////////////////////////////////////////////////////
+	CLife::CLife() {
+		Life_num.SetDelayCount(1);
+	}
+	void CLife::LoadBitmap() {
+		if (!isBmpLoaded) {
+			Life_num.AddBitmap(".\\Bitmaps\\fullLife.bmp", RGB(255, 255, 255));
+			Life_num.AddBitmap(".\\Bitmaps\\twoLife.bmp", RGB(255, 255, 255));
+			Life_num.AddBitmap(".\\Bitmaps\\oneLife.bmp", RGB(255, 255, 255));
+			Life_num.AddBitmap(".\\Bitmaps\\noLife.bmp", RGB(255, 255, 255));
+			isBmpLoaded = true;
+		}
+	}
+	void CLife::Reset() {
+		Life_num.Reset();
+	}
+	void CLife::OnMove() {
+		Life_num.OnMove();
+	}
+	void CLife::OnShow() {
+		Life_num.SetTopLeft(580, 10);
+		Life_num.OnShow();
+	}
 	/////////////////////////////////////////////////////////////////////////////
 	// CMovingBitmap: Moving Bitmap class
 	// 這個class提供可以移動的圖形
