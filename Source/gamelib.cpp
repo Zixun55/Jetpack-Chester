@@ -312,13 +312,13 @@ namespace game_framework {
 	}
 	void CLife::LoadBitmap() {
 		if (!isBmpLoaded) {
-			Life_num.AddBitmap(".\\Bitmaps\\fullLife.bmp", RGB(255, 255, 255));
-			Life_num.AddBitmap(".\\Bitmaps\\AfullLife.bmp", RGB(255, 255, 255));
-			Life_num.AddBitmap(".\\Bitmaps\\twoLife.bmp", RGB(255, 255, 255));
-			Life_num.AddBitmap(".\\Bitmaps\\AtwoLife.bmp", RGB(255, 255, 255));
-			Life_num.AddBitmap(".\\Bitmaps\\oneLife.bmp", RGB(255, 255, 255));
-			Life_num.AddBitmap(".\\Bitmaps\\AnoLife.bmp", RGB(255, 255, 255));
-			Life_num.AddBitmap(".\\Bitmaps\\noLife.bmp", RGB(255, 255, 255));
+			Life_num.AddBitmap(".\\Bitmaps\\fin_full.bmp", RGB(255, 255, 255));
+			Life_num.AddBitmap(".\\Bitmaps\\fin_afull.bmp", RGB(255, 255, 255));
+			Life_num.AddBitmap(".\\Bitmaps\\fin_two.bmp", RGB(255, 255, 255));
+			Life_num.AddBitmap(".\\Bitmaps\\fin_atwo.bmp", RGB(255, 255, 255));
+			Life_num.AddBitmap(".\\Bitmaps\\fin_one.bmp", RGB(255, 255, 255));
+			Life_num.AddBitmap(".\\Bitmaps\\fin_aone.bmp", RGB(255, 255, 255));
+			Life_num.AddBitmap(".\\Bitmaps\\fin_none.bmp", RGB(255, 255, 255));
 			isBmpLoaded = true;
 		}
 	}
