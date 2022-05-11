@@ -471,9 +471,8 @@ namespace game_framework {
 			if (laser[i].IsAlive() && laser[i].HitEraser(&chtest)) {
 				laser[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失
 				hits_left.Add(-1);                                        //扣命
-				if (hits_left.GetInteger() <= 0) {
-					GotoGameState(GAME_STATE_OVER);
-				}
+				
+
 				
 			}
 		}
@@ -483,9 +482,7 @@ namespace game_framework {
 			if (laser2[i].IsAlive() && laser2[i].HitEraser(&chtest)) {
 				laser2[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失
 				hits_left.Add(-1);                                        //扣命
-				if (hits_left.GetInteger() <= 0) {
-					GotoGameState(GAME_STATE_OVER);
-				}
+				
 			}
 		}
 
@@ -574,12 +571,17 @@ namespace game_framework {
 		steam.LoadBitmap(".\\Bitmaps\\steam.bmp", RGB(255, 255, 255));
 		steam1.LoadBitmap(".\\Bitmaps\\steam1.bmp", RGB(255, 255, 255));
 		steam2.LoadBitmap(".\\Bitmaps\\steam2.bmp", RGB(255, 255, 255));
-		aaa.LoadBitmap(".\\Bitmaps\\aaa.bmp", RGB(255, 255, 255));
-		live.LoadBitmap(".\\Bitmaps\\live.bmp", RGB(255, 255, 255));
-		live2.LoadBitmap(".\\Bitmaps\\live.bmp", RGB(255, 255, 255));
-		live3.LoadBitmap(".\\Bitmaps\\live.bmp", RGB(255, 255, 255));
-		nolive.LoadBitmap(".\\Bitmaps\\nolive.bmp", RGB(255, 255, 255));
-		nolive2.LoadBitmap(".\\Bitmaps\\nolive.bmp", RGB(255, 255, 255));
+		
+		live.AddBitmap(".\\Bitmaps\\live.bmp", RGB(255, 255, 255));
+		live.AddBitmap(".\\Bitmaps\\aaa.bmp", RGB(255, 255, 255));
+		live.AddBitmap(".\\Bitmaps\\nolive.bmp", RGB(255, 255, 255));
+		live2.AddBitmap(".\\Bitmaps\\live.bmp", RGB(255, 255, 255));
+		live2.AddBitmap(".\\Bitmaps\\aaa.bmp", RGB(255, 255, 255));
+		live2.AddBitmap(".\\Bitmaps\\nolive.bmp", RGB(255, 255, 255));
+		live3.AddBitmap(".\\Bitmaps\\live.bmp", RGB(255, 255, 255));
+		live3.AddBitmap(".\\Bitmaps\\aaa.bmp", RGB(255, 255, 255));
+		live3.AddBitmap(".\\Bitmaps\\nolive.bmp", RGB(255, 255, 255));
+		
 
 
 		CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
@@ -726,27 +728,36 @@ namespace game_framework {
 		corner.SetTopLeft(SIZE_X - corner.Width(), SIZE_Y - corner.Height());
 		corner.ShowBitmap();
 
-		live.SetTopLeft(580, 10);
-		live.ShowBitmap();
+		live.SetTopLeft(700, 10);
+		live.OnShow();
 		live2.SetTopLeft(640, 10);
-		live2.ShowBitmap();
-		live3.SetTopLeft(700, 10);
-		live3.ShowBitmap();
+		live2.OnShow();
+		live3.SetTopLeft(580, 10);
+		live3.OnShow();
 
-		if (hits_left.GetInteger() <= 2) {
-			aaa.SetTopLeft(700, 10);
-			aaa.ShowBitmap();
-
-
-			nolive.SetTopLeft(700, 10);
-			nolive.ShowBitmap();
+		if (hits_left.GetInteger() == 2) {
+			if (live.GetCurrentBitmapNumber() != 2) {
+				live.OnMove();
+			}
+			if (live2.GetCurrentBitmapNumber() != 0) {
+				live2.OnMove();
+			}
 		}
-		if (hits_left.GetInteger() <= 1) {
-			aaa.SetTopLeft(640, 10);
-			aaa.ShowBitmap();
-			nolive2.SetTopLeft(640, 10);
-			nolive2.ShowBitmap();
+		if (hits_left.GetInteger() == 1) {
+			if (live2.GetCurrentBitmapNumber() != 2) {
+				live2.OnMove();
+			}
+			if (live3.GetCurrentBitmapNumber() != 0) {
+				live3.OnMove();
+			}
 		}
+		if (hits_left.GetInteger() == 0) {
+			if (live3.GetCurrentBitmapNumber() != 2) {
+				live3.OnMove();
+			}
+			GotoGameState(GAME_STATE_OVER);
+		}
+
 	}
 
 
