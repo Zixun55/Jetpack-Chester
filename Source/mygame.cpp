@@ -303,22 +303,17 @@ namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame *g)
 		: CGameState(g), NUMBALLS(28), NUMLASER(10), NUMLASER2(10), NUMBOXES(10)
 	{
-		ball = new CBall[NUMBALLS];
-		laser = new CBlock[NUMLASER];
-		laser2 = new Claser[NUMLASER2];
-		boxes = new CBox[NUMBOXES];
+		/*ball = new CBall[NUMBALLS];*/
 		map = CMap();
+		
 	}
 
 	CGameStateRun::~CGameStateRun()
 	{
-		delete[] boxes;
-		delete[] laser;
-		delete[] laser2;
-		delete[] ball;
+		//delete[] ball;
+		//ALLoB.~CALaser();
 		TRACE("del\n");
 	}
-
 	void CGameStateRun::OnBeginState()
 	{
 		const int BALL_GAP = 90;
@@ -332,167 +327,36 @@ namespace game_framework {
 		for (int i = 0; i < NUMBALLS; i++) {				// 設定球的起始座標
 			int x_pos = i % BALL_PER_ROW;
 			int y_pos = i / BALL_PER_ROW;
-			ball[i].SetXY(x_pos * BALL_GAP + BALL_XY_OFFSET, y_pos * BALL_GAP + BALL_XY_OFFSET);
-			ball[i].SetDelay(x_pos);
-			ball[i].SetIsAlive(true);
+			//ball[i].SetXY(x_pos * BALL_GAP + BALL_XY_OFFSET, y_pos * BALL_GAP + BALL_XY_OFFSET);
+			//ball[i].SetDelay(x_pos);
+			//ball[i].SetIsAlive(true);
 		}
 
 		//雷射位置
-		int laserx_1[10] = { 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000 };
-		int lasery_1[10] = { 50, 200, 400, 150, 500, 175, 350, 135, 375, 185 };
-		int laserx_2[10] = { 700, 1400, 1700, 2200, 2700, 3200, 3700, 1200, 4700, 5200 };
-		int lasery_2[10] = { 300, 120, 75, 150, 500, 175, 350, 135, 375, 185 };
-		for (int i = 0; i < NUMLASER; i++) {
-			laser[i].SetXY(laserx_1[i],lasery_1[i]);
-			laser[i].SetIsAlive(true);
-			laser2[i].SetXY(laserx_2[i],lasery_2[i]);
-			laser2[i].SetIsAlive(true);
-		}
-		for (int i = 0; i < NUMBOXES; i++) {
-			boxes[i].SetXY((i + 1) * 1000, 280);
-		}
+		ALLoB.Initialize();
+		//ALLoB.LoadBitmap();
 		eraser.Initialize();
-		chtest.Initialize();
 		map.Initialize();
 		map.chooseMap(maps);
 		map.LoadBitmap();
-		TRACE("%d\n", maps);
 		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 		hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 		hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
-		Life.Reset();
-		//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
-		//CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
-		//CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
-	}
-	int  CGameStateRun::ClosestBox() {
-		int x[100][100];
-		for (int i = 0; i < NUMBOXES; i++) {
-			x[i][0] = abs(boxes[i].BoxX1() - chtest.GetX2());
-			x[i][1] = i;
-		}
-		int min = x[0][0];
-		int closet = 0;
-		for (int i = 1; i < NUMBOXES; i++)
-		{
-			if (x[i][0] < min) {
-				min = x[i][0];
-				closet = x[i][1];
-			}
-		}
-		return closet;
+		
 	}
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
-		//
-		// 如果希望修改cursor的樣式，則將下面程式的commment取消即可
-		//
-		// SetCursor(AfxGetApp()->LoadCursor(IDC_GAMECURSOR));
-		//
-		// 移動背景圖的座標
-		//
-		//if (background.Top() > SIZE_Y)
-			//background.SetTopLeft(60, -background.Height());
-
-		//if (background.Left() > -640) {                                       //畫面移動
-		//	background.SetTopLeft(background.Left() - 1, background.Top());
-		//}
-
-
-		//
-		// 移動球
-		//
-
-		for (int i = 0; i < NUMBALLS; i++)
-			ball[i].OnMove();
-		//
-		// 移動擦子
-		//
-		eraser.OnMove();
 		map.OnMove();
-		//
-		// 判斷擦子是否碰到球
-		//
-		for (int i = 0; i < NUMBALLS; i++)
-			if (ball[i].IsAlive() && ball[i].HitEraser(&eraser)) {
-				ball[i].SetIsAlive(false);
-				CAudio::Instance()->Play(AUDIO_DING);
-				hits_left.Add(-1);
-				Life.OnMove();
-				//
-				// 若剩餘碰撞次數為0，則跳到Game Over狀態
-				//
-				if (hits_left.GetInteger() <= 0) {
-					CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
-					CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
-					GotoGameState(GAME_STATE_OVER);
-				}
-			}
-		for (int i = 0; i < NUMLASER; i++) {
-			laser[i].OnMove();
-			if (laser[i].IsAlive() && laser[i].HitEraser(&chtest)) {
-				laser[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失
-				hits_left.Add(-1);                                        //扣命
-				Life.OnMove();
-				if (hits_left.GetInteger() <= 0) {
-					GotoGameState(GAME_STATE_OVER);
-				}
-
-			}
+		ALLoB.OnMove();
+		if (ALLoB.GetLife_n() <= 0) {
+			GotoGameState(GAME_STATE_OVER);
 		}
-		for (int i = 0; i < NUMLASER2; i++) {
-			laser2[i].OnMove();
-			if (laser2[i].IsAlive() && laser2[i].HitEraser(&chtest)) {
-				laser2[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失
-				hits_left.Add(-1);                                        //扣命
-				Life.OnMove();
-				if (hits_left.GetInteger() <= 0) {
-					GotoGameState(GAME_STATE_OVER);
-				}
-			}
+		if (ALLoB.GetCheck_map()) {
+			map.CantMoving(true);
 		}
-
-		int check_box = 0;
-		int check_ch = 0;
-		for (int i = 0; i < NUMBOXES; i++) {
-			if (boxes[i].HitEraser(&chtest)) {
-				check_box = 1;
-			}
+		else {
+			map.CantMoving(false);
 		}
-		int close_box = CGameStateRun::ClosestBox();
-		if (boxes[close_box].ChxBigThanBox(&chtest)) {
-			check_ch = 1;
-		}
-		for (int i = 0; i < NUMBOXES; i++) {
-			if (check_box) {
-				boxes[i].CantMoving(true);
-				laser[i].CantMoving(true);
-				laser2[i].CantMoving(true);
-				map.CantMoving(true);
-				if (check_ch) {
-					chtest.CantMoving(true);
-				}
-				else {
-					chtest.CantMoving(false);
-				}
-			}
-			else {
-				boxes[i].CantMoving(false);
-				laser[i].CantMoving(false);
-				laser2[i].CantMoving(false);
-				map.CantMoving(false);
-				chtest.CantMoving(false);
-			}
-			boxes[i].OnMove();
-		}
-		chtest.OnMove();
-		check_box = 0;
-		check_ch = 0;
-
-		//
-		// 移動彈跳的球
-		//
-		bball.OnMove();
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -506,22 +370,10 @@ namespace game_framework {
 		// 開始載入資料
 		//
 		for (int i = 0; i < NUMBALLS; i++)
-			ball[i].LoadBitmap();								// 載入第i個球的圖形
+			//ball[i].LoadBitmap();								// 載入第i個球的圖形
+		
 		eraser.LoadBitmap();
-		chtest.LoadBitmap();
-		Life.LoadBitmap();
-
-
-		for (int i = 0; i < NUMLASER; i++) {
-			laser[i].LoadBitmap();
-		}
-		for (int i = 0; i < NUMLASER2; i++) {
-			laser2[i].LoadBitmap();
-		}
-		for (int i = 0; i < NUMBOXES; i++) {
-			boxes[i].LoadBitmap();
-		}
-
+		
 		//
 		// 完成部分Loading動作，提高進度
 		//
@@ -562,23 +414,14 @@ namespace game_framework {
 
 
 		if (nChar == KEY_LEFT) {
-			chtest.SetMovingLeft(true);
 			map.SetMovingLeft(true);
-			for (int i = 0; i < NUMLASER; i++) {
-				laser[i].SetMovingLeft(true);
-				laser2[i].SetMovingLeft(true);
-				boxes[i].SetMovingLeft(true);
-			}
+			ALLoB.SetMovingLeft(true);
 		}
 		if (nChar == KEY_RIGHT) {
-			chtest.SetMovingRight(true);
 			map.SetMovingRight(true);
-			for (int i = 0; i < NUMLASER; i++) {
-				laser[i].SetMovingRight(true);
-				laser2[i].SetMovingRight(true);
-				boxes[i].SetMovingRight(true);
-			}
+			ALLoB.SetMovingRight(true);
 		}
+
 	}
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -597,22 +440,12 @@ namespace game_framework {
 			eraser.SetMovingDown(false);
 
 		if (nChar == KEY_LEFT) {
-			chtest.SetMovingLeft(false);
 			map.SetMovingLeft(false);
-			for (int i = 0; i < NUMLASER; i++) {
-				laser[i].SetMovingLeft(false);
-				laser2[i].SetMovingLeft(false);
-				boxes[i].SetMovingLeft(false);
-			}
+			ALLoB.SetMovingLeft(false);
 		}
 		if (nChar == KEY_RIGHT) {
-			chtest.SetMovingRight(false);
 			map.SetMovingRight(false);
-			for (int i = 0; i < NUMLASER; i++) {
-				laser[i].SetMovingRight(false);
-				laser2[i].SetMovingRight(false);
-				boxes[i].SetMovingRight(false);
-			}
+			ALLoB.SetMovingRight(false);
 		}
 		//if (nChar == KEY_LEFT)
 		//	character.SetTopLeft(character.Left() - 1, character.Top());
@@ -659,19 +492,15 @@ namespace game_framework {
 		//
 		//background.ShowBitmap();			// 貼上背景圖
 		help.ShowBitmap();					// 貼上說明圖
-		for (int i = 0; i < NUMBALLS; i++)
-			ball[i].OnShow();				// 貼上第i號球
+		/*for (int i = 0; i < NUMBALLS; i++)*/
+			//ball[i].OnShow();				// 貼上第i號球
 		eraser.OnShow();					// 貼上擦子
 		bball.OnShow();						// 貼上彈跳的球
 		map.OnShow();
-		chtest.OnShow();
+		ALLoB.OnShow();
+
 		//hits_left.ShowBitmap();
-		for (int i = 0; i < NUMLASER; i++) {
-			laser[i].OnShow();
-			laser2[i].OnShow();
-			boxes[i].OnShow();
-		}
-		Life.OnShow();
+		
 
 		//
 		//  貼上左上及右下角落的圖

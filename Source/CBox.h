@@ -1,3 +1,5 @@
+#ifndef CBOX_H 
+#define CBOX_H
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class提供繞圈圈的球
@@ -31,3 +33,4 @@ namespace game_framework {
 		bool HitRectangle(int tx1, int ty1, int tx2, int ty2);	// 是否碰到參數範圍的矩形
 	};
 }
+#endif

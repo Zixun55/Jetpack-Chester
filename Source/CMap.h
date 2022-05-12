@@ -1,3 +1,4 @@
+
 namespace game_framework {
 
 
@@ -13,13 +14,12 @@ namespace game_framework {
 		void LoadBitmap();
 		void OnMove();
 		void OnShow();
-		void SetMovingDown(bool flag);
 		void SetMovingLeft(bool flag);
 		void SetMovingRight(bool flag);
-		void SetMovingUp(bool flag);
 		void SetXY(int nx, int ny);
 		void CantMoving(bool flag);
 		void chooseMap(int maps);
+
 	protected:
 		CAnimation animation;
 		int x, y;
@@ -29,5 +29,10 @@ namespace game_framework {
 		bool isMovingUp;
 		bool cantMoving;
 		int  map;
+		//Claser    *laser2;
+		//CBlock    *laser;
+		Ccharacter chtest;          // ¨¤¦â
+		CLife      Life;
+		//CBox       box;
 	};
 }

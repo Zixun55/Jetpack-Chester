@@ -273,6 +273,9 @@ namespace game_framework {
 		void OnMove();
 		void OnShow();
 		void Reset();
+		int  get_n();
+		void Add(int a);
+		void set_n(int a);
 	private:
 		CAnimation Life_num; // 儲存0..9及負號之圖形(bitmap)
 		int n;							// 整數值

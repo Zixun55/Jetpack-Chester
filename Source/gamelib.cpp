@@ -336,6 +336,15 @@ namespace game_framework {
 			Life_num.OnMove();
 		}
 	}
+	int CLife::get_n() {
+		return n;
+	}
+	void CLife::Add(int a) {
+		n += a;
+	}
+	void CLife::set_n(int a) {
+		n = a;
+	}
 	/////////////////////////////////////////////////////////////////////////////
 	// CMovingBitmap: Moving Bitmap class
 	// 這個class提供可以移動的圖形

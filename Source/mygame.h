@@ -46,7 +46,7 @@
 #include "CBlock.h"
 #include "Claser.h"
 #include "CBox.h"
-#include <time.h> 
+#include "CALaser.h" 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// Constants
@@ -99,7 +99,7 @@ namespace game_framework {
 		void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作 
 		void OnRButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
 		void OnRButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
-
+		void LaserInit();
 		int  ClosestBox();                   // 最近的箱子
 	protected:
 		void OnMove();									// 移動遊戲元素
@@ -109,9 +109,8 @@ namespace game_framework {
 		const int       NUMLASER;   // 雷射總數
 		const int       NUMLASER2;   // 雷射總數
 		const int       NUMBOXES;   // 箱子總數
-		CMovingBitmap	background;	// 背景圖
 		CMovingBitmap	help;		// 說明圖
-		CBall			*ball;		// 球的陣列
+		//CBall			*ball;		// 球的陣列
 		CMovingBitmap	corner;		// 角落圖
 		CEraser			eraser;		// 拍子
 		CInteger		hits_left;	// 剩下的撞擊數
@@ -119,11 +118,8 @@ namespace game_framework {
 
 		CLife    Life;
 		CMap       map;             // 地圖
-		Ccharacter chtest;          // 角色
-		CBlock     *laser;          // 雷射
-		Claser     *laser2;          // 雷射
-		CInteger   life;            // 生命
-		CBox       *boxes;          // 箱子
+		//Ccharacter chtest;          // 角色
+		CALaser    ALLoB;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

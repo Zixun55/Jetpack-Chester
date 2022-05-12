@@ -2,10 +2,10 @@
 #include "Resource.h"
 #include <mmsystem.h>
 #include <ddraw.h>
-#include "audio.h"
 #include "gamelib.h"
+#include "Ccharacter.h"
+#include "CBox.h"
 #include "CMap.h"
-
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// CEraser: Eraser class
