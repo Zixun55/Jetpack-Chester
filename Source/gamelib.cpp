@@ -539,7 +539,7 @@ namespace game_framework {
 		for (int i = 0; i < NUM_GAME_STATES; i++)
 			delete gameStateTable[i];
 	}
-
+	
 	CGame *CGame::Instance()
 	{
 		return &instance;

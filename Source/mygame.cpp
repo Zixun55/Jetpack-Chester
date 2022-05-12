@@ -338,55 +338,16 @@ namespace game_framework {
 		}
 
 		//¹p®g¦ì¸m
-		laser[0].SetXY(500, 50);
-		laser[0].SetIsAlive(true);
-		laser[1].SetXY(1000, 200);
-		laser[1].SetIsAlive(true);
-		laser[2].SetXY(1500, 400);
-		laser[2].SetIsAlive(true);
-		laser[3].SetXY(2000, 150);
-		laser[3].SetIsAlive(true);
-		laser[4].SetXY(2500, 500);
-		laser[4].SetIsAlive(true);
-		laser[5].SetXY(3000, 175);
-		laser[5].SetIsAlive(true);
-		laser[6].SetXY(3500, 350);
-		laser[6].SetIsAlive(true);
-		laser[7].SetXY(4000, 135);
-		laser[7].SetIsAlive(true);
-		laser[8].SetXY(4500, 375);
-		laser[8].SetIsAlive(true);
-		laser[9].SetXY(5000, 185);
-		laser[9].SetIsAlive(true);
-
-		laser2[0].SetXY(700, 300);
-		laser2[0].SetIsAlive(true);
-		laser2[1].SetXY(1400, 120);
-		laser2[1].SetIsAlive(true);
-		laser2[2].SetXY(1700, 75);
-		laser2[2].SetIsAlive(true);
-		laser2[3].SetXY(2200, 150);
-		laser2[3].SetIsAlive(true);
-		laser2[4].SetXY(2700, 500);
-		laser2[4].SetIsAlive(true);
-		laser2[5].SetXY(3200, 175);
-		laser2[5].SetIsAlive(true);
-		laser2[6].SetXY(3700, 350);
-		laser2[6].SetIsAlive(true);
-		laser2[7].SetXY(4200, 135);
-		laser2[7].SetIsAlive(true);
-		laser2[8].SetXY(4700, 375);
-		laser2[8].SetIsAlive(true);
-		laser2[9].SetXY(5200, 185);
-		laser2[9].SetIsAlive(true);
-
-
-		//for (int i = 0; i < NUMLASER; i++) {
-		//	laser[i].SetXY((i + 1) * 500, 50);
-		//	laser[i].SetIsAlive(true);
-		//}
-
-
+		int laserx_1[10] = { 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000 };
+		int lasery_1[10] = { 50, 200, 400, 150, 500, 175, 350, 135, 375, 185 };
+		int laserx_2[10] = { 700, 1400, 1700, 2200, 2700, 3200, 3700, 1200, 4700, 5200 };
+		int lasery_2[10] = { 300, 120, 75, 150, 500, 175, 350, 135, 375, 185 };
+		for (int i = 0; i < NUMLASER; i++) {
+			laser[i].SetXY(laserx_1[i],lasery_1[i]);
+			laser[i].SetIsAlive(true);
+			laser2[i].SetXY(laserx_2[i],lasery_2[i]);
+			laser2[i].SetIsAlive(true);
+		}
 		for (int i = 0; i < NUMBOXES; i++) {
 			boxes[i].SetXY((i + 1) * 1000, 280);
 		}
