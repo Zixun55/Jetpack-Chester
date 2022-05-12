@@ -704,7 +704,7 @@ namespace game_framework {
 		bball.OnShow();						// ¶K¤W¼u¸õªº²y
 		map.OnShow();
 		chtest.OnShow();
-		hits_left.ShowBitmap();
+		//hits_left.ShowBitmap();
 		for (int i = 0; i < NUMLASER; i++) {
 			laser[i].OnShow();
 			laser2[i].OnShow();

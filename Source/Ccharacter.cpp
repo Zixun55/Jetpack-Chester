@@ -131,33 +131,64 @@ namespace game_framework {
 
 	void Ccharacter::OnShow() // ¦w¦w 
 	{
-		
-		if (isMovingRight) {
-			if (counter > 0 && counter < 4) {
-				steam.SetTopLeft(x - animation.Width() + 40, y + animation.Height() - 10);
-				steam.ShowBitmap();
+		if (isMovingRight && isMovingLeft) {
+			if(con){
+				if (counter > 0 && counter < 4) {
+					steam.SetTopLeft(x - animation.Width() + 40, y + animation.Height() - 10);
+					steam.ShowBitmap();
+				}
+				else if (counter > 3 && counter < 7) {
+					steam1.SetTopLeft(x - animation.Width() + 40, y + animation.Height() - 10);
+					steam1.ShowBitmap();
+				}
+				else {
+					steam2.SetTopLeft(x - animation.Width() + 40, y + animation.Height() - 10);
+					steam2.ShowBitmap();
+				}
 			}
-			else if (counter > 3 && counter < 7) {
-				steam1.SetTopLeft(x - animation.Width() + 40, y + animation.Height() - 10);
-				steam1.ShowBitmap();
-			}
-			else {
-				steam2.SetTopLeft(x - animation.Width() + 40, y + animation.Height() - 10);
-				steam2.ShowBitmap();
+			if (!con) {
+				if (counter > 0 && counter < 4) {
+					steamR.SetTopLeft(x + animation.Width() - 5, y + animation.Height() - 10);
+					steamR.ShowBitmap();
+				}
+				else if (counter > 3 && counter < 7) {
+					steamR1.SetTopLeft(x + animation.Width() - 5, y + animation.Height() - 10);
+					steamR1.ShowBitmap();
+				}
+				else {
+					steamR2.SetTopLeft(x + animation.Width() - 5, y + animation.Height() - 10);
+					steamR2.ShowBitmap();
+				}
 			}
 		}
-		if (isMovingLeft) {
-			if (counter > 0 && counter < 4) {
-				steamR.SetTopLeft(x + animation.Width() - 5, y + animation.Height() - 10);
-				steamR.ShowBitmap();
+		else {
+			if (isMovingRight) {
+				if (counter > 0 && counter < 4) {
+					steam.SetTopLeft(x - animation.Width() + 40, y + animation.Height() - 10);
+					steam.ShowBitmap();
+				}
+				else if (counter > 3 && counter < 7) {
+					steam1.SetTopLeft(x - animation.Width() + 40, y + animation.Height() - 10);
+					steam1.ShowBitmap();
+				}
+				else {
+					steam2.SetTopLeft(x - animation.Width() + 40, y + animation.Height() - 10);
+					steam2.ShowBitmap();
+				}
 			}
-			else if (counter > 3 && counter < 7) {
-				steamR1.SetTopLeft(x + animation.Width() - 5, y + animation.Height() - 10);
-				steamR1.ShowBitmap();
-			}
-			else {
-				steamR2.SetTopLeft(x + animation.Width() - 5, y + animation.Height() - 10);
-				steamR2.ShowBitmap();
+			if (isMovingLeft) {
+				if (counter > 0 && counter < 4) {
+					steamR.SetTopLeft(x + animation.Width() - 5, y + animation.Height() - 10);
+					steamR.ShowBitmap();
+				}
+				else if (counter > 3 && counter < 7) {
+					steamR1.SetTopLeft(x + animation.Width() - 5, y + animation.Height() - 10);
+					steamR1.ShowBitmap();
+				}
+				else {
+					steamR2.SetTopLeft(x + animation.Width() - 5, y + animation.Height() - 10);
+					steamR2.ShowBitmap();
+				}
 			}
 		}
 		animation.SetTopLeft(x, y);
