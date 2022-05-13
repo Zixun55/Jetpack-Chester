@@ -50,8 +50,8 @@ namespace game_framework {
 		animation.SetDelayCount(1);
 		animation.AddBitmap(".\\Bitmaps\\bg12.bmp");
 		animation.AddBitmap(".\\Bitmaps\\bg22.bmp");
-		animation.AddBitmap(".\\Bitmaps\\bg3.bmp");
-		animation.AddBitmap(".\\Bitmaps\\bg4.bmp");
+		animation.AddBitmap(".\\Bitmaps\\bg32.bmp");
+		animation.AddBitmap(".\\Bitmaps\\bg42.bmp");
 	}
 
 	void CMap::OnMove()
