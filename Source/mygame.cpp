@@ -353,9 +353,11 @@ namespace game_framework {
 		}
 		if (ALLoB.GetCheck_map()) {
 			map.CantMoving(true);
+			//map.MovingCheck(ALLoB.Get_check_chx());
 		}
 		else {
 			map.CantMoving(false);
+			//map.MovingCheck(ALLoB.Get_check_chx());
 		}
 	}
 

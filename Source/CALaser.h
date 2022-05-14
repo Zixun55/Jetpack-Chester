@@ -15,13 +15,14 @@ namespace game_framework {
 		int  ClosestBox();
 		int  GetLife_n();
 		int  GetCheck_map();
-		void OnKeyDown(UINT, UINT, UINT);
-		void OnKeyUp(UINT, UINT, UINT);
 		void SetMovingLeft(bool flag);
 		void SetMovingRight(bool flag);
+		bool Get_check_chx();
 	protected:
 		int check_map;
 		int x, y;
+		bool check_chx;
+		bool check_chx2;
 		bool cantMoving;
 		bool isLeft  = false;
 		bool isRight = false;

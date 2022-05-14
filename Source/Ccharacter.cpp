@@ -76,7 +76,7 @@ namespace game_framework {
 		if (y <= 0 && isMovingRight) {
 			y = 0;
 			if (!con) {
-				animation.Reset();
+				animation.OnMove();
 				con = true;
 			}
 		}
@@ -91,7 +91,7 @@ namespace game_framework {
 			if (isMovingRight) {
 				y -= STEP_SIZE;
 				if (!con) {
-					animation.Reset();
+					animation.OnMove();
 					con = true;
 				}
 			}
@@ -101,14 +101,6 @@ namespace game_framework {
 				}
 			}
 		}
-		//if (x != 340) {
-			//if (isMovingLeft) {
-				//x -= 5;
-			//}
-			//if (isMovingRight) {
-				//x += 5;
-			//}
-		//}
 	}
 
 
@@ -197,4 +189,5 @@ namespace game_framework {
 	void Ccharacter::CantMoving(bool flag) {
 		cantMoving = flag;
 	}
+
 }

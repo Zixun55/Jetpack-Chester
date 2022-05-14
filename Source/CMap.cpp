@@ -43,6 +43,7 @@ namespace game_framework {
 		x = X_POS;
 		y = Y_POS;
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = cantMoving = false;
+		movingcheck = false;
 	}
 
 	void CMap::LoadBitmap()
@@ -73,6 +74,12 @@ namespace game_framework {
 
 						x -= STEP_SIZE;
 					}
+				}
+				else if (movingcheck && isMovingRight) {
+					x -= STEP_SIZE;
+				}
+				else if (movingcheck && isMovingRight) {
+					x += STEP_SIZE;
 				}
 			}
 		}
@@ -126,5 +133,8 @@ namespace game_framework {
 	}
 	void CMap::chooseMap(int maps) {
 		map = maps;
+	}
+	void CMap::MovingCheck(bool flag) {
+		movingcheck = flag;
 	}
 }

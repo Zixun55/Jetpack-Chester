@@ -52,7 +52,7 @@ namespace game_framework {
 		chtest.Initialize();
 		isLeft = isRight = cantMoving = false;
 		Life.Reset();
-		Life.set_n(3);
+		Life.set_n(200);
 	}
 
 	void CALaser::LoadBitmap()
@@ -103,12 +103,23 @@ namespace game_framework {
 		if (boxes[close_box].ChxBigThanBox(&chtest)) {
 			check_ch = 1;
 		}
+		check_chx = false;
+		if (boxes[close_box].ChxXBigThanBox(&chtest)) {
+			check_chx = true;
+		}
+		check_chx2 = false;
+		if (boxes[close_box].ChxXSmallThanBox(&chtest)) {
+			check_chx2 = true;
+		}
 		check_map = check_box;
 		for (int i = 0; i < 10; i++) {
 			if (check_box) {
 				boxes[i].CantMoving(true);
 				laser[i].CantMoving(true);
 				laser2[i].CantMoving(true);
+				boxes[i].MovingCheck(check_chx,check_chx2);
+				//laser[i].MovingCheck(check_chx);
+				//laser2[i].MovingCheck(check_chx);
 				if (check_ch) {
 					chtest.CantMoving(true);
 				}
@@ -120,6 +131,9 @@ namespace game_framework {
 				boxes[i].CantMoving(false);
 				laser[i].CantMoving(false);
 				laser2[i].CantMoving(false);
+				boxes[i].MovingCheck(check_chx,check_chx2);
+				//laser[i].MovingCheck(check_chx);
+				//laser2[i].MovingCheck(check_chx);
 				chtest.CantMoving(false);
 			}
 			boxes[i].OnMove();
@@ -181,5 +195,8 @@ namespace game_framework {
 			laser2[i].SetMovingRight(flag);
 			boxes[i].SetMovingRight(flag);
 		}
+	}
+	bool CALaser::Get_check_chx() {
+		return check_chx;
 	}
 }

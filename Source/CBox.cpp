@@ -15,6 +15,7 @@ namespace game_framework {
 		is_alive = true;
 		x = y = dx = dy = 0;
 		isMovingLeft = cantMoving = isMovingRight = false;
+		movingcheck = false;
 	}
 
 	bool CBox::HitEraser(Ccharacter *character)
@@ -35,6 +36,12 @@ namespace game_framework {
 	}
 	bool CBox::ChxBigThanBox(Ccharacter *character) {
 		return character->GetX2() > (x + dx) && character->GetY2() <= (y + dy + 8);
+	}
+	bool CBox::ChxXBigThanBox(Ccharacter *character) {
+		return character->GetX2() >= (x + dx) && character->GetX2() <= (x + dx + bmp.Width());
+	}
+	bool CBox::ChxXSmallThanBox(Ccharacter *character) {
+		return character->GetX1() <= (x + dx + bmp.Width()) && character->GetX1() > (x + dx);
 	}
 	int  CBox::BoxX1() {
 		return x + dx;
@@ -59,6 +66,15 @@ namespace game_framework {
 				dx += 5;
 			}
 		}
+		else if (movingcheck2 && isMovingRight) {
+			dx -= 5;
+		}
+		else if (movingcheck && isMovingLeft) {
+			dx += 5;
+		}
+		else if(movingcheck2){
+			TRACE("check:%d can:%d R:%d L:%d\n",movingcheck,cantMoving,isMovingRight,isMovingLeft);
+		}
 	}
 	void CBox::SetXY(int nx, int ny)
 	{
@@ -80,5 +96,9 @@ namespace game_framework {
 	}
 	void CBox::CantMoving(bool flag) {
 		cantMoving = flag;
+	}
+	void CBox::MovingCheck(bool flag,bool flag2) {
+		movingcheck = flag;
+		movingcheck2 = flag2;
 	}
 }

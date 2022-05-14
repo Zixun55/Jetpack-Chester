@@ -18,6 +18,7 @@ namespace game_framework {
 		void SetMovingRight(bool flag);
 		void SetXY(int nx, int ny);
 		void CantMoving(bool flag);
+		void MovingCheck(bool flag);
 		void chooseMap(int maps);
 
 	protected:
@@ -28,11 +29,9 @@ namespace game_framework {
 		bool isMovingRight;
 		bool isMovingUp;
 		bool cantMoving;
+		bool movingcheck;
 		int  map;
-		//Claser    *laser2;
-		//CBlock    *laser;
 		Ccharacter chtest;          // ¨¤¦â
 		CLife      Life;
-		//CBox       box;
 	};
 }

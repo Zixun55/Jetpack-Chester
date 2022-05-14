@@ -19,7 +19,11 @@ namespace game_framework {
 		void SetMovingLeft(bool flag);
 		void SetMovingRight(bool flag);
 		void CantMoving(bool flag);
+		void MovingCheck(bool flag,bool flag2);
 		bool ChxBigThanBox(Ccharacter *character);
+		bool ChxXBigThanBox(Ccharacter *character);
+		bool ChxXSmallThanBox(Ccharacter *character);
+		
 		int  BoxX1();
 	protected:
 		CAnimation bmp;			// 球的圖	
@@ -29,6 +33,8 @@ namespace game_framework {
 		bool isMovingLeft;
 		bool isMovingRight;
 		bool cantMoving;
+		bool movingcheck;
+		bool movingcheck2;
 	private:
 		bool HitRectangle(int tx1, int ty1, int tx2, int ty2);	// 是否碰到參數範圍的矩形
 	};

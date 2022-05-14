@@ -18,6 +18,7 @@ namespace game_framework {
 		x = y = dx = dy = index = delay_counter = 0;
 		isMovingLeft = false;
 		isMovingRight = false;
+		movingcheck = false;
 	}
 
 	bool CBlock::HitEraser(Ccharacter *character)
@@ -63,6 +64,12 @@ namespace game_framework {
 			if (isMovingLeft) {
 				dx += 5;
 			}
+		}
+		else if (movingcheck && isMovingRight) {
+			dx -= 5;
+		}
+		else if (movingcheck && isMovingRight) {
+			dx += 5;
 		}
 		//delay_counter--;
 		//if (delay_counter < 0) {
@@ -114,5 +121,8 @@ namespace game_framework {
 	}
 	void CBlock::CantMoving(bool flag) {
 		cantMoving = flag;
+	}
+	void CBlock::MovingCheck(bool flag) {
+		movingcheck = flag;
 	}
 }

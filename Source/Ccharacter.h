@@ -26,6 +26,7 @@ namespace game_framework {
 		bool isMovingRight;
 		bool isMovingUp;
 		bool cantMoving;
+		int Bigthanbox;
 	private:
 		bool con = true;
 		int counter;
