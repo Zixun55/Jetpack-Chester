@@ -9,6 +9,7 @@
 #include "Claser.h"
 #include "CALaser.h"
 
+
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// CEraser: Eraser class
@@ -19,11 +20,13 @@ namespace game_framework {
 		laser = nullptr;
 		laser2 = nullptr;
 		boxes = nullptr;
+		coins = nullptr;
 	}
 	CALaser::~CALaser() {
 		if (laser != nullptr) delete[] laser;
 		if (laser2 != nullptr) delete[] laser2;
 		if (boxes != nullptr) delete[] boxes;
+		if (coins != nullptr) delete[] coins;
 	}
 
 
@@ -32,19 +35,25 @@ namespace game_framework {
 		if (laser != nullptr) delete[] laser;
 		if (laser2 != nullptr) delete[] laser2;
 		if (boxes != nullptr) delete[] boxes;
+		if (coins != nullptr) delete[] coins;
 		laser = new CBlock[10];
 		laser2 = new Claser[10];
 		boxes = new CBox[10];
+		coins = new Ccoin[10];
 		this->LoadBitmap();
 		int laserx_1[10] = { 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000 };
 		int lasery_1[10] = { 50, 200, 400, 150, 500, 175, 350, 135, 375, 185 };
 		int laserx_2[10] = { 700, 1400, 1700, 2200, 2700, 3200, 3700, 1200, 4700, 5200 };
 		int lasery_2[10] = { 300, 120, 75, 150, 500, 175, 350, 135, 375, 185 };
+		int coinx[10] = { 510, 700, 825, 1123, 1687, 2333, 2668, 3212, 3924, 4354 };
+		int coiny[10] = { 150, 30, 110, 150, 70, 90, 50, 135, 200, 140 };
 		for (int i = 0; i < 10; i++) {
 			laser[i].SetXY(laserx_1[i], lasery_1[i]);
 			laser[i].SetIsAlive(true);
 			laser2[i].SetXY(laserx_2[i], lasery_2[i]);
 			laser2[i].SetIsAlive(true);
+			coins[i].SetXY(coinx[i], coiny[i]);
+			coins[i].SetIsAlive(true);
 		}
 		for (int i = 0; i < 10; i++) {
 			boxes[i].SetXY((i + 1) * 1000, 280);
@@ -66,6 +75,9 @@ namespace game_framework {
 		}
 		for (int i = 0; i < 10; i++) {
 			laser2[i].LoadBitmap();
+		}
+		for (int i = 0; i < 10; i++) {
+			coins[i].LoadBitmap();
 		}
 		for (int i = 0; i < 10; i++) {
 			boxes[i].LoadBitmap();
@@ -90,6 +102,12 @@ namespace game_framework {
 				laser2[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失
 				Life.Add(-1);                                        //扣命
 				Life.OnMove();
+			}
+		}
+		for (int i = 0; i < 10; i++) {
+			coins[i].OnMove();
+			if (coins[i].IsAlive() && coins[i].HitEraser(&chtest)) {
+				coins[i].SetIsAlive(false);                                //如果角色碰到錢幣，錢幣會消失                                        
 			}
 		}
 		int check_box = 0;
@@ -117,6 +135,7 @@ namespace game_framework {
 				boxes[i].CantMoving(true);
 				laser[i].CantMoving(true);
 				laser2[i].CantMoving(true);
+				coins[i].CantMoving(true);
 				boxes[i].MovingCheck(check_chx,check_chx2);
 				//laser[i].MovingCheck(check_chx);
 				//laser2[i].MovingCheck(check_chx);
@@ -131,6 +150,7 @@ namespace game_framework {
 				boxes[i].CantMoving(false);
 				laser[i].CantMoving(false);
 				laser2[i].CantMoving(false);
+				coins[i].CantMoving(false);
 				boxes[i].MovingCheck(check_chx,check_chx2);
 				//laser[i].MovingCheck(check_chx);
 				//laser2[i].MovingCheck(check_chx);
@@ -148,6 +168,7 @@ namespace game_framework {
 		for (int i = 0; i < 10; i++) {
 			laser[i].OnShow();
 			laser2[i].OnShow();
+			coins[i].OnShow();
 			boxes[i].OnShow();
 		}
 		Life.OnShow();
@@ -185,6 +206,7 @@ namespace game_framework {
 		for (int i = 0; i < 10; i++) {
 			laser[i].SetMovingLeft(flag);
 			laser2[i].SetMovingLeft(flag);
+			coins[i].SetMovingLeft(flag);
 			boxes[i].SetMovingLeft(flag);
 		}
 	}
@@ -193,6 +215,7 @@ namespace game_framework {
 		for (int i = 0; i < 10; i++) {
 			laser[i].SetMovingRight(flag);
 			laser2[i].SetMovingRight(flag);
+			coins[i].SetMovingRight(flag);
 			boxes[i].SetMovingRight(flag);
 		}
 	}

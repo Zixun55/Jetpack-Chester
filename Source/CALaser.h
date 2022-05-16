@@ -1,6 +1,6 @@
 #include <vector>
+#include "Ccoin.h"
 namespace game_framework {
-
 
 	class CALaser
 	{
@@ -27,8 +27,10 @@ namespace game_framework {
 		bool isLeft  = false;
 		bool isRight = false;
 		bool isLoadBitmap = false;
+		Ccoin    *coins;
 		Claser    *laser2;
 		CBlock    *laser;
+		
 		Ccharacter chtest;          // ¨¤¦â
 		CLife      Life;
 		CBox       *boxes;
