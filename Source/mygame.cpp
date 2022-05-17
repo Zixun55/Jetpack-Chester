@@ -500,6 +500,7 @@ namespace game_framework {
 		bball.OnShow();						// ¶K¤W¼u¸õªº²y
 		map.OnShow();
 		ALLoB.OnShow();
+		
 
 		//hits_left.ShowBitmap();
 		

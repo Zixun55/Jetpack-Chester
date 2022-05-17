@@ -264,6 +264,7 @@
     <ClCompile Include="Source\CBouncingBall.cpp" />
     <ClCompile Include="Source\CBox.cpp" />
     <ClCompile Include="Source\Ccharacter.cpp" />
+    <ClCompile Include="Source\Ccoin.cpp" />
     <ClCompile Include="Source\CEraser.cpp" />
     <ClCompile Include="Source\Claser.cpp" />
     <ClCompile Include="Source\CMap.cpp" />
@@ -316,6 +317,7 @@
     <ClInclude Include="Source\CBouncingBall.h" />
     <ClInclude Include="Source\CBox.h" />
     <ClInclude Include="Source\Ccharacter.h" />
+    <ClInclude Include="Source\Ccoin.h" />
     <ClInclude Include="Source\CEraser.h" />
     <ClInclude Include="Source\Claser.h" />
     <ClInclude Include="Source\CMap.h" />

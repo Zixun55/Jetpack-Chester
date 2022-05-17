@@ -47,6 +47,7 @@
 #include "Claser.h"
 #include "CBox.h"
 #include "CALaser.h" 
+#include "Ccoin.h" 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// Constants
