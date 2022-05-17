@@ -345,6 +345,46 @@ namespace game_framework {
 	void CLife::set_n(int a) {
 		n = a;
 	}
+
+	/////////////////////////////////////////////////////////////////////////////
+	Cpoint::Cpoint() {
+		point_num.SetDelayCount(1);
+	}
+	void Cpoint::LoadBitmap() {
+		if (!isBmpLoaded) {
+			point_num.AddBitmap(".\\Bitmaps\\bmp0.bmp", RGB(0, 0, 0));
+			point_num.AddBitmap(".\\Bitmaps\\bmp1.bmp", RGB(0, 0, 0));
+			point_num.AddBitmap(".\\Bitmaps\\bmp2.bmp", RGB(0, 0, 0));
+			point_num.AddBitmap(".\\Bitmaps\\bmp3.bmp", RGB(0, 0, 0));
+			point_num.AddBitmap(".\\Bitmaps\\bmp4.bmp", RGB(0, 0, 0));
+			point_num.AddBitmap(".\\Bitmaps\\bmp5.bmp", RGB(0, 0, 0));
+			point_num.AddBitmap(".\\Bitmaps\\bmp6.bmp", RGB(0, 0, 0));
+			point_num.AddBitmap(".\\Bitmaps\\bmp7.bmp", RGB(0, 0, 0));
+			point_num.AddBitmap(".\\Bitmaps\\bmp8.bmp", RGB(0, 0, 0));
+			point_num.AddBitmap(".\\Bitmaps\\bmp9.bmp", RGB(0, 0, 0));
+			point_num.AddBitmap(".\\Bitmaps\\bmp10.bmp", RGB(0, 0, 0));
+			isBmpLoaded = true;
+		}
+	}
+	void Cpoint::Reset() {
+		point_num.Reset();
+	}
+	void Cpoint::OnMove() {
+		point_num.OnMove();
+	}
+	void Cpoint::OnShow() {
+		point_num.SetTopLeft(5, 10);
+		point_num.OnShow();
+	}
+	int Cpoint::get_n() {
+		return n;
+	}
+	void Cpoint::Add(int a) {
+		n += a;
+	}
+	void Cpoint::set_n(int a) {
+		n = a;
+	}
 	/////////////////////////////////////////////////////////////////////////////
 	// CMovingBitmap: Moving Bitmap class
 	// 這個class提供可以移動的圖形

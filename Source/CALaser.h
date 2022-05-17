@@ -14,6 +14,7 @@ namespace game_framework {
 		void CantMoving(bool flag);
 		int  ClosestBox();
 		int  GetLife_n();
+		int  Getpoint_n();
 		int  GetCheck_map();
 		void SetMovingLeft(bool flag);
 		void SetMovingRight(bool flag);
@@ -33,6 +34,7 @@ namespace game_framework {
 		
 		Ccharacter chtest;          // ¨¤¦â
 		CLife      Life;
+		Cpoint     point;
 		CBox       *boxes;
 	};
 }
