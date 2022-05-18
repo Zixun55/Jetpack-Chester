@@ -352,17 +352,17 @@ namespace game_framework {
 	}
 	void Cpoint::LoadBitmap() {
 		if (!isBmpLoaded) {
-			point_num.AddBitmap(".\\Bitmaps\\bmp0.bmp", RGB(0, 0, 0));
-			point_num.AddBitmap(".\\Bitmaps\\bmp1.bmp", RGB(0, 0, 0));
-			point_num.AddBitmap(".\\Bitmaps\\bmp2.bmp", RGB(0, 0, 0));
-			point_num.AddBitmap(".\\Bitmaps\\bmp3.bmp", RGB(0, 0, 0));
-			point_num.AddBitmap(".\\Bitmaps\\bmp4.bmp", RGB(0, 0, 0));
-			point_num.AddBitmap(".\\Bitmaps\\bmp5.bmp", RGB(0, 0, 0));
-			point_num.AddBitmap(".\\Bitmaps\\bmp6.bmp", RGB(0, 0, 0));
-			point_num.AddBitmap(".\\Bitmaps\\bmp7.bmp", RGB(0, 0, 0));
-			point_num.AddBitmap(".\\Bitmaps\\bmp8.bmp", RGB(0, 0, 0));
-			point_num.AddBitmap(".\\Bitmaps\\bmp9.bmp", RGB(0, 0, 0));
-			point_num.AddBitmap(".\\Bitmaps\\bmp10.bmp", RGB(0, 0, 0));
+			point_num.AddBitmap(".\\Bitmaps\\bmp0.bmp", RGB(255, 255, 255));
+			point_num.AddBitmap(".\\Bitmaps\\bmp1.bmp", RGB(255, 255, 255));
+			point_num.AddBitmap(".\\Bitmaps\\bmp2.bmp", RGB(255, 255, 255));
+			point_num.AddBitmap(".\\Bitmaps\\bmp3.bmp", RGB(255, 255, 255));
+			point_num.AddBitmap(".\\Bitmaps\\bmp4.bmp", RGB(255, 255, 255));
+			point_num.AddBitmap(".\\Bitmaps\\bmp5.bmp", RGB(255, 255, 255));
+			point_num.AddBitmap(".\\Bitmaps\\bmp6.bmp", RGB(255, 255, 255));
+			point_num.AddBitmap(".\\Bitmaps\\bmp7.bmp", RGB(255, 255, 255));
+			point_num.AddBitmap(".\\Bitmaps\\bmp8.bmp", RGB(255, 255, 255));
+			point_num.AddBitmap(".\\Bitmaps\\bmp9.bmp", RGB(255, 255, 255));
+			point_num.AddBitmap(".\\Bitmaps\\bmp10.bmp", RGB(255, 255, 255));
 			isBmpLoaded = true;
 		}
 	}

@@ -62,8 +62,8 @@ namespace game_framework {
 		isLeft = isRight = cantMoving = false;
 		Life.Reset();
 		Life.set_n(3);
-		//point.Reset();
-		//point.set_n(0);
+		point.Reset();
+		point.set_n(0);
 	}
 
 	void CALaser::LoadBitmap()

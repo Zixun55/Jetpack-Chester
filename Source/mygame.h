@@ -63,7 +63,6 @@ namespace game_framework {
 	// 這個class為遊戲的遊戲開頭畫面物件
 	// 每個Member function的Implementation都要弄懂
 	/////////////////////////////////////////////////////////////////////////////
-
 	class CGameStateInit : public CGameState {
 	public:
 		CGameStateInit(CGame *g);
@@ -102,7 +101,6 @@ namespace game_framework {
 		void OnRButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
 		void LaserInit();
 		int  ClosestBox();                   // 最近的箱子
-		CALaser    ALLoB;
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
@@ -121,7 +119,7 @@ namespace game_framework {
 		CLife    Life;
 		CMap       map;             // 地圖
 		//Ccharacter chtest;          // 角色
-		
+		CALaser    ALLoB;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -144,6 +142,7 @@ namespace game_framework {
 		CMovingBitmap lost;         //結束畫面
 		CMovingBitmap again;        //again button
 		CMovingBitmap menu;         //menu button
+		CMovingBitmap point_output;
 
 		CMovingBitmap again_dark;        //again_dark button
 		CMovingBitmap menu_dark;         //menu_dark button

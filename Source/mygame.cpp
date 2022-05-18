@@ -61,7 +61,9 @@
 #include "mygame.h"
 #include <stdlib.h>
 
+int scores;
 int maps;
+
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的遊戲開頭畫面物件
@@ -203,12 +205,48 @@ namespace game_framework {
 		menu.LoadBitmap(".\\Bitmaps\\menubutton.bmp");
 		again_dark.LoadBitmap(".\\Bitmaps\\againbutton_dark.bmp");
 		menu_dark.LoadBitmap(".\\Bitmaps\\menubutton_dark.bmp");
+
+		if (scores == 0) {
+			point_output.LoadBitmap(".\\Bitmaps\\bmp0.bmp", RGB(255, 255, 255));
+		}
+		if (scores == 1) {
+			point_output.LoadBitmap(".\\Bitmaps\\bmp1.bmp", RGB(255, 255, 255));
+		}
+		if (scores == 2) {
+			point_output.LoadBitmap(".\\Bitmaps\\bmp2.bmp", RGB(255, 255, 255));
+		}
+		if (scores == 3) {
+			point_output.LoadBitmap(".\\Bitmaps\\bmp3.bmp", RGB(255, 255, 255));
+		}
+		if (scores == 4) {
+			point_output.LoadBitmap(".\\Bitmaps\\bmp4.bmp", RGB(255, 255, 255));
+		}
+		if (scores == 5) {
+			point_output.LoadBitmap(".\\Bitmaps\\bmp5.bmp", RGB(255, 255, 255));
+		}
+		if (scores == 6) {
+			point_output.LoadBitmap(".\\Bitmaps\\bmp6.bmp", RGB(255, 255, 255));
+		}
+		if (scores == 7) {
+			point_output.LoadBitmap(".\\Bitmaps\\bmp7.bmp", RGB(255, 255, 255));
+		}
+		if (scores == 8) {
+			point_output.LoadBitmap(".\\Bitmaps\\bmp8.bmp", RGB(255, 255, 255));
+		}
+		if (scores == 9) {
+			point_output.LoadBitmap(".\\Bitmaps\\bmp9.bmp", RGB(255, 255, 255));
+		}
+		if (scores == 10) {
+			point_output.LoadBitmap(".\\Bitmaps\\bmp10.bmp", RGB(255, 255, 255));
+		}
 	}
 
 	void CGameStateOver::OnShow()
 	{
 		lost.ShowBitmap();
-
+		point_output.SetTopLeft(300, 400);
+		point_output.ShowBitmap();
+		//258 421    
 
 		if (!in) {
 			again.SetTopLeft(243, 180);
@@ -346,9 +384,11 @@ namespace game_framework {
 	}
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
+		
 		map.OnMove();
 		ALLoB.OnMove();
 		if (ALLoB.GetLife_n() <= 0) {
+			scores = 3;
 			GotoGameState(GAME_STATE_OVER);
 		}
 		if (ALLoB.GetCheck_map()) {
