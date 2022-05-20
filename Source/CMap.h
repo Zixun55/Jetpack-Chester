@@ -20,6 +20,7 @@ namespace game_framework {
 		void CantMoving(bool flag);
 		void MovingCheck(bool flag);
 		void chooseMap(int maps);
+		bool FinishMap();
 
 	protected:
 		CAnimation animation;

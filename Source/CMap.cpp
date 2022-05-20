@@ -137,4 +137,7 @@ namespace game_framework {
 	void CMap::MovingCheck(bool flag) {
 		movingcheck = flag;
 	}
+	bool CMap::FinishMap() {
+		return x <= -2324;
+	}
 }
