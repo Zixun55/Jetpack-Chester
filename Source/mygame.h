@@ -142,12 +142,23 @@ namespace game_framework {
 		CMovingBitmap lost;         //µ²§ôµe­±
 		CMovingBitmap again;        //again button
 		CMovingBitmap menu;         //menu button
-		CMovingBitmap point_output;
+		CMovingBitmap point_output0;
+		CMovingBitmap point_output1;
+		CMovingBitmap point_output2;
+		CMovingBitmap point_output3;
+		CMovingBitmap point_output4;
+		CMovingBitmap point_output5;
+		CMovingBitmap point_output6;
+		CMovingBitmap point_output7;
+		CMovingBitmap point_output8;
+		CMovingBitmap point_output9;
+		CMovingBitmap point_output10;
 
 		CMovingBitmap again_dark;        //again_dark button
 		CMovingBitmap menu_dark;         //menu_dark button
 		bool in = false;
 		bool in1 = false;
+		bool showscore = false;
 	};
 
 

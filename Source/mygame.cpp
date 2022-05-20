@@ -175,6 +175,7 @@ namespace game_framework {
 
 	void CGameStateOver::OnMove()
 	{
+		
 		//counter--;
 		//if (counter < 0)
 			//GotoGameState(GAME_STATE_INIT);
@@ -206,46 +207,68 @@ namespace game_framework {
 		again_dark.LoadBitmap(".\\Bitmaps\\againbutton_dark.bmp");
 		menu_dark.LoadBitmap(".\\Bitmaps\\menubutton_dark.bmp");
 
-		if (scores == 0) {
-			point_output.LoadBitmap(".\\Bitmaps\\bmp0.bmp", RGB(255, 255, 255));
-		}
-		if (scores == 1) {
-			point_output.LoadBitmap(".\\Bitmaps\\bmp1.bmp", RGB(255, 255, 255));
-		}
-		if (scores == 2) {
-			point_output.LoadBitmap(".\\Bitmaps\\bmp2.bmp", RGB(255, 255, 255));
-		}
-		if (scores == 3) {
-			point_output.LoadBitmap(".\\Bitmaps\\bmp3.bmp", RGB(255, 255, 255));
-		}
-		if (scores == 4) {
-			point_output.LoadBitmap(".\\Bitmaps\\bmp4.bmp", RGB(255, 255, 255));
-		}
-		if (scores == 5) {
-			point_output.LoadBitmap(".\\Bitmaps\\bmp5.bmp", RGB(255, 255, 255));
-		}
-		if (scores == 6) {
-			point_output.LoadBitmap(".\\Bitmaps\\bmp6.bmp", RGB(255, 255, 255));
-		}
-		if (scores == 7) {
-			point_output.LoadBitmap(".\\Bitmaps\\bmp7.bmp", RGB(255, 255, 255));
-		}
-		if (scores == 8) {
-			point_output.LoadBitmap(".\\Bitmaps\\bmp8.bmp", RGB(255, 255, 255));
-		}
-		if (scores == 9) {
-			point_output.LoadBitmap(".\\Bitmaps\\bmp9.bmp", RGB(255, 255, 255));
-		}
-		if (scores == 10) {
-			point_output.LoadBitmap(".\\Bitmaps\\bmp10.bmp", RGB(255, 255, 255));
-		}
+		point_output0.LoadBitmap(".\\Bitmaps\\bmp0.bmp", RGB(255, 255, 255));
+		point_output1.LoadBitmap(".\\Bitmaps\\bmp1.bmp", RGB(255, 255, 255));
+		point_output2.LoadBitmap(".\\Bitmaps\\bmp2.bmp", RGB(255, 255, 255));
+		point_output3.LoadBitmap(".\\Bitmaps\\bmp3.bmp", RGB(255, 255, 255));
+		point_output4.LoadBitmap(".\\Bitmaps\\bmp4.bmp", RGB(255, 255, 255));
+		point_output5.LoadBitmap(".\\Bitmaps\\bmp5.bmp", RGB(255, 255, 255));
+		point_output6.LoadBitmap(".\\Bitmaps\\bmp6.bmp", RGB(255, 255, 255));
+		point_output7.LoadBitmap(".\\Bitmaps\\bmp7.bmp", RGB(255, 255, 255));
+		point_output8.LoadBitmap(".\\Bitmaps\\bmp8.bmp", RGB(255, 255, 255));
+		point_output9.LoadBitmap(".\\Bitmaps\\bmp9.bmp", RGB(255, 255, 255));
+		point_output10.LoadBitmap(".\\Bitmaps\\bmp10.bmp", RGB(255, 255, 255));
 	}
 
 	void CGameStateOver::OnShow()
 	{
 		lost.ShowBitmap();
-		point_output.SetTopLeft(300, 400);
-		point_output.ShowBitmap();
+		
+		if (scores == 0) {
+			point_output0.SetTopLeft(300, 400);
+			point_output0.ShowBitmap();
+		}
+		if (scores == 1) {
+			point_output1.SetTopLeft(300, 400);
+			point_output1.ShowBitmap();
+		}
+		if (scores == 2) {
+			point_output2.SetTopLeft(300, 400);
+			point_output2.ShowBitmap();
+		}
+		if (scores == 3) {
+			point_output3.SetTopLeft(300, 400);
+			point_output3.ShowBitmap();
+		}
+		if (scores == 4) {
+			point_output4.SetTopLeft(300, 400);
+			point_output4.ShowBitmap();
+		}
+		if (scores == 5) {
+			point_output5.SetTopLeft(300, 400);
+			point_output5.ShowBitmap();
+		}
+		if (scores == 6) {
+			point_output6.SetTopLeft(300, 400);
+			point_output6.ShowBitmap();
+		}
+		if (scores == 7) {
+			point_output7.SetTopLeft(300, 400);
+			point_output7.ShowBitmap();
+		}
+		if (scores == 8) {
+			point_output8.SetTopLeft(300, 400);
+			point_output8.ShowBitmap();
+		}
+		if (scores == 9) {
+			point_output9.SetTopLeft(300, 400);
+			point_output9.ShowBitmap();
+		}
+		if (scores == 10) {
+			point_output10.SetTopLeft(300, 400);
+			point_output10.ShowBitmap();
+		}
+
 		//258 421    
 
 		if (!in) {
@@ -384,11 +407,11 @@ namespace game_framework {
 	}
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
-		
+		scores = ALLoB.Getpoint_n();
 		map.OnMove();
 		ALLoB.OnMove();
 		if (ALLoB.GetLife_n() <= 0) {
-			scores = 3;
+			
 			GotoGameState(GAME_STATE_OVER);
 		}
 		if (ALLoB.GetCheck_map()) {
@@ -411,6 +434,7 @@ namespace game_framework {
 		//
 		// 開始載入資料
 		//
+		
 		for (int i = 0; i < NUMBALLS; i++)
 			//ball[i].LoadBitmap();								// 載入第i個球的圖形
 		
@@ -553,6 +577,7 @@ namespace game_framework {
 		corner.SetTopLeft(SIZE_X - corner.Width(), SIZE_Y - corner.Height());
 		corner.ShowBitmap();
 		//580 10
+		
 	}
 
 
