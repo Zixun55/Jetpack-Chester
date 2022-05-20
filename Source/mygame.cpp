@@ -50,7 +50,7 @@
  *   2010-03-23 V4.6
  *      1. Demo MP3 support: use lake.mp3 to replace lake.wav.
 */
-
+//commit test
 #include <ctime> 
 #include "stdafx.h"
 #include "Resource.h"
