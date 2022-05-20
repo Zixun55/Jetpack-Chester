@@ -45,8 +45,8 @@ namespace game_framework {
 		int lasery_1[10] = { 50, 200, 400, 150, 500, 175, 350, 135, 375, 185 };
 		int laserx_2[10] = { 700, 1400, 1700, 2200, 2700, 3200, 3700, 1200, 4700, 5200 };
 		int lasery_2[10] = { 300, 120, 75, 150, 500, 175, 350, 135, 375, 185 };
-		int coinx[10] = { 510, 700, 825, 1123, 1687, 2333, 2668, 3212, 3924, 4354 };
-		int coiny[10] = { 150, 30, 110, 150, 70, 90, 50, 135, 200, 140 };
+		int coinx[10] = { 510, 700, 825, 1350, 1575, 2333, 2668, 3212, 3924, 4354 };
+		int coiny[10] = { 150, 30, 110, 150, 230, 90, 50, 135, 200, 140 };
 		for (int i = 0; i < 10; i++) {
 			laser[i].SetXY(laserx_1[i], lasery_1[i]);
 			laser[i].SetIsAlive(true);
@@ -61,7 +61,9 @@ namespace game_framework {
 		chtest.Initialize();
 		isLeft = isRight = cantMoving = false;
 		Life.Reset();
-		Life.set_n(200);
+		Life.set_n(3);
+		point.Reset();
+		point.set_n(0);
 	}
 
 	void CALaser::LoadBitmap()
@@ -69,6 +71,7 @@ namespace game_framework {
 		if (!isLoadBitmap) {
 			chtest.LoadBitmap();
 			Life.LoadBitmap();
+			point.LoadBitmap();
 		}
 		for (int i = 0; i < 10; i++) {
 			laser[i].LoadBitmap();
@@ -107,7 +110,9 @@ namespace game_framework {
 		for (int i = 0; i < 10; i++) {
 			coins[i].OnMove();
 			if (coins[i].IsAlive() && coins[i].HitEraser(&chtest)) {
-				coins[i].SetIsAlive(false);                                //如果角色碰到錢幣，錢幣會消失                                        
+				coins[i].SetIsAlive(false);                                //如果角色碰到錢幣，錢幣會消失        
+				point.Add(1);                                        
+				point.OnMove();
 			}
 		}
 		int check_box = 0;
@@ -172,6 +177,7 @@ namespace game_framework {
 			boxes[i].OnShow();
 		}
 		Life.OnShow();
+		point.OnShow();
 	}
 	void CALaser::CantMoving(bool flag) {
 		cantMoving = flag;
@@ -195,6 +201,9 @@ namespace game_framework {
 	}
 	int CALaser::GetLife_n() {
 		return Life.get_n();
+	}
+	int CALaser::Getpoint_n() {
+		return point.get_n();
 	}
 	int CALaser::GetCheck_map() {
 		return check_map;

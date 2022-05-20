@@ -63,7 +63,6 @@ namespace game_framework {
 	// 這個class為遊戲的遊戲開頭畫面物件
 	// 每個Member function的Implementation都要弄懂
 	/////////////////////////////////////////////////////////////////////////////
-
 	class CGameStateInit : public CGameState {
 	public:
 		CGameStateInit(CGame *g);
@@ -143,6 +142,7 @@ namespace game_framework {
 		CMovingBitmap lost;         //結束畫面
 		CMovingBitmap again;        //again button
 		CMovingBitmap menu;         //menu button
+		CMovingBitmap point_output;
 
 		CMovingBitmap again_dark;        //again_dark button
 		CMovingBitmap menu_dark;         //menu_dark button
