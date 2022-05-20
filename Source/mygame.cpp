@@ -50,7 +50,7 @@
  *   2010-03-23 V4.6
  *      1. Demo MP3 support: use lake.mp3 to replace lake.wav.
 */
-
+//commit test
 #include <ctime> 
 #include "stdafx.h"
 #include "Resource.h"
@@ -175,7 +175,9 @@ namespace game_framework {
 
 	void CGameStateOver::OnMove()
 	{
-		
+		if (points.GetInteger() != scores) {
+			points.Add(1);
+		}
 		//counter--;
 		//if (counter < 0)
 			//GotoGameState(GAME_STATE_INIT);
@@ -184,6 +186,9 @@ namespace game_framework {
 	void CGameStateOver::OnBeginState()
 	{
 		counter = 30 * 5; // 5 seconds
+		const int P = 0;
+		points.SetInteger(P);				
+		points.SetTopLeft(200, 425);
 	}
 
 	void CGameStateOver::OnInit()
@@ -206,68 +211,68 @@ namespace game_framework {
 		menu.LoadBitmap(".\\Bitmaps\\menubutton.bmp");
 		again_dark.LoadBitmap(".\\Bitmaps\\againbutton_dark.bmp");
 		menu_dark.LoadBitmap(".\\Bitmaps\\menubutton_dark.bmp");
-
-		point_output0.LoadBitmap(".\\Bitmaps\\bmp0.bmp", RGB(255, 255, 255));
-		point_output1.LoadBitmap(".\\Bitmaps\\bmp1.bmp", RGB(255, 255, 255));
-		point_output2.LoadBitmap(".\\Bitmaps\\bmp2.bmp", RGB(255, 255, 255));
-		point_output3.LoadBitmap(".\\Bitmaps\\bmp3.bmp", RGB(255, 255, 255));
-		point_output4.LoadBitmap(".\\Bitmaps\\bmp4.bmp", RGB(255, 255, 255));
-		point_output5.LoadBitmap(".\\Bitmaps\\bmp5.bmp", RGB(255, 255, 255));
-		point_output6.LoadBitmap(".\\Bitmaps\\bmp6.bmp", RGB(255, 255, 255));
-		point_output7.LoadBitmap(".\\Bitmaps\\bmp7.bmp", RGB(255, 255, 255));
-		point_output8.LoadBitmap(".\\Bitmaps\\bmp8.bmp", RGB(255, 255, 255));
-		point_output9.LoadBitmap(".\\Bitmaps\\bmp9.bmp", RGB(255, 255, 255));
-		point_output10.LoadBitmap(".\\Bitmaps\\bmp10.bmp", RGB(255, 255, 255));
+		points.LoadBitmap();
+		//point_output0.LoadBitmap(".\\Bitmaps\\bmp0.bmp", RGB(255, 255, 255));
+		//point_output1.LoadBitmap(".\\Bitmaps\\bmp1.bmp", RGB(255, 255, 255));
+		//point_output2.LoadBitmap(".\\Bitmaps\\bmp2.bmp", RGB(255, 255, 255));
+		//point_output3.LoadBitmap(".\\Bitmaps\\bmp3.bmp", RGB(255, 255, 255));
+		//point_output4.LoadBitmap(".\\Bitmaps\\bmp4.bmp", RGB(255, 255, 255));
+		//point_output5.LoadBitmap(".\\Bitmaps\\bmp5.bmp", RGB(255, 255, 255));
+		//point_output6.LoadBitmap(".\\Bitmaps\\bmp6.bmp", RGB(255, 255, 255));
+		//point_output7.LoadBitmap(".\\Bitmaps\\bmp7.bmp", RGB(255, 255, 255));
+		//point_output8.LoadBitmap(".\\Bitmaps\\bmp8.bmp", RGB(255, 255, 255));
+		//point_output9.LoadBitmap(".\\Bitmaps\\bmp9.bmp", RGB(255, 255, 255));
+		//point_output10.LoadBitmap(".\\Bitmaps\\bmp10.bmp", RGB(255, 255, 255));
 	}
 
 	void CGameStateOver::OnShow()
 	{
 		lost.ShowBitmap();
-		
-		if (scores == 0) {
-			point_output0.SetTopLeft(300, 400);
-			point_output0.ShowBitmap();
-		}
-		if (scores == 1) {
-			point_output1.SetTopLeft(300, 400);
-			point_output1.ShowBitmap();
-		}
-		if (scores == 2) {
-			point_output2.SetTopLeft(300, 400);
-			point_output2.ShowBitmap();
-		}
-		if (scores == 3) {
-			point_output3.SetTopLeft(300, 400);
-			point_output3.ShowBitmap();
-		}
-		if (scores == 4) {
-			point_output4.SetTopLeft(300, 400);
-			point_output4.ShowBitmap();
-		}
-		if (scores == 5) {
-			point_output5.SetTopLeft(300, 400);
-			point_output5.ShowBitmap();
-		}
-		if (scores == 6) {
-			point_output6.SetTopLeft(300, 400);
-			point_output6.ShowBitmap();
-		}
-		if (scores == 7) {
-			point_output7.SetTopLeft(300, 400);
-			point_output7.ShowBitmap();
-		}
-		if (scores == 8) {
-			point_output8.SetTopLeft(300, 400);
-			point_output8.ShowBitmap();
-		}
-		if (scores == 9) {
-			point_output9.SetTopLeft(300, 400);
-			point_output9.ShowBitmap();
-		}
-		if (scores == 10) {
-			point_output10.SetTopLeft(300, 400);
-			point_output10.ShowBitmap();
-		}
+		points.ShowBitmap();
+		//if (scores == 0) {
+		//	point_output0.SetTopLeft(300, 400);
+		//	point_output0.ShowBitmap();
+		//}
+		//if (scores == 1) {
+		//	point_output1.SetTopLeft(300, 400);
+		//	point_output1.ShowBitmap();
+		//}
+		//if (scores == 2) {
+		//	point_output2.SetTopLeft(300, 400);
+		//	point_output2.ShowBitmap();
+		//}
+		//if (scores == 3) {
+		//	point_output3.SetTopLeft(300, 400);
+		//	point_output3.ShowBitmap();
+		//}
+		//if (scores == 4) {
+		//	point_output4.SetTopLeft(300, 400);
+		//	point_output4.ShowBitmap();
+		//}
+		//if (scores == 5) {
+		//	point_output5.SetTopLeft(300, 400);
+		//	point_output5.ShowBitmap();
+		//}
+		//if (scores == 6) {
+		//	point_output6.SetTopLeft(300, 400);
+		//	point_output6.ShowBitmap();
+		//}
+		//if (scores == 7) {
+		//	point_output7.SetTopLeft(300, 400);
+		//	point_output7.ShowBitmap();
+		//}
+		//if (scores == 8) {
+		//	point_output8.SetTopLeft(300, 400);
+		//	point_output8.ShowBitmap();
+		//}
+		//if (scores == 9) {
+		//	point_output9.SetTopLeft(300, 400);
+		//	point_output9.ShowBitmap();
+		//}
+		//if (scores == 10) {
+		//	point_output10.SetTopLeft(300, 400);
+		//	point_output10.ShowBitmap();
+		//}
 
 		//258 421    
 
@@ -380,9 +385,9 @@ namespace game_framework {
 		const int BALL_GAP = 90;
 		const int BALL_XY_OFFSET = 45;
 		const int BALL_PER_ROW = 7;
-		const int HITS_LEFT = 3;
-		const int HITS_LEFT_X = 590;
-		const int HITS_LEFT_Y = 0;
+		//const int HITS_LEFT = 3;
+		//const int HITS_LEFT_X = 590;
+		//const int HITS_LEFT_Y = 0;
 		const int BACKGROUND_X = 60;
 		const int ANIMATION_SPEED = 15;
 		for (int i = 0; i < NUMBALLS; i++) {				// 設定球的起始座標
@@ -401,8 +406,8 @@ namespace game_framework {
 		map.chooseMap(maps);
 		map.LoadBitmap();
 		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
-		hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
-		hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
+		//hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
+		//hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
 		
 	}
 	void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -455,7 +460,7 @@ namespace game_framework {
 		corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形stea
 		//corner.ShowBitmap(background);							// 將corner貼到background
 		bball.LoadBitmap();										// 載入圖形
-		hits_left.LoadBitmap();
+		//hits_left.LoadBitmap();
 
 
 		CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
