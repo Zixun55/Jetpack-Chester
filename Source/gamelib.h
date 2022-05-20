@@ -278,9 +278,12 @@ namespace game_framework {
 		void set_n(int a);
 	private:
 		CAnimation Life_num; // 儲存0..9及負號之圖形(bitmap)
+		CAnimation Life_num_dark;
 		int n;							// 整數值
 		bool isBmpLoaded = false;				// 是否已經載入圖形
+		int judge;
 	};
+
 
 	/////////////////////////////////////////////////////////////////////////////
 	// 宣告尚未定義的class

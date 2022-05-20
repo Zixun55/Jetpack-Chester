@@ -308,32 +308,44 @@ namespace game_framework {
 	}
 	/////////////////////////////////////////////////////////////////////////////
 	CLife::CLife() {
+		judge = 0;
 		Life_num.SetDelayCount(1);
+		Life_num_dark.SetDelayCount(1);
 	}
 	void CLife::LoadBitmap() {
 		if (!isBmpLoaded) {
 			Life_num.AddBitmap(".\\Bitmaps\\fin_full.bmp", RGB(255, 255, 255));
-			Life_num.AddBitmap(".\\Bitmaps\\fin_afull.bmp", RGB(255, 255, 255));
+			Life_num_dark.AddBitmap(".\\Bitmaps\\fin_afull.bmp", RGB(255, 255, 255));
 			Life_num.AddBitmap(".\\Bitmaps\\fin_two.bmp", RGB(255, 255, 255));
-			Life_num.AddBitmap(".\\Bitmaps\\fin_atwo.bmp", RGB(255, 255, 255));
+			Life_num_dark.AddBitmap(".\\Bitmaps\\fin_atwo.bmp", RGB(255, 255, 255));
 			Life_num.AddBitmap(".\\Bitmaps\\fin_one.bmp", RGB(255, 255, 255));
-			Life_num.AddBitmap(".\\Bitmaps\\fin_aone.bmp", RGB(255, 255, 255));
+			Life_num_dark.AddBitmap(".\\Bitmaps\\fin_aone.bmp", RGB(255, 255, 255));
 			Life_num.AddBitmap(".\\Bitmaps\\fin_none.bmp", RGB(255, 255, 255));
 			isBmpLoaded = true;
 		}
 	}
 	void CLife::Reset() {
 		Life_num.Reset();
+		Life_num_dark.Reset();
 	}
 	void CLife::OnMove() {
-		Life_num.OnMove();
-		//Life_num.OnMove();
+		Life_num.Reset();
+		for (int i = 0; i < 3 - n; i++) {
+			Life_num.OnMove();
+		}
+		Life_num_dark.Reset();
+		for (int i = 0; i < 3 - n; i++) {
+			Life_num_dark.OnMove();
+		}
+		judge = 1;
 	}
 	void CLife::OnShow() {
 		Life_num.SetTopLeft(580, 10);
 		Life_num.OnShow();
-		if (Life_num.GetCurrentBitmapNumber() % 2 == 1) {
-			Life_num.OnMove();
+		if (judge == 1) {
+			Life_num_dark.SetTopLeft(580, 10);
+			Life_num_dark.OnShow();
+			judge = 0;
 		}
 	}
 	int CLife::get_n() {
