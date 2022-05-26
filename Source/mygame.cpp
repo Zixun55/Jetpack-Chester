@@ -63,6 +63,7 @@
 
 int scores;
 int maps;
+bool isFinish = false;
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -206,75 +207,29 @@ namespace game_framework {
 		// 最終進度為100%
 		//
 		ShowInitProgress(100);
-		lost.LoadBitmap(".\\Bitmaps\\lost.bmp");
+		lost.LoadBitmap(".\\Bitmaps\\over_background.bmp");
+		finish.LoadBitmap(".\\Bitmaps\\aaa.bmp");
+		lost_image.LoadBitmap(".\\Bitmaps\\lost_image.bmp",RGB(255,255,255));
 		again.LoadBitmap(".\\Bitmaps\\againbutton.bmp");
 		menu.LoadBitmap(".\\Bitmaps\\menubutton.bmp");
 		again_dark.LoadBitmap(".\\Bitmaps\\againbutton_dark.bmp");
 		menu_dark.LoadBitmap(".\\Bitmaps\\menubutton_dark.bmp");
 		points.LoadBitmap();
-		//point_output0.LoadBitmap(".\\Bitmaps\\bmp0.bmp", RGB(255, 255, 255));
-		//point_output1.LoadBitmap(".\\Bitmaps\\bmp1.bmp", RGB(255, 255, 255));
-		//point_output2.LoadBitmap(".\\Bitmaps\\bmp2.bmp", RGB(255, 255, 255));
-		//point_output3.LoadBitmap(".\\Bitmaps\\bmp3.bmp", RGB(255, 255, 255));
-		//point_output4.LoadBitmap(".\\Bitmaps\\bmp4.bmp", RGB(255, 255, 255));
-		//point_output5.LoadBitmap(".\\Bitmaps\\bmp5.bmp", RGB(255, 255, 255));
-		//point_output6.LoadBitmap(".\\Bitmaps\\bmp6.bmp", RGB(255, 255, 255));
-		//point_output7.LoadBitmap(".\\Bitmaps\\bmp7.bmp", RGB(255, 255, 255));
-		//point_output8.LoadBitmap(".\\Bitmaps\\bmp8.bmp", RGB(255, 255, 255));
-		//point_output9.LoadBitmap(".\\Bitmaps\\bmp9.bmp", RGB(255, 255, 255));
-		//point_output10.LoadBitmap(".\\Bitmaps\\bmp10.bmp", RGB(255, 255, 255));
+
 	}
 
 	void CGameStateOver::OnShow()
 	{
 		lost.ShowBitmap();
-		points.ShowBitmap();
-		//if (scores == 0) {
-		//	point_output0.SetTopLeft(300, 400);
-		//	point_output0.ShowBitmap();
-		//}
-		//if (scores == 1) {
-		//	point_output1.SetTopLeft(300, 400);
-		//	point_output1.ShowBitmap();
-		//}
-		//if (scores == 2) {
-		//	point_output2.SetTopLeft(300, 400);
-		//	point_output2.ShowBitmap();
-		//}
-		//if (scores == 3) {
-		//	point_output3.SetTopLeft(300, 400);
-		//	point_output3.ShowBitmap();
-		//}
-		//if (scores == 4) {
-		//	point_output4.SetTopLeft(300, 400);
-		//	point_output4.ShowBitmap();
-		//}
-		//if (scores == 5) {
-		//	point_output5.SetTopLeft(300, 400);
-		//	point_output5.ShowBitmap();
-		//}
-		//if (scores == 6) {
-		//	point_output6.SetTopLeft(300, 400);
-		//	point_output6.ShowBitmap();
-		//}
-		//if (scores == 7) {
-		//	point_output7.SetTopLeft(300, 400);
-		//	point_output7.ShowBitmap();
-		//}
-		//if (scores == 8) {
-		//	point_output8.SetTopLeft(300, 400);
-		//	point_output8.ShowBitmap();
-		//}
-		//if (scores == 9) {
-		//	point_output9.SetTopLeft(300, 400);
-		//	point_output9.ShowBitmap();
-		//}
-		//if (scores == 10) {
-		//	point_output10.SetTopLeft(300, 400);
-		//	point_output10.ShowBitmap();
-		//}
-
-		//258 421    
+		if (!isFinish) {
+			lost_image.SetTopLeft(225,0);
+			lost_image.ShowBitmap();
+		}
+		else {
+			finish.SetTopLeft(255,0);
+			finish.ShowBitmap();
+		}
+		points.ShowBitmap();   
 
 		if (!in) {
 			again.SetTopLeft(243, 180);
@@ -406,8 +361,7 @@ namespace game_framework {
 		map.chooseMap(maps);
 		map.LoadBitmap();
 		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
-		//hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
-		//hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
+		isFinish = false;
 		
 	}
 	void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -416,9 +370,11 @@ namespace game_framework {
 		map.OnMove();
 		ALLoB.OnMove();
 		if (ALLoB.GetLife_n() <= 0) {
+			isFinish = false;
 			GotoGameState(GAME_STATE_OVER);
 		}
 		if (map.FinishMap()) {
+			isFinish = true;
 			GotoGameState(GAME_STATE_OVER);
 
 		}
@@ -466,9 +422,7 @@ namespace game_framework {
 		CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
 		CAudio::Instance()->Load(AUDIO_LAKE, "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
 		CAudio::Instance()->Load(AUDIO_NTUT, "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
-		//
-		// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
-		//
+
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)

@@ -140,19 +140,10 @@ namespace game_framework {
 	private:
 		int counter;	// 倒數之計數器
 		CMovingBitmap lost;         //結束畫面
+		CMovingBitmap finish;       //finish image
+		CMovingBitmap lost_image;   //lost   image
 		CMovingBitmap again;        //again button
 		CMovingBitmap menu;         //menu button
-		CMovingBitmap point_output0;
-		CMovingBitmap point_output1;
-		CMovingBitmap point_output2;
-		CMovingBitmap point_output3;
-		CMovingBitmap point_output4;
-		CMovingBitmap point_output5;
-		CMovingBitmap point_output6;
-		CMovingBitmap point_output7;
-		CMovingBitmap point_output8;
-		CMovingBitmap point_output9;
-		CMovingBitmap point_output10;
 		CInteger points;
 
 		CMovingBitmap again_dark;        //again_dark button
