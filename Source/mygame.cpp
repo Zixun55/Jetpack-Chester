@@ -208,7 +208,7 @@ namespace game_framework {
 		//
 		ShowInitProgress(100);
 		lost.LoadBitmap(".\\Bitmaps\\over_background.bmp");
-		finish.LoadBitmap(".\\Bitmaps\\aaa.bmp");
+		finish.LoadBitmap(".\\Bitmaps\\finish_image.bmp");
 		lost_image.LoadBitmap(".\\Bitmaps\\lost_image.bmp",RGB(255,255,255));
 		again.LoadBitmap(".\\Bitmaps\\againbutton.bmp");
 		menu.LoadBitmap(".\\Bitmaps\\menubutton.bmp");
