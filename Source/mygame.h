@@ -73,11 +73,15 @@ namespace game_framework {
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		//CMovingBitmap logo;								// csie的logo
 		CMovingBitmap title;                            // init的封面
 		CMovingBitmap start;                            // start的按鈕
 		CMovingBitmap start_dark;                       // start的按鈕_暗掉
 		bool in;
+		CMovingBitmap intro;                            // intro的按鈕
+		CMovingBitmap intro_dark;                       // intro的按鈕_暗掉
+		CMovingBitmap instructions;                       // intro的按鈕_暗掉
+		bool intro_view;                                // 顯示說明
+		bool intro_in;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

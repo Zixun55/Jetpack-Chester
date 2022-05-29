@@ -88,6 +88,10 @@ namespace game_framework {
 		title.LoadBitmap(".\\Bitmaps\\background_true.bmp");
 		start.LoadBitmap(".\\Bitmaps\\background_startbutton.bmp", RGB(255, 255, 255));
 		start_dark.LoadBitmap(".\\Bitmaps\\background_startbutton_dark.bmp", RGB(255, 255, 255));
+		intro.LoadBitmap(".\\Bitmaps\\ch3.bmp", RGB(255, 255, 255));
+		intro_dark.LoadBitmap(".\\Bitmaps\\ch3reverse.bmp", RGB(255, 255, 255));
+		instructions.LoadBitmap(".\\Bitmaps\\ch4.bmp", RGB(255, 255, 255));
+
 		//title.LoadBitmap("./game_image/background.bmp");
 		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
@@ -98,13 +102,16 @@ namespace game_framework {
 	void CGameStateInit::OnBeginState()
 	{
 		in = false;
+		intro_in = intro_view = false;
 	}
 	void CGameStateInit::OnMouseMove(UINT nFlags, CPoint point)
 	{
 		CPoint start0(243, 250);
+		CPoint start_intro_point(243, 350);
 		int allx = 296;
 		int ally = 87;
 		CPoint new_point = point - start0;
+		CPoint intro_point = point - start_intro_point;
 		if (new_point.x > 0 && new_point.y > 0) {
 			if (new_point.x < allx && new_point.y < ally) {
 				in = true;
@@ -117,6 +124,18 @@ namespace game_framework {
 		{
 			in = false;
 		}
+		if (intro_point.x > 0 && intro_point.y > 0) {
+			if (intro_point.x < allx && intro_point.y < ally) {
+				intro_in = true;
+			}
+			else {
+				intro_in = false;
+			}
+		}
+		else
+		{
+			intro_in = false;
+		}
 	}
 	void CGameStateInit::OnLButtonUp(UINT nFlags, CPoint point)
 	{
@@ -128,6 +147,16 @@ namespace game_framework {
 		if (new_point.x > 0 && new_point.y > 0) {
 			if (new_point.x < allx && new_point.y < ally) {
 				GotoGameState(GAME_STATE_CHOOSE);		// 切換至GAME_STATE_RUN
+			}
+		}
+		CPoint start_intro_point(243, 350);
+		CPoint intro_point = point - start_intro_point;
+		if (intro_view) {
+			intro_view = false;
+		}
+		else if (intro_point.x > 0 && intro_point.y > 0) {
+			if (intro_point.x < allx && intro_point.y < ally) {
+				intro_view = true;
 			}
 		}
 	}
@@ -146,6 +175,18 @@ namespace game_framework {
 		else {
 			start.SetTopLeft(243, 250);
 			start.ShowBitmap();
+		}
+		if (intro_in) {
+			intro_dark.SetTopLeft(243, 350);
+			intro_dark.ShowBitmap();
+		}
+		else {
+			intro.SetTopLeft(243, 350);
+			intro.ShowBitmap();
+		}
+		if (intro_view) {
+			instructions.SetTopLeft(243, 250);
+			instructions.ShowBitmap();
 		}
 		//
 		// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
@@ -188,7 +229,7 @@ namespace game_framework {
 	{
 		counter = 30 * 5; // 5 seconds
 		const int P = 0;
-		points.SetInteger(P);				
+		points.SetInteger(P);
 		points.SetTopLeft(200, 425);
 	}
 
@@ -209,7 +250,7 @@ namespace game_framework {
 		ShowInitProgress(100);
 		lost.LoadBitmap(".\\Bitmaps\\over_background.bmp");
 		finish.LoadBitmap(".\\Bitmaps\\finish_image.bmp");
-		lost_image.LoadBitmap(".\\Bitmaps\\lost_image.bmp",RGB(255,255,255));
+		lost_image.LoadBitmap(".\\Bitmaps\\lost_image.bmp", RGB(255, 255, 255));
 		again.LoadBitmap(".\\Bitmaps\\againbutton.bmp");
 		menu.LoadBitmap(".\\Bitmaps\\menubutton.bmp");
 		again_dark.LoadBitmap(".\\Bitmaps\\againbutton_dark.bmp");
@@ -222,14 +263,14 @@ namespace game_framework {
 	{
 		lost.ShowBitmap();
 		if (!isFinish) {
-			lost_image.SetTopLeft(225,0);
+			lost_image.SetTopLeft(225, 0);
 			lost_image.ShowBitmap();
 		}
 		else {
-			finish.SetTopLeft(255,0);
+			finish.SetTopLeft(255, 0);
 			finish.ShowBitmap();
 		}
-		points.ShowBitmap();   
+		points.ShowBitmap();
 
 		if (!in) {
 			again.SetTopLeft(243, 180);
@@ -326,7 +367,7 @@ namespace game_framework {
 	{
 		/*ball = new CBall[NUMBALLS];*/
 		map = CMap();
-		
+
 	}
 
 	CGameStateRun::~CGameStateRun()
@@ -362,7 +403,7 @@ namespace game_framework {
 		map.LoadBitmap();
 		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 		isFinish = false;
-		
+
 	}
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
@@ -398,12 +439,12 @@ namespace game_framework {
 		//
 		// 開始載入資料
 		//
-		
+
 		for (int i = 0; i < NUMBALLS; i++)
 			//ball[i].LoadBitmap();								// 載入第i個球的圖形
-		
-		eraser.LoadBitmap();
-		
+
+			eraser.LoadBitmap();
+
 		//
 		// 完成部分Loading動作，提高進度
 		//
@@ -516,10 +557,10 @@ namespace game_framework {
 		bball.OnShow();						// 貼上彈跳的球
 		map.OnShow();
 		ALLoB.OnShow();
-		
+
 
 		//hits_left.ShowBitmap();
-		
+
 
 		//
 		//  貼上左上及右下角落的圖
@@ -529,7 +570,7 @@ namespace game_framework {
 		corner.SetTopLeft(SIZE_X - corner.Width(), SIZE_Y - corner.Height());
 		corner.ShowBitmap();
 		//580 10
-		
+
 	}
 
 
