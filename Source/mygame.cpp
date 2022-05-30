@@ -88,8 +88,8 @@ namespace game_framework {
 		title.LoadBitmap(".\\Bitmaps\\background_true.bmp");
 		start.LoadBitmap(".\\Bitmaps\\background_startbutton.bmp", RGB(255, 255, 255));
 		start_dark.LoadBitmap(".\\Bitmaps\\background_startbutton_dark.bmp", RGB(255, 255, 255));
-		intro.LoadBitmap(".\\Bitmaps\\ch3.bmp", RGB(255, 255, 255));
-		intro_dark.LoadBitmap(".\\Bitmaps\\ch3reverse.bmp", RGB(255, 255, 255));
+		intro.LoadBitmap(".\\Bitmaps\\background_instructionbutton.bmp", RGB(255, 255, 255));
+		intro_dark.LoadBitmap(".\\Bitmaps\\background_instructionbutton_dark.bmp", RGB(255, 255, 255));
 		instructions.LoadBitmap(".\\Bitmaps\\instruction.bmp", RGB(255, 255, 255));
 
 		//title.LoadBitmap("./game_image/background.bmp");
