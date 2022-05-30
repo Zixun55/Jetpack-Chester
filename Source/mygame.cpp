@@ -90,7 +90,7 @@ namespace game_framework {
 		start_dark.LoadBitmap(".\\Bitmaps\\background_startbutton_dark.bmp", RGB(255, 255, 255));
 		intro.LoadBitmap(".\\Bitmaps\\ch3.bmp", RGB(255, 255, 255));
 		intro_dark.LoadBitmap(".\\Bitmaps\\ch3reverse.bmp", RGB(255, 255, 255));
-		instructions.LoadBitmap(".\\Bitmaps\\ch4.bmp", RGB(255, 255, 255));
+		instructions.LoadBitmap(".\\Bitmaps\\instruction.bmp", RGB(255, 255, 255));
 
 		//title.LoadBitmap("./game_image/background.bmp");
 		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
@@ -185,7 +185,7 @@ namespace game_framework {
 			intro.ShowBitmap();
 		}
 		if (intro_view) {
-			instructions.SetTopLeft(243, 250);
+			instructions.SetTopLeft(125, 110);
 			instructions.ShowBitmap();
 		}
 		//
