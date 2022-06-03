@@ -249,7 +249,7 @@ namespace game_framework {
 		//
 		ShowInitProgress(100);
 		lost.LoadBitmap(".\\Bitmaps\\over_background.bmp");
-		finish.LoadBitmap(".\\Bitmaps\\finish_image.bmp");
+		finish.LoadBitmap(".\\Bitmaps\\finish_image.bmp",RGB(255,255,255));
 		lost_image.LoadBitmap(".\\Bitmaps\\lost_image.bmp", RGB(255, 255, 255));
 		again.LoadBitmap(".\\Bitmaps\\againbutton.bmp");
 		menu.LoadBitmap(".\\Bitmaps\\menubutton.bmp");
@@ -267,7 +267,7 @@ namespace game_framework {
 			lost_image.ShowBitmap();
 		}
 		else {
-			finish.SetTopLeft(255, 0);
+			finish.SetTopLeft(190, 0);
 			finish.ShowBitmap();
 		}
 		points.ShowBitmap();
@@ -403,19 +403,37 @@ namespace game_framework {
 		map.LoadBitmap();
 		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 		isFinish = false;
-
+		CAudio::Instance()->Play(AUDIO_DING, false);		    // 撥放 WAVE
+		CAudio::Instance()->Play(AUDIO_LAKE, false);			// 撥放 WAVE
+		CAudio::Instance()->Play(AUDIO_NTUT, false);			// 撥放 MIDI
+		CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
+		CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
 	}
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
 		scores = ALLoB.Getpoint_n();
 		map.OnMove();
 		ALLoB.OnMove();
+		if (ALLoB.Audio_Coin()) {
+			TRACE("test\n");
+			CAudio::Instance()->Play(AUDIO_DING);
+			ALLoB.SetAudioCoin(false);
+		}
+		if (ALLoB.Audio_Laser()) {
+			TRACE("test\n");
+			CAudio::Instance()->Play(AUDIO_DING);
+			ALLoB.SetAudioLaser(false);
+		}
 		if (ALLoB.GetLife_n() <= 0) {
 			isFinish = false;
+			CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
+			CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
 			GotoGameState(GAME_STATE_OVER);
 		}
 		if (map.FinishMap()) {
 			isFinish = true;
+			CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
+			CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
 			GotoGameState(GAME_STATE_OVER);
 
 		}
@@ -458,12 +476,9 @@ namespace game_framework {
 		//corner.ShowBitmap(background);							// 將corner貼到background
 		bball.LoadBitmap();										// 載入圖形
 		//hits_left.LoadBitmap();
-
-
-		CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
 		CAudio::Instance()->Load(AUDIO_LAKE, "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
 		CAudio::Instance()->Load(AUDIO_NTUT, "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
-
+		CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)

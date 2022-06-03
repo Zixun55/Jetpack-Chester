@@ -94,9 +94,10 @@ namespace game_framework {
 		for (int i = 0; i < 10; i++) {
 			laser[i].OnMove();
 			if (laser[i].IsAlive() && laser[i].HitEraser(&chtest)) {
-				laser[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失                                        
+				laser[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失       
 				Life.Add(-1);
 				Life.OnMove();                                             //扣命
+				audio_laser = true;
 			}
 		}
 		for (int i = 0; i < 10; i++) {
@@ -105,14 +106,16 @@ namespace game_framework {
 				laser2[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失
 				Life.Add(-1);                                        //扣命
 				Life.OnMove();
+				audio_laser = true;
 			}
 		}
 		for (int i = 0; i < 10; i++) {
 			coins[i].OnMove();
 			if (coins[i].IsAlive() && coins[i].HitEraser(&chtest)) {
 				coins[i].SetIsAlive(false);                                //如果角色碰到錢幣，錢幣會消失        
-				point.Add(1);                                        
+				point.Add(1);
 				point.OnMove();
+				audio_coin = true;
 			}
 		}
 		int check_box = 0;
@@ -141,7 +144,7 @@ namespace game_framework {
 				laser[i].CantMoving(true);
 				laser2[i].CantMoving(true);
 				coins[i].CantMoving(true);
-				boxes[i].MovingCheck(check_chx,check_chx2);
+				boxes[i].MovingCheck(check_chx, check_chx2);
 				//laser[i].MovingCheck(check_chx);
 				//laser2[i].MovingCheck(check_chx);
 				if (check_ch) {
@@ -156,7 +159,7 @@ namespace game_framework {
 				laser[i].CantMoving(false);
 				laser2[i].CantMoving(false);
 				coins[i].CantMoving(false);
-				boxes[i].MovingCheck(check_chx,check_chx2);
+				boxes[i].MovingCheck(check_chx, check_chx2);
 				//laser[i].MovingCheck(check_chx);
 				//laser2[i].MovingCheck(check_chx);
 				chtest.CantMoving(false);
@@ -209,7 +212,7 @@ namespace game_framework {
 		return check_map;
 	}
 
-	
+
 	void CALaser::SetMovingLeft(bool flag) {
 		chtest.SetMovingLeft(flag);
 		for (int i = 0; i < 10; i++) {
@@ -230,5 +233,17 @@ namespace game_framework {
 	}
 	bool CALaser::Get_check_chx() {
 		return check_chx;
+	}
+	bool CALaser::Audio_Laser() {
+		return audio_laser;
+	}
+	bool CALaser::Audio_Coin() {
+		return audio_coin;
+	}
+	void CALaser::SetAudioLaser(bool flag) {
+		audio_laser = flag;
+	}
+	void CALaser::SetAudioCoin(bool flag) {
+		audio_coin = flag;
 	}
 }

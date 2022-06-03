@@ -19,6 +19,10 @@ namespace game_framework {
 		void SetMovingLeft(bool flag);
 		void SetMovingRight(bool flag);
 		bool Get_check_chx();
+		void SetAudioLaser(bool flag);
+		void SetAudioCoin(bool flag);
+		bool Audio_Laser();
+		bool Audio_Coin();
 	protected:
 		int check_map;
 		int x, y;
@@ -28,6 +32,8 @@ namespace game_framework {
 		bool isLeft  = false;
 		bool isRight = false;
 		bool isLoadBitmap = false;
+		bool audio_laser = false;
+		bool audio_coin = false;
 		Ccoin    *coins;
 		Claser    *laser2;
 		CBlock    *laser;
