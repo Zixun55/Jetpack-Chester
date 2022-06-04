@@ -497,8 +497,6 @@ namespace game_framework {
 		//corner.ShowBitmap(background);							// 將corner貼到background
 		bball.LoadBitmap();										// 載入圖形
 		//hits_left.LoadBitmap();
-		CAudio::Instance()->Load(AUDIO_LAKE, "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
-		CAudio::Instance()->Load(AUDIO_NTUT, "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
 		CAudio::Instance()->Load(AUDIO_DING, "sounds\\coin.mp3");	// 載入編號0的聲音ding.wav
 		CAudio::Instance()->Load(11, "sounds\\noob_00.mp3");	// 載入編號0的聲音ding.wav
 		CAudio::Instance()->Load(12, "sounds\\dream_01.mp3");	// 載入編號0的聲音ding.wav
@@ -585,6 +583,10 @@ namespace game_framework {
 
 	void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
+		CAudio::Instance()->Stop(11);	// 停止 MIDI
+		CAudio::Instance()->Stop(12);	// 停止 MIDI
+		CAudio::Instance()->Stop(13);	// 停止 MIDI
+		CAudio::Instance()->Stop(14);	// 停止 MIDI
 		GotoGameState(GAME_STATE_OVER);
 		eraser.SetMovingRight(false);
 	}
