@@ -8,6 +8,7 @@
 #include "CBlock.h"
 #include "Claser.h"
 #include "CALaser.h"
+#include "math.h"
 
 
 namespace game_framework {
@@ -30,7 +31,7 @@ namespace game_framework {
 	}
 
 
-	void CALaser::Initialize()
+	void CALaser::Initialize(int maps)
 	{
 		if (laser != nullptr) delete[] laser;
 		if (laser2 != nullptr) delete[] laser2;
@@ -41,12 +42,36 @@ namespace game_framework {
 		boxes = new CBox[10];
 		coins = new Ccoin[10];
 		this->LoadBitmap();
-		int laserx_1[10] = { 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000 };
-		int lasery_1[10] = { 50, 200, 400, 150, 500, 175, 350, 135, 375, 185 };
-		int laserx_2[10] = { 700, 1400, 1700, 2200, 2700, 3200, 3700, 1200, 4700, 5200 };
-		int lasery_2[10] = { 300, 120, 75, 150, 500, 175, 350, 135, 375, 185 };
+		int laserx_1[10] = { 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000 };  
+		int lasery_1[10] = { 50, 200, 430, 150, 450, 175, 350, 135, 375, 185 };            
+		int laserx_2[10] = { 700, 1400, 1700, 2200, 2700, 3200, 3700, 1200, 4700, 5200 };  
+		int lasery_2[10] = { 300, 120, 75, 150, 400, 175, 350, 135, 375, 185 };            
 		int coinx[10] = { 510, 700, 825, 1350, 1575, 2333, 2668, 3212, 3924, 4354 };
 		int coiny[10] = { 150, 30, 110, 150, 230, 90, 50, 135, 200, 140 };
+		int lasery_12[10] = { 150, 70, 370, 260, 20, 100, 48, 210, 330, 130 };
+		int lasery_22[10] = { 200, 40, 100, 50, 380, 150, 90, 40, 200, 190 };
+		int lasery_13[10] = { 300, 90, 200, 30, 180, 230, 420, 90, 100, 160};
+		int lasery_23[10] = { 60, 10, 30, 230, 50, 70, 210, 260, 30, 350};
+		//int lasery_14[10] = { , , , , , , , , , };
+		//int lasery_24[10] = { , , , , , , , , , };
+		if (maps == 2) {
+			for (int i = 0; i < 10; i++) {
+				lasery_1[i] = lasery_12[i];
+				lasery_2[i] = lasery_22[i];
+			}
+		}
+		else if (maps == 3) {
+			for (int i = 0; i < 10; i++) {
+				lasery_1[i] = lasery_13[i];
+				lasery_2[i] = lasery_23[i];
+			}
+		}
+		//else {
+			//for (int i = 0; i < 10; i++) {
+				//lasery_1[i] = lasery_14[i];
+				//lasery_2[i] = lasery_24[i];
+			//}
+		//}
 		for (int i = 0; i < 10; i++) {
 			laser[i].SetXY(laserx_1[i], lasery_1[i]);
 			laser[i].SetIsAlive(true);

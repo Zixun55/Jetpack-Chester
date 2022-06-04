@@ -7,7 +7,7 @@ namespace game_framework {
 	public:
 		CALaser();
 		~CALaser();
-		void Initialize();
+		void Initialize(int maps);
 		void LoadBitmap();
 		void OnMove();
 		void OnShow();
