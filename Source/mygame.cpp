@@ -497,8 +497,6 @@ namespace game_framework {
 		//corner.ShowBitmap(background);							// 盢corner禟background
 		bball.LoadBitmap();										// 更瓜
 		//hits_left.LoadBitmap();
-		CAudio::Instance()->Load(AUDIO_LAKE, "sounds\\lake.mp3");	// 更絪腹1羘lake.mp3
-		CAudio::Instance()->Load(AUDIO_NTUT, "sounds\\ntut.mid");	// 更絪腹2羘ntut.mid
 		CAudio::Instance()->Load(AUDIO_DING, "sounds\\coin.mp3");	// 更絪腹0羘ding.wav
 		CAudio::Instance()->Load(11, "sounds\\noob_00.mp3");	// 更絪腹0羘ding.wav
 		CAudio::Instance()->Load(12, "sounds\\dream_01.mp3");	// 更絪腹0羘ding.wav
