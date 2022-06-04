@@ -249,7 +249,7 @@ namespace game_framework {
 		//
 		ShowInitProgress(100);
 		lost.LoadBitmap(".\\Bitmaps\\over_background.bmp");
-		finish.LoadBitmap(".\\Bitmaps\\finish_image.bmp");
+		finish.LoadBitmap(".\\Bitmaps\\finish_image.bmp"), RGB(255, 255, 255);
 		lost_image.LoadBitmap(".\\Bitmaps\\lost_image.bmp", RGB(255, 255, 255));
 		again.LoadBitmap(".\\Bitmaps\\againbutton.bmp");
 		menu.LoadBitmap(".\\Bitmaps\\menubutton.bmp");
@@ -395,7 +395,7 @@ namespace game_framework {
 		}
 
 		//¹p®g¦ì¸m
-		ALLoB.Initialize();
+		ALLoB.Initialize(maps);
 		//ALLoB.LoadBitmap();
 		eraser.Initialize();
 		map.Initialize();
