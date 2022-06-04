@@ -220,6 +220,7 @@ namespace game_framework {
 		if (points.GetInteger() != scores) {
 			points.Add(1);
 		}
+		
 		//counter--;
 		//if (counter < 0)
 			//GotoGameState(GAME_STATE_INIT);
@@ -231,6 +232,12 @@ namespace game_framework {
 		const int P = 0;
 		points.SetInteger(P);
 		points.SetTopLeft(200, 425);
+		if (isFinish) {
+			CAudio::Instance()->Play(16);
+		}
+		else {
+			CAudio::Instance()->Play(17);
+		}
 	}
 
 	void CGameStateOver::OnInit()
@@ -256,6 +263,8 @@ namespace game_framework {
 		again_dark.LoadBitmap(".\\Bitmaps\\againbutton_dark.bmp");
 		menu_dark.LoadBitmap(".\\Bitmaps\\menubutton_dark.bmp");
 		points.LoadBitmap();
+		CAudio::Instance()->Load(16, "sounds\\finish.mp3");	// 載入編號0的聲音ding.wav
+		CAudio::Instance()->Load(17, "sounds\\fail.mp3");	// 載入編號0的聲音ding.wav
 
 	}
 
@@ -403,11 +412,19 @@ namespace game_framework {
 		map.LoadBitmap();
 		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 		isFinish = false;
-		CAudio::Instance()->Play(AUDIO_DING, false);		    // 撥放 WAVE
-		CAudio::Instance()->Play(AUDIO_LAKE, false);			// 撥放 WAVE
-		CAudio::Instance()->Play(AUDIO_NTUT, false);			// 撥放 MIDI
-		CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
-		CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
+
+		if (maps == 1) {
+			CAudio::Instance()->Play(11,true);			// 撥放 MIDI
+		}
+		else if (maps == 2) {
+			CAudio::Instance()->Play(12, true);			// 撥放 MIDI
+		}
+		else if (maps == 3) {
+			CAudio::Instance()->Play(13, true);			// 撥放 MIDI
+		}
+		else {
+			CAudio::Instance()->Play(14, true);			// 撥放 MIDI
+		}
 	}
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
@@ -421,19 +438,23 @@ namespace game_framework {
 		}
 		if (ALLoB.Audio_Laser()) {
 			TRACE("test\n");
-			CAudio::Instance()->Play(AUDIO_DING);
+			CAudio::Instance()->Play(15);
 			ALLoB.SetAudioLaser(false);
 		}
 		if (ALLoB.GetLife_n() <= 0) {
 			isFinish = false;
-			CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
-			CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
+			CAudio::Instance()->Stop(11);	// 停止 MIDI
+			CAudio::Instance()->Stop(12);	// 停止 MIDI
+			CAudio::Instance()->Stop(13);	// 停止 MIDI
+			CAudio::Instance()->Stop(14);	// 停止 MIDI
 			GotoGameState(GAME_STATE_OVER);
 		}
 		if (map.FinishMap()) {
 			isFinish = true;
-			CAudio::Instance()->Stop(AUDIO_LAKE);	// 停止 WAVE
-			CAudio::Instance()->Stop(AUDIO_NTUT);	// 停止 MIDI
+			CAudio::Instance()->Stop(11);	// 停止 MIDI
+			CAudio::Instance()->Stop(12);	// 停止 MIDI
+			CAudio::Instance()->Stop(13);	// 停止 MIDI
+			CAudio::Instance()->Stop(14);	// 停止 MIDI
 			GotoGameState(GAME_STATE_OVER);
 
 		}
@@ -478,7 +499,12 @@ namespace game_framework {
 		//hits_left.LoadBitmap();
 		CAudio::Instance()->Load(AUDIO_LAKE, "sounds\\lake.mp3");	// 載入編號1的聲音lake.mp3
 		CAudio::Instance()->Load(AUDIO_NTUT, "sounds\\ntut.mid");	// 載入編號2的聲音ntut.mid
-		CAudio::Instance()->Load(AUDIO_DING, "sounds\\ding.wav");	// 載入編號0的聲音ding.wav
+		CAudio::Instance()->Load(AUDIO_DING, "sounds\\coin.mp3");	// 載入編號0的聲音ding.wav
+		CAudio::Instance()->Load(11, "sounds\\noob_00.mp3");	// 載入編號0的聲音ding.wav
+		CAudio::Instance()->Load(12, "sounds\\dream_01.mp3");	// 載入編號0的聲音ding.wav
+		CAudio::Instance()->Load(13, "sounds\\rock_10.mp3");	// 載入編號0的聲音ding.wav
+		CAudio::Instance()->Load(14, "sounds\\paradise_11.mp3");	// 載入編號0的聲音ding.wav
+		CAudio::Instance()->Load(15, "sounds\\laser.mp3");	// 載入編號0的聲音ding.wav
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
