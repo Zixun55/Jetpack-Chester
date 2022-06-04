@@ -256,11 +256,7 @@ namespace game_framework {
 		//
 		ShowInitProgress(100);
 		lost.LoadBitmap(".\\Bitmaps\\over_background.bmp");
-<<<<<<< HEAD
-		finish.LoadBitmap(".\\Bitmaps\\finish_image.bmp"), RGB(255, 255, 255);
-=======
 		finish.LoadBitmap(".\\Bitmaps\\finish_image.bmp",RGB(255,255,255));
->>>>>>> 0bf64fb38bb65e4798829de306483d8285ea3732
 		lost_image.LoadBitmap(".\\Bitmaps\\lost_image.bmp", RGB(255, 255, 255));
 		again.LoadBitmap(".\\Bitmaps\\againbutton.bmp");
 		menu.LoadBitmap(".\\Bitmaps\\menubutton.bmp");
@@ -587,6 +583,10 @@ namespace game_framework {
 
 	void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// ³B²z·Æ¹«ªº°Ê§@
 	{
+		CAudio::Instance()->Stop(11);	// °±¤î MIDI
+		CAudio::Instance()->Stop(12);	// °±¤î MIDI
+		CAudio::Instance()->Stop(13);	// °±¤î MIDI
+		CAudio::Instance()->Stop(14);	// °±¤î MIDI
 		GotoGameState(GAME_STATE_OVER);
 		eraser.SetMovingRight(false);
 	}
