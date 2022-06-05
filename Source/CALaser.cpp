@@ -44,7 +44,7 @@ namespace game_framework {
 		coins = new Ccoin[10];
 		this->LoadBitmap();
 		int laserx_1[10] = { 450, 500, 730, 900, 1400, 1600, 1900, 2100, 2400, 2650 };  
-		int lasery_1[10] = { 50, 300, 430, 50, 250, 175, 350, 220 , 7 ,213};            
+		int lasery_1[10] = { 50, 300, 430, 100, 250, 175, 350, 220 , 7 ,213};            
 		int laserx_2[10] = { 700, 850, 1100, 1300, 1700, 2200, 2300, 2400, 2500 ,2700};  
 		int lasery_2[10] = { 350, 10, 20, 150, 140, 145, 250, 370 ,30 ,230};    
 
@@ -87,7 +87,7 @@ namespace game_framework {
 			coins[i].SetIsAlive(true);
 		}
 		for (int i = 0; i < 10; i++) {
-			boxes[i].SetXY((i + 1) * 1000, 300);
+			boxes[i].SetXY((i + 1) * 1000, 320);
 		}
 		chtest.Initialize();
 		map.Initialize();
