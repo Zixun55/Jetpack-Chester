@@ -220,7 +220,7 @@ namespace game_framework {
 		if (points.GetInteger() != scores) {
 			points.Add(1);
 		}
-		
+
 		//counter--;
 		//if (counter < 0)
 			//GotoGameState(GAME_STATE_INIT);
@@ -256,7 +256,7 @@ namespace game_framework {
 		//
 		ShowInitProgress(100);
 		lost.LoadBitmap(".\\Bitmaps\\over_background.bmp");
-		finish.LoadBitmap(".\\Bitmaps\\finish_image.bmp",RGB(255,255,255));
+		finish.LoadBitmap(".\\Bitmaps\\finish_image.bmp", RGB(255, 255, 255));
 		lost_image.LoadBitmap(".\\Bitmaps\\lost_image.bmp", RGB(255, 255, 255));
 		again.LoadBitmap(".\\Bitmaps\\againbutton.bmp");
 		menu.LoadBitmap(".\\Bitmaps\\menubutton.bmp");
@@ -374,47 +374,20 @@ namespace game_framework {
 	CGameStateRun::CGameStateRun(CGame *g)
 		: CGameState(g), NUMBALLS(28), NUMLASER(10), NUMLASER2(10), NUMBOXES(10)
 	{
-		/*ball = new CBall[NUMBALLS];*/
-		map = CMap();
 
 	}
 
 	CGameStateRun::~CGameStateRun()
 	{
-		//delete[] ball;
-		//ALLoB.~CALaser();
 		TRACE("del\n");
 	}
 	void CGameStateRun::OnBeginState()
 	{
-		const int BALL_GAP = 90;
-		const int BALL_XY_OFFSET = 45;
-		const int BALL_PER_ROW = 7;
-		//const int HITS_LEFT = 3;
-		//const int HITS_LEFT_X = 590;
-		//const int HITS_LEFT_Y = 0;
-		const int BACKGROUND_X = 60;
-		const int ANIMATION_SPEED = 15;
-		for (int i = 0; i < NUMBALLS; i++) {				// 設定球的起始座標
-			int x_pos = i % BALL_PER_ROW;
-			int y_pos = i / BALL_PER_ROW;
-			//ball[i].SetXY(x_pos * BALL_GAP + BALL_XY_OFFSET, y_pos * BALL_GAP + BALL_XY_OFFSET);
-			//ball[i].SetDelay(x_pos);
-			//ball[i].SetIsAlive(true);
-		}
-
-		//雷射位置
 		ALLoB.Initialize(maps);
-		//ALLoB.LoadBitmap();
-		eraser.Initialize();
-		map.Initialize();
-		map.chooseMap(maps);
-		map.LoadBitmap();
-		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 		isFinish = false;
 
 		if (maps == 1) {
-			CAudio::Instance()->Play(11,true);			// 撥放 MIDI
+			CAudio::Instance()->Play(11, true);			// 撥放 MIDI
 		}
 		else if (maps == 2) {
 			CAudio::Instance()->Play(12, true);			// 撥放 MIDI
@@ -429,7 +402,6 @@ namespace game_framework {
 	void CGameStateRun::OnMove()							// 移動遊戲元素
 	{
 		scores = ALLoB.Getpoint_n();
-		map.OnMove();
 		ALLoB.OnMove();
 		if (ALLoB.Audio_Coin()) {
 			TRACE("test\n");
@@ -449,7 +421,7 @@ namespace game_framework {
 			CAudio::Instance()->Stop(14);	// 停止 MIDI
 			GotoGameState(GAME_STATE_OVER);
 		}
-		if (map.FinishMap()) {
+		if (ALLoB.map_finish_map()) {
 			isFinish = true;
 			CAudio::Instance()->Stop(11);	// 停止 MIDI
 			CAudio::Instance()->Stop(12);	// 停止 MIDI
@@ -457,14 +429,6 @@ namespace game_framework {
 			CAudio::Instance()->Stop(14);	// 停止 MIDI
 			GotoGameState(GAME_STATE_OVER);
 
-		}
-		if (ALLoB.GetCheck_map()) {
-			map.CantMoving(true);
-			//map.MovingCheck(ALLoB.Get_check_chx());
-		}
-		else {
-			map.CantMoving(false);
-			//map.MovingCheck(ALLoB.Get_check_chx());
 		}
 	}
 
@@ -475,14 +439,6 @@ namespace game_framework {
 		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
 		//
 		ShowInitProgress(33);	// 接個前一個狀態的進度，此處進度視為33%
-		//
-		// 開始載入資料
-		//
-
-		for (int i = 0; i < NUMBALLS; i++)
-			//ball[i].LoadBitmap();								// 載入第i個球的圖形
-
-			eraser.LoadBitmap();
 
 		//
 		// 完成部分Loading動作，提高進度
@@ -492,11 +448,6 @@ namespace game_framework {
 		//
 		// 繼續載入其他資料
 		//
-		help.LoadBitmap(IDB_HELP, RGB(255, 255, 255));				// 載入說明的圖形
-		corner.LoadBitmap(IDB_CORNER);							// 載入角落圖形stea
-		//corner.ShowBitmap(background);							// 將corner貼到background
-		bball.LoadBitmap();										// 載入圖形
-		//hits_left.LoadBitmap();
 		CAudio::Instance()->Load(AUDIO_DING, "sounds\\coin.mp3");	// 載入編號0的聲音ding.wav
 		CAudio::Instance()->Load(11, "sounds\\noob_00.mp3");	// 載入編號0的聲音ding.wav
 		CAudio::Instance()->Load(12, "sounds\\dream_01.mp3");	// 載入編號0的聲音ding.wav
@@ -511,22 +462,12 @@ namespace game_framework {
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
-		if (nChar == KEY_LEFT)
-			eraser.SetMovingLeft(true);
-		if (nChar == KEY_RIGHT)
-			eraser.SetMovingRight(true);
-		if (nChar == KEY_UP)
-			eraser.SetMovingUp(true);
-		if (nChar == KEY_DOWN)
-			eraser.SetMovingDown(true);
 
 
 		if (nChar == KEY_LEFT) {
-			map.SetMovingLeft(true);
 			ALLoB.SetMovingLeft(true);
 		}
 		if (nChar == KEY_RIGHT) {
-			map.SetMovingRight(true);
 			ALLoB.SetMovingRight(true);
 		}
 
@@ -538,37 +479,24 @@ namespace game_framework {
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
-		if (nChar == KEY_LEFT)
-			eraser.SetMovingLeft(false);
-		if (nChar == KEY_RIGHT)
-			eraser.SetMovingRight(false);
-		if (nChar == KEY_UP)
-			eraser.SetMovingUp(false);
-		if (nChar == KEY_DOWN)
-			eraser.SetMovingDown(false);
+
 
 		if (nChar == KEY_LEFT) {
-			map.SetMovingLeft(false);
 			ALLoB.SetMovingLeft(false);
 		}
 		if (nChar == KEY_RIGHT) {
-			map.SetMovingRight(false);
 			ALLoB.SetMovingRight(false);
 		}
-		//if (nChar == KEY_LEFT)
-		//	character.SetTopLeft(character.Left() - 1, character.Top());
-		//if (nChar == KEY_RIGHT)
-		//	character.SetTopLeft(character.Left() - 1, character.Top());
 	}
 
 	void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 	{
-		eraser.SetMovingLeft(true);
+
 	}
 
 	void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
-		eraser.SetMovingLeft(false);
+
 	}
 
 	void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
@@ -578,7 +506,7 @@ namespace game_framework {
 
 	void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 	{
-		eraser.SetMovingRight(true);
+
 	}
 
 	void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
@@ -588,32 +516,12 @@ namespace game_framework {
 		CAudio::Instance()->Stop(13);	// 停止 MIDI
 		CAudio::Instance()->Stop(14);	// 停止 MIDI
 		GotoGameState(GAME_STATE_OVER);
-		eraser.SetMovingRight(false);
+
 	}
 
 	void CGameStateRun::OnShow()
 	{
-		help.ShowBitmap();					// 貼上說明圖
-		/*for (int i = 0; i < NUMBALLS; i++)*/
-			//ball[i].OnShow();				// 貼上第i號球
-		eraser.OnShow();					// 貼上擦子
-		bball.OnShow();						// 貼上彈跳的球
-		map.OnShow();
 		ALLoB.OnShow();
-
-
-		//hits_left.ShowBitmap();
-
-
-		//
-		//  貼上左上及右下角落的圖
-		//
-		corner.SetTopLeft(0, 0);
-		corner.ShowBitmap();
-		corner.SetTopLeft(SIZE_X - corner.Width(), SIZE_Y - corner.Height());
-		corner.ShowBitmap();
-		//580 10
-
 	}
 
 
