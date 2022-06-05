@@ -53,7 +53,7 @@ namespace game_framework {
 
 	void CBox::LoadBitmap()
 	{
-		bmp.AddBitmap(".//Bitmaps//boxes.bmp", RGB(255, 255, 255));			// 載入球的圖形
+		bmp.AddBitmap(".//Bitmaps//four_boxes.bmp", RGB(255, 255, 255));			// 載入球的圖形
 	}
 
 	void CBox::OnMove()
