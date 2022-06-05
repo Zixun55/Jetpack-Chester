@@ -20,7 +20,7 @@ namespace game_framework {
 		void SetMovingLeft(bool flag);
 		void SetMovingRight(bool flag);
 		void CantMoving(bool flag);
-		void MovingCheck(bool flag);
+		void MovingCheck(bool flag, bool flag2);
 	protected:
 		CAnimation coin;			// 錢幣的圖	
 		int x, y;					// 圓心的座標
@@ -33,6 +33,7 @@ namespace game_framework {
 		bool isMovingRight;
 		bool cantMoving;
 		bool movingcheck;
+		bool movingcheck2;
 	private:
 		bool HitRectangle(int tx1, int ty1, int tx2, int ty2);	// 是否碰到參數範圍的矩形
 	};

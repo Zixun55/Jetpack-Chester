@@ -23,13 +23,14 @@ namespace game_framework {
 		void SetAudioCoin(bool flag);
 		bool Audio_Laser();
 		bool Audio_Coin();
+		bool map_finish_map();
 	protected:
 		int check_map;
 		int x, y;
 		bool check_chx;
 		bool check_chx2;
 		bool cantMoving;
-		bool isLeft  = false;
+		bool isLeft = false;
 		bool isRight = false;
 		bool isLoadBitmap = false;
 		bool audio_laser = false;
@@ -37,10 +38,11 @@ namespace game_framework {
 		Ccoin    *coins;
 		Claser    *laser2;
 		CBlock    *laser;
-		
+
 		Ccharacter chtest;          // ¨¤¦â
 		CLife      Life;
 		Cpoint     point;
 		CBox       *boxes;
+		CMap       map;
 	};
 }
