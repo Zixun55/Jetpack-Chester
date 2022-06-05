@@ -18,7 +18,7 @@ namespace game_framework {
 		void SetMovingRight(bool flag);
 		void SetXY(int nx, int ny);
 		void CantMoving(bool flag);
-		void MovingCheck(bool flag);
+		void MovingCheck(bool flag, bool flag2);
 		void chooseMap(int maps);
 		bool FinishMap();
 
@@ -31,6 +31,7 @@ namespace game_framework {
 		bool isMovingUp;
 		bool cantMoving;
 		bool movingcheck;
+		bool movingcheck2;
 		int  map;
 		Ccharacter chtest;          // ¨¤¦â
 		CLife      Life;

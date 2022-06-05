@@ -150,9 +150,12 @@ namespace game_framework {
 				laser[i].CantMoving(true);
 				laser2[i].CantMoving(true);
 				coins[i].CantMoving(true);
+
+				map.MovingCheck(check_chx, check_chx2);
 				boxes[i].MovingCheck(check_chx, check_chx2);
-				//laser[i].MovingCheck(check_chx);
-				//laser2[i].MovingCheck(check_chx);
+				laser[i].MovingCheck(check_chx, check_chx2);
+				laser2[i].MovingCheck(check_chx, check_chx2);
+				coins[i].MovingCheck(check_chx, check_chx2);
 				if (check_ch) {
 					chtest.CantMoving(true);
 				}
@@ -166,9 +169,11 @@ namespace game_framework {
 				laser[i].CantMoving(false);
 				laser2[i].CantMoving(false);
 				coins[i].CantMoving(false);
+				map.MovingCheck(check_chx, check_chx2);
 				boxes[i].MovingCheck(check_chx, check_chx2);
-				//laser[i].MovingCheck(check_chx);
-				//laser2[i].MovingCheck(check_chx);
+				laser[i].MovingCheck(check_chx, check_chx2);
+				laser2[i].MovingCheck(check_chx, check_chx2);
+				coins[i].MovingCheck(check_chx, check_chx2);
 				chtest.CantMoving(false);
 			}
 			boxes[i].OnMove();

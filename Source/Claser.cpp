@@ -65,10 +65,10 @@ namespace game_framework {
 				dx += 5;
 			}
 		}
-		else if (movingcheck && isMovingRight) {
+		else if (movingcheck2 && isMovingRight) {
 			dx -= 5;
 		}
-		else if (movingcheck && isMovingRight) {
+		else if (movingcheck && isMovingLeft) {
 			dx += 5;
 		}
 		//delay_counter--;
@@ -122,7 +122,8 @@ namespace game_framework {
 	void Claser::CantMoving(bool flag) {
 		cantMoving = flag;
 	}
-	void Claser::MovingCheck(bool flag) {
+	void Claser::MovingCheck(bool flag, bool flag2) {
 		movingcheck = flag;
+		movingcheck2 = flag2;
 	}
 }

@@ -75,10 +75,10 @@ namespace game_framework {
 						x -= STEP_SIZE;
 					}
 				}
-				else if (movingcheck && isMovingRight) {
+				else if (movingcheck2 && isMovingRight) {
 					x -= STEP_SIZE;
 				}
-				else if (movingcheck && isMovingRight) {
+				else if (movingcheck && isMovingLeft) {
 					x += STEP_SIZE;
 				}
 			}
@@ -134,8 +134,9 @@ namespace game_framework {
 	void CMap::chooseMap(int maps) {
 		map = maps;
 	}
-	void CMap::MovingCheck(bool flag) {
+	void CMap::MovingCheck(bool flag, bool flag2) {
 		movingcheck = flag;
+		movingcheck2 = flag2;
 	}
 	bool CMap::FinishMap() {
 		return x <= -2324;
