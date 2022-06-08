@@ -8,9 +8,6 @@
 #include "Ccoin.h"
 
 namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// CBall: Ball class
-	/////////////////////////////////////////////////////////////////////////////
 
 	Ccoin::Ccoin()
 	{
@@ -23,19 +20,16 @@ namespace game_framework {
 
 	bool Ccoin::HitEraser(Ccharacter *character)
 	{
-		// 檢測擦子所構成的矩形是否碰到球
 		return HitRectangle(character->GetX1()+5, character->GetY1()+5, character->GetX2()-10, character->GetY2()-10);
 	}
 
 	bool Ccoin::HitRectangle(int tx1, int ty1, int tx2, int ty2)
 	{
-		int x1 = x + dx;				// 球的左上角x座標
-		int y1 = y + dy;				// 球的左上角y座標
-		int x2 = x1 + coin.Width();	// 球的右下角x座標
-		int y2 = y1 + coin.Height();	// 球的右下角y座標
-									//
-									// 檢測球的矩形與參數矩形是否有交集
-									//
+		int x1 = x + dx;				// 左上角x座標
+		int y1 = y + dy;				// 左上角y座標
+		int x2 = x1 + coin.Width();		// 右下角x座標
+		int y2 = y1 + coin.Height();	// 右下角y座標
+
 		return (tx2 >= x1 && tx1 <= x2 && ty2 >= y1 && ty1 <= y2);
 	}
 

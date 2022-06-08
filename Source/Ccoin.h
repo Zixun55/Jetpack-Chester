@@ -1,15 +1,11 @@
 #pragma once
 namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// 這個class提供繞圈圈的球
-	// 看懂就可以改寫成自己的程式了
-	/////////////////////////////////////////////////////////////////////////////
 
 	class Ccoin
 	{
 	public:
 		Ccoin();
-		bool HitEraser(Ccharacter *character);						// 是否碰到擦子
+		bool HitEraser(Ccharacter *character);					// 是否碰到擦子
 		bool IsAlive();											// 是否活著
 		void LoadBitmap();										// 載入圖形
 		void OnMove();											// 移動

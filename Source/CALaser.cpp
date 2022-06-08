@@ -13,9 +13,6 @@
 
 
 namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// CEraser: Eraser class
-	/////////////////////////////////////////////////////////////////////////////
 
 	CALaser::CALaser()
 	{
@@ -120,7 +117,6 @@ namespace game_framework {
 			boxes[i].LoadBitmap();
 		}
 		isLoadBitmap = true;
-		//}
 	}
 
 	void CALaser::OnMove()

@@ -8,9 +8,6 @@
 #include "Claser.h"
 
 namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// CBall: Ball class
-	/////////////////////////////////////////////////////////////////////////////
 
 	Claser::Claser()
 	{
@@ -29,13 +26,10 @@ namespace game_framework {
 
 	bool Claser::HitRectangle(int tx1, int ty1, int tx2, int ty2)
 	{
-		int x1 = x + dx;				// 球的左上角x座標
-		int y1 = y + dy;				// 球的左上角y座標
-		int x2 = x1 + laser.Width();	// 球的右下角x座標
-		int y2 = y1 + laser.Height();	// 球的右下角y座標
-									//
-									// 檢測球的矩形與參數矩形是否有交集
-									//
+		int x1 = x + dx;				// 左上角x座標
+		int y1 = y + dy;				// 左上角y座標
+		int x2 = x1 + laser.Width();	// 右下角x座標
+		int y2 = y1 + laser.Height();	// 右下角y座標
 		return (tx2 >= x1 && tx1 <= x2 && ty2 >= y1 && ty1 <= y2);
 	}
 
@@ -46,10 +40,10 @@ namespace game_framework {
 
 	void Claser::LoadBitmap()
 	{
-		laser.AddBitmap(".//Bitmaps//laser3.bmp", RGB(255, 255, 255));			// 載入球的圖形
-		laser.AddBitmap(".//Bitmaps//laser6.bmp", RGB(255, 255, 255));			// 載入球的圖形
-		laser.AddBitmap(".//Bitmaps//laser5.bmp", RGB(255, 255, 255));			// 載入球的圖形
-		laser.AddBitmap(".//Bitmaps//laser4.bmp", RGB(255, 255, 255));			// 載入球的圖形
+		laser.AddBitmap(".//Bitmaps//laser3.bmp", RGB(255, 255, 255));			// 載入圖形
+		laser.AddBitmap(".//Bitmaps//laser6.bmp", RGB(255, 255, 255));			// 載入圖形
+		laser.AddBitmap(".//Bitmaps//laser5.bmp", RGB(255, 255, 255));			// 載入圖形
+		laser.AddBitmap(".//Bitmaps//laser4.bmp", RGB(255, 255, 255));			// 載入圖形
 	}
 
 	void Claser::OnMove()
@@ -71,21 +65,6 @@ namespace game_framework {
 		else if (movingcheck && isMovingLeft) {
 			dx += 5;
 		}
-		//delay_counter--;
-		//if (delay_counter < 0) {
-			//delay_counter = delay;
-			//
-			// 計算球向對於圓心的位移量dx, dy
-			//
-			//const int STEPS = 18;
-			//static const int DIFFX[] = { 35, 32, 26, 17, 6, -6, -17, -26, -32, -34, -32, -26, -17, -6, 6, 17, 26, 32, };
-			//static const int DIFFY[] = { 0, 11, 22, 30, 34, 34, 30, 22, 11, 0, -11, -22, -30, -34, -34, -30, -22, -11, };
-			//index++;
-			//if (index >= STEPS)
-				//index = 0;
-			//dx = DIFFX[index];
-		//	dy = DIFFY[index];
-		//}
 	}
 
 	void Claser::SetDelay(int d)
