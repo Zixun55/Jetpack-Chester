@@ -259,13 +259,10 @@
   <ItemGroup>
     <ClCompile Include="Source\audio.cpp" />
     <ClCompile Include="Source\CALaser.cpp" />
-    <ClCompile Include="Source\CBall.cpp" />
     <ClCompile Include="Source\CBlock.cpp" />
-    <ClCompile Include="Source\CBouncingBall.cpp" />
     <ClCompile Include="Source\CBox.cpp" />
     <ClCompile Include="Source\Ccharacter.cpp" />
     <ClCompile Include="Source\Ccoin.cpp" />
-    <ClCompile Include="Source\CEraser.cpp" />
     <ClCompile Include="Source\Claser.cpp" />
     <ClCompile Include="Source\CMap.cpp" />
     <ClCompile Include="Source\game.cpp">
@@ -312,13 +309,10 @@
   <ItemGroup>
     <ClInclude Include="Source\audio.h" />
     <ClInclude Include="Source\CALaser.h" />
-    <ClInclude Include="Source\CBall.h" />
     <ClInclude Include="Source\CBlock.h" />
-    <ClInclude Include="Source\CBouncingBall.h" />
     <ClInclude Include="Source\CBox.h" />
     <ClInclude Include="Source\Ccharacter.h" />
     <ClInclude Include="Source\Ccoin.h" />
-    <ClInclude Include="Source\CEraser.h" />
     <ClInclude Include="Source\Claser.h" />
     <ClInclude Include="Source\CMap.h" />
     <ClInclude Include="Source\game.h" />
