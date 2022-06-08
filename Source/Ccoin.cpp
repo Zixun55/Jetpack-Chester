@@ -24,7 +24,7 @@ namespace game_framework {
 	bool Ccoin::HitEraser(Ccharacter *character)
 	{
 		// 檢測擦子所構成的矩形是否碰到球
-		return HitRectangle(character->GetX1(), character->GetY1(), character->GetX2(), character->GetY2());
+		return HitRectangle(character->GetX1()+5, character->GetY1()+5, character->GetX2()-10, character->GetY2()-10);
 	}
 
 	bool Ccoin::HitRectangle(int tx1, int ty1, int tx2, int ty2)

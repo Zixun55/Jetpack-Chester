@@ -24,7 +24,7 @@ namespace game_framework {
 	bool CBlock::HitEraser(Ccharacter *character)
 	{
 		// 檢測擦子所構成的矩形是否碰到球
-		return HitRectangle(character->GetX1(), character->GetY1(),character->GetX2(), character->GetY2());
+		return HitRectangle(character->GetX1() + 5, character->GetY1() + 5, character->GetX2() - 5, character->GetY2() - 5);
 	}
 
 	bool CBlock::HitRectangle(int tx1, int ty1, int tx2, int ty2)
