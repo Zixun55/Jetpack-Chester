@@ -109,6 +109,7 @@ namespace game_framework {
 		const int       NUMLASER;   // 雷射總數
 		const int       NUMLASER2;   // 雷射總數
 		const int       NUMBOXES;   // 箱子總數
+		int             Clearance;  //通關密技計數  先按左鍵再按又建材通關窩 一定要連續才可以 中間按其他的按鍵 就要再一次
 		CLife    Life;
 		CALaser    ALLoB;
 	};

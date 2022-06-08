@@ -385,6 +385,7 @@ namespace game_framework {
 	{
 		ALLoB.Initialize(maps);
 		isFinish = false;
+		Clearance = 0;
 
 		if (maps == 1) {
 			CAudio::Instance()->Play(11, true);			// 撥放 MIDI
@@ -462,7 +463,7 @@ namespace game_framework {
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
-
+		Clearance = 0;
 
 		if (nChar == KEY_LEFT) {
 			ALLoB.SetMovingLeft(true);
@@ -480,7 +481,7 @@ namespace game_framework {
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
 
-
+		Clearance = 0;
 		if (nChar == KEY_LEFT) {
 			ALLoB.SetMovingLeft(false);
 		}
@@ -496,7 +497,7 @@ namespace game_framework {
 
 	void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
-
+		Clearance = 1;
 	}
 
 	void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
@@ -511,12 +512,14 @@ namespace game_framework {
 
 	void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
-		CAudio::Instance()->Stop(11);	// 停止 MIDI
-		CAudio::Instance()->Stop(12);	// 停止 MIDI
-		CAudio::Instance()->Stop(13);	// 停止 MIDI
-		CAudio::Instance()->Stop(14);	// 停止 MIDI
-		GotoGameState(GAME_STATE_OVER);
-
+		if (Clearance) {
+			isFinish = true;
+			CAudio::Instance()->Stop(11);	// 停止 MIDI
+			CAudio::Instance()->Stop(12);	// 停止 MIDI
+			CAudio::Instance()->Stop(13);	// 停止 MIDI
+			CAudio::Instance()->Stop(14);	// 停止 MIDI
+			GotoGameState(GAME_STATE_OVER);
+		}
 	}
 
 	void CGameStateRun::OnShow()
