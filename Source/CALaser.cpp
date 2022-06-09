@@ -142,6 +142,7 @@ namespace game_framework {
 		}
 		check_map = check_box;
 		for (int i = 0; i < 10; i++) {
+			
 			if (check_box) {
 				map.CantMoving(true);
 				boxes[i].CantMoving(true);
@@ -160,6 +161,20 @@ namespace game_framework {
 				else {
 					chtest.CantMoving(false);
 				}
+			}
+			else if (map.Left_Moving_Start() && isLeft) {
+				TRACE("test_map\n");
+				map.CantMoving(true);
+				boxes[i].CantMoving(true);
+				laser[i].CantMoving(true);
+				laser2[i].CantMoving(true);
+				coins[i].CantMoving(true);
+
+				map.MovingCheck(0,0);
+				boxes[i].MovingCheck(0,0);
+				laser[i].MovingCheck(0,0);
+				laser2[i].MovingCheck(0,0);
+				coins[i].MovingCheck(0,0);
 			}
 			else {
 				map.CantMoving(false);
@@ -253,6 +268,7 @@ namespace game_framework {
 
 
 	void CALaser::SetMovingLeft(bool flag) {
+		isLeft = true;
 		map.SetMovingLeft(flag);
 		chtest.SetMovingLeft(flag);
 		for (int i = 0; i < 10; i++) {
@@ -263,6 +279,7 @@ namespace game_framework {
 		}
 	}
 	void CALaser::SetMovingRight(bool flag) {
+		isLeft = false;
 		map.SetMovingRight(flag);
 		chtest.SetMovingRight(flag);
 		for (int i = 0; i < 10; i++) {

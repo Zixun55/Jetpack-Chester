@@ -21,6 +21,7 @@ namespace game_framework {
 		void MovingCheck(bool flag, bool flag2);
 		void chooseMap(int maps);
 		bool FinishMap();
+		bool Left_Moving_Start();
 
 	protected:
 		CAnimation animation;
@@ -32,6 +33,7 @@ namespace game_framework {
 		bool cantMoving;
 		bool movingcheck;
 		bool movingcheck2;
+		bool left_moving_start;
 		int  map;
 		Ccharacter chtest;          // ¨¤¦â
 		CLife      Life;

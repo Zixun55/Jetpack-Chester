@@ -39,7 +39,7 @@ namespace game_framework {
 		const int Y_POS = 0;
 		x = X_POS;
 		y = Y_POS;
-		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = cantMoving = false;
+		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = cantMoving = left_moving_start = false;
 		movingcheck = false;
 	}
 
@@ -58,9 +58,11 @@ namespace game_framework {
 		if (x < 100) {
 			if (isMovingLeft && x >= 0) {
 				x = 0;
+				
 			}
 			else if (isMovingRight && x <= -2324) {
 				x = -2324;
+				
 			}
 			else {
 				if (!cantMoving) {
@@ -78,7 +80,14 @@ namespace game_framework {
 				else if (movingcheck && isMovingLeft) {
 					x += STEP_SIZE;
 				}
+				
 			}
+		}
+		if (x >= -1) {
+			left_moving_start = true;
+		}
+		else {
+			left_moving_start = false;
 		}
 		if (map == 1) {
 			animation.Reset();
@@ -137,5 +146,8 @@ namespace game_framework {
 	}
 	bool CMap::FinishMap() {
 		return x <= -2324;
+	}
+	bool CMap::Left_Moving_Start() {
+		return left_moving_start;
 	}
 }
