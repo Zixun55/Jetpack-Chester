@@ -12,7 +12,7 @@ namespace game_framework {
 	Ccoin::Ccoin()
 	{
 		is_alive = true;
-		x = y = dx = dy = index = delay_counter = 0;
+		x = y = dx = dy = 0;
 		isMovingLeft = false;
 		isMovingRight = false;
 		movingcheck = false;
@@ -40,10 +40,10 @@ namespace game_framework {
 
 	void Ccoin::LoadBitmap()
 	{
-		coin.AddBitmap(".//Bitmaps//coin.bmp", RGB(255, 255, 255));			// 更瞴瓜
-		coin.AddBitmap(".//Bitmaps//coin1.bmp", RGB(255, 255, 255));			// 更瞴瓜
-		coin.AddBitmap(".//Bitmaps//coin2.bmp", RGB(255, 255, 255));			// 更瞴瓜
-		coin.AddBitmap(".//Bitmaps//coin3.bmp", RGB(255, 255, 255));			// 更瞴瓜
+		coin.AddBitmap(".//Bitmaps//coin.bmp", RGB(255, 255, 255));				// 更瓜
+		coin.AddBitmap(".//Bitmaps//coin1.bmp", RGB(255, 255, 255));			// 更瓜
+		coin.AddBitmap(".//Bitmaps//coin2.bmp", RGB(255, 255, 255));			// 更瓜
+		coin.AddBitmap(".//Bitmaps//coin3.bmp", RGB(255, 255, 255));			// 更瓜
 	}
 
 	void Ccoin::OnMove()
@@ -65,11 +65,6 @@ namespace game_framework {
 		else if (movingcheck && isMovingLeft) {
 			dx += 5;
 		}
-	}
-
-	void Ccoin::SetDelay(int d)
-	{
-		delay = d;
 	}
 
 	void Ccoin::SetIsAlive(bool alive)

@@ -12,7 +12,7 @@ namespace game_framework {
 	Claser::Claser()
 	{
 		is_alive = true;
-		x = y = dx = dy = index = delay_counter = 0;
+		x = y = dx = dy = 0;
 		isMovingLeft = false;
 		isMovingRight = false;
 		movingcheck = false;
@@ -20,7 +20,7 @@ namespace game_framework {
 
 	bool Claser::HitEraser(Ccharacter *character)
 	{
-		// 檢測擦子所構成的矩形是否碰到球
+		// 檢測角色所構成的矩形是否碰到球
 		return HitRectangle(character->GetX1() + 5, character->GetY1() + 5, character->GetX2() - 5, character->GetY2() - 5);
 	}
 
@@ -65,11 +65,6 @@ namespace game_framework {
 		else if (movingcheck && isMovingLeft) {
 			dx += 5;
 		}
-	}
-
-	void Claser::SetDelay(int d)
-	{
-		delay = d;
 	}
 
 	void Claser::SetIsAlive(bool alive)

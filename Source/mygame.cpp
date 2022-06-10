@@ -110,7 +110,7 @@ namespace game_framework {
 		if (new_point.x > 0 && new_point.y > 0) {
 			if (new_point.x < allx && new_point.y < ally) {
 				in = true;
-				CAudio::Instance()->Play(99);
+				CAudio::Instance()->Play(99,false);
 			}
 			else {
 				in = false;
@@ -123,7 +123,7 @@ namespace game_framework {
 		if (intro_point.x > 0 && intro_point.y > 0) {
 			if (intro_point.x < allx && intro_point.y < ally) {
 				intro_in = true;
-				CAudio::Instance()->Play(99);
+				CAudio::Instance()->Play(99,false);
 			}
 			else {
 				intro_in = false;
@@ -209,10 +209,10 @@ namespace game_framework {
 		points.SetInteger(P);
 		points.SetTopLeft(200, 425);
 		if (isFinish) {
-			CAudio::Instance()->Play(16);
+			CAudio::Instance()->Play(16,false);
 		}
 		else {
-			CAudio::Instance()->Play(17);
+			CAudio::Instance()->Play(17,false);
 		}
 	}
 
@@ -281,7 +281,7 @@ namespace game_framework {
 		if (new_point.x > 0 && new_point.y > 0) {
 			if (new_point.x < allx && new_point.y < ally) {
 				in = true;
-				CAudio::Instance()->Play(98);
+				CAudio::Instance()->Play(98,false);
 			}
 			else {
 				in = false;
@@ -296,7 +296,7 @@ namespace game_framework {
 		if (ne_point.x > 0 && ne_point.y > 0) {
 			if (ne_point.x < allx && ne_point.y < ally) {
 				in1 = true;
-				CAudio::Instance()->Play(98);
+				CAudio::Instance()->Play(98,false);
 			}
 			else {
 				in1 = false;
@@ -365,12 +365,12 @@ namespace game_framework {
 		ALLoB.OnMove();
 		if (ALLoB.Audio_Coin()) {
 			TRACE("test\n");
-			CAudio::Instance()->Play(0);
+			CAudio::Instance()->Play(0,false);
 			ALLoB.SetAudioCoin(false);
 		}
 		if (ALLoB.Audio_Laser()) {
 			TRACE("test\n");
-			CAudio::Instance()->Play(15);
+			CAudio::Instance()->Play(15,false);
 			ALLoB.SetAudioLaser(false);
 		}
 		if (ALLoB.GetLife_n() <= 0) {
@@ -561,7 +561,7 @@ namespace game_framework {
 		if (new_point.x > 0 && new_point.y > 0) {
 			if (new_point.x < allx && new_point.y < ally) {
 				in = true;
-				CAudio::Instance()->Play(96);
+				CAudio::Instance()->Play(96,false);
 			}
 			else {
 				in = false;

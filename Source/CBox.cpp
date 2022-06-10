@@ -25,13 +25,10 @@ namespace game_framework {
 
 	bool CBox::HitRectangle(int tx1, int ty1, int tx2, int ty2)
 	{
-		int x1 = x + dx;				// 球的左上角x座標
-		int y1 = y + dy;				// 球的左上角y座標
-		int x2 = x1 + bmp.Width();	// 球的右下角x座標
-		int y2 = y1 + bmp.Height();	// 球的右下角y座標
-									//
-									// 檢測球的矩形與參數矩形是否有交集
-									//
+		int x1 = x + dx;				// 左上角x座標
+		int y1 = y + dy;				// 左上角y座標
+		int x2 = x1 + bmp.Width();		// 右下角x座標
+		int y2 = y1 + bmp.Height();		// 右下角y座標
 		return (tx2 >= x1 && tx1 <= x2 && ty2 >= y1 && ty1 <= y2);
 	}
 	bool CBox::ChxBigThanBox(Ccharacter *character) {
@@ -53,7 +50,7 @@ namespace game_framework {
 
 	void CBox::LoadBitmap()
 	{
-		bmp.AddBitmap(".//Bitmaps//four_boxes.bmp", RGB(255, 255, 255));			// 載入球的圖形
+		bmp.AddBitmap(".//Bitmaps//four_boxes.bmp", RGB(255, 255, 255));			// 載入圖形
 	}
 
 	void CBox::OnMove()

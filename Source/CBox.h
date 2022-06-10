@@ -6,12 +6,12 @@ namespace game_framework {
 	{
 	public:
 		CBox();
-		bool HitEraser(Ccharacter *character);						// 是否碰到擦子
-		bool IsAlive();											// 是否活著
+		bool HitEraser(Ccharacter *character);					// 是否碰到角色
+		bool IsAlive();											// 是否還在
 		void LoadBitmap();										// 載入圖形
 		void OnMove();											// 移動
 		void OnShow();											// 將圖形貼到畫面
-		void SetXY(int nx, int ny);								// 設定圓心的座標
+		void SetXY(int nx, int ny);								// 設定座標
 		void SetMovingLeft(bool flag);
 		void SetMovingRight(bool flag);
 		void CantMoving(bool flag);
@@ -22,10 +22,10 @@ namespace game_framework {
 		
 		int  BoxX1();
 	protected:
-		CAnimation bmp;			// 球的圖	
-		int x, y;					// 圓心的座標
-		int dx, dy;					// 球距離圓心的位移量
-		bool is_alive;				// 是否活著
+		CAnimation bmp;				// 箱子用動畫做移動	
+		int x, y;					// 座標
+		int dx, dy;					// 用這個做位移
+		bool is_alive;				// 是否還在
 		bool isMovingLeft;
 		bool isMovingRight;
 		bool cantMoving;
