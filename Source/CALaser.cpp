@@ -13,13 +13,15 @@
 
 
 namespace game_framework {
-
+	/////////////////////////////////////////////////////////////////////////////
+	// CALaser: all object class
+	/////////////////////////////////////////////////////////////////////////////
 	CALaser::CALaser()
 	{
-		laser = nullptr;
-		laser2 = nullptr;
-		boxes = nullptr;
-		coins = nullptr;
+		laser = nullptr;       //雷射_橫的
+		laser2 = nullptr;      //雷射直的
+		boxes = nullptr;       //箱子
+		coins = nullptr;       //金幣
 	}
 	CALaser::~CALaser() {
 		if (laser != nullptr) delete[] laser;
@@ -40,6 +42,8 @@ namespace game_framework {
 		boxes = new CBox[10];
 		coins = new Ccoin[10];
 		this->LoadBitmap();
+		///////////////////////////////////////
+		//直接把物品定位，設置給所有地圖
 		int laserx_1[10] = { 450, 500, 730, 900, 1400, 1600, 1900, 2100, 2400, 2650 };  
 		int lasery_1[10] = { 50, 300, 430, 100, 250, 175, 350, 220 , 7 ,213};            
 		int laserx_2[10] = { 700, 850, 1100, 1300, 1700, 2200, 2300, 2400, 2500 ,2700};  
@@ -86,6 +90,7 @@ namespace game_framework {
 		for (int i = 0; i < 10; i++) {
 			boxes[i].SetXY((i + 1) * 1000, 320);
 		}
+		///////////////////////////////////////
 		chtest.Initialize();
 		map.Initialize();
 		map.chooseMap(maps);
@@ -121,6 +126,8 @@ namespace game_framework {
 
 	void CALaser::OnMove()
 	{
+		///////////////////////////////////////
+		//判斷箱子碰撞以及其他物件是否能移動
 		int check_box = 0;
 		int check_ch = 0;
 		for (int i = 0; i < 10; i++) {
@@ -140,7 +147,6 @@ namespace game_framework {
 		if (boxes[close_box].ChxXSmallThanBox(&chtest)) {
 			check_chx2 = true;
 		}
-		check_map = check_box;
 		for (int i = 0; i < 10; i++) {
 			
 			if (check_box) {
@@ -163,7 +169,6 @@ namespace game_framework {
 				}
 			}
 			else if (map.Left_Moving_Start() && isLeft) {
-				TRACE("test_map\n");
 				map.CantMoving(true);
 				boxes[i].CantMoving(true);
 				laser[i].CantMoving(true);
@@ -191,12 +196,13 @@ namespace game_framework {
 			}
 			boxes[i].OnMove();
 		}
+		///////////////////////////////////////
 		for (int i = 0; i < 10; i++) {
 			laser[i].OnMove();
 			if (laser[i].IsAlive() && laser[i].HitEraser(&chtest)) {
 				laser[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失       
-				Life.Add(-1);
-				Life.OnMove();                                             //扣命
+				Life.Add(-1);											   //扣命
+				Life.OnMove();                                             //扣命動畫
 				audio_laser = true;
 			}
 		}
@@ -204,8 +210,8 @@ namespace game_framework {
 			laser2[i].OnMove();
 			if (laser2[i].IsAlive() && laser2[i].HitEraser(&chtest)) {
 				laser2[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失
-				Life.Add(-1);                                        //扣命
-				Life.OnMove();
+				Life.Add(-1);												//扣命
+				Life.OnMove();												//扣命動畫
 				audio_laser = true;
 			}
 		}
@@ -213,8 +219,8 @@ namespace game_framework {
 			coins[i].OnMove();
 			if (coins[i].IsAlive() && coins[i].HitEraser(&chtest)) {
 				coins[i].SetIsAlive(false);                                //如果角色碰到錢幣，錢幣會消失        
-				point.Add(1);
-				point.OnMove();
+				point.Add(1);											   //分數加一
+				point.OnMove();											   //加分動畫
 				audio_coin = true;
 			}
 		}
@@ -256,18 +262,14 @@ namespace game_framework {
 		}
 		return closet;
 	}
-	int CALaser::GetLife_n() {
+	int CALaser::GetLife_n() {   //當前生命值
 		return Life.get_n();
 	}
-	int CALaser::Getpoint_n() {
+	int CALaser::Getpoint_n() {  //當前分數
 		return point.get_n();
 	}
-	int CALaser::GetCheck_map() {
-		return check_map;
-	}
 
-
-	void CALaser::SetMovingLeft(bool flag) {
+	void CALaser::SetMovingLeft(bool flag) {  //按下方向鍵左鍵
 		isLeft = true;
 		map.SetMovingLeft(flag);
 		chtest.SetMovingLeft(flag);
@@ -278,7 +280,7 @@ namespace game_framework {
 			boxes[i].SetMovingLeft(flag);
 		}
 	}
-	void CALaser::SetMovingRight(bool flag) {
+	void CALaser::SetMovingRight(bool flag) {  //按下方向鍵右鍵
 		isLeft = false;
 		map.SetMovingRight(flag);
 		chtest.SetMovingRight(flag);
@@ -289,13 +291,10 @@ namespace game_framework {
 			boxes[i].SetMovingRight(flag);
 		}
 	}
-	bool CALaser::Get_check_chx() {
-		return check_chx;
-	}
-	bool CALaser::Audio_Laser() {
+	bool CALaser::Audio_Laser() {  //播放雷射音效
 		return audio_laser;
 	}
-	bool CALaser::Audio_Coin() {
+	bool CALaser::Audio_Coin() {   //播放金幣音效
 		return audio_coin;
 	}
 	void CALaser::SetAudioLaser(bool flag) {
@@ -304,7 +303,7 @@ namespace game_framework {
 	void CALaser::SetAudioCoin(bool flag) {
 		audio_coin = flag;
 	}
-	bool CALaser::map_finish_map() {
+	bool CALaser::map_finish_map() {//地圖是否完成
 		return map.FinishMap();
 	}
 }

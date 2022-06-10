@@ -37,8 +37,6 @@
  *      2. Replace the demonstration of animation as a new bouncing ball.
  *      3. Use ShowInitProgress(percent) to display loading progress.
 */
-
-
 #include "Ccharacter.h"
 #include "CMap.h"
 #include "CBlock.h"
@@ -48,26 +46,15 @@
 #include "Ccoin.h" 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
-	// Constants
-	/////////////////////////////////////////////////////////////////////////////
-
-	enum AUDIO_ID {				// 定義各種音效的編號
-		AUDIO_DING,				// 0
-		AUDIO_LAKE,				// 1
-		AUDIO_NTUT				// 2
-	};
-
-	/////////////////////////////////////////////////////////////////////////////
-	// 這個class為遊戲的遊戲開頭畫面物件
-	// 每個Member function的Implementation都要弄懂
+	// 這個class為遊戲的一開始狀態(Game Init)
 	/////////////////////////////////////////////////////////////////////////////
 	class CGameStateInit : public CGameState {
 	public:
 		CGameStateInit(CGame *g);
 		void OnInit();  								// 遊戲的初值及圖形設定
 		void OnBeginState();							// 設定每次重玩所需的變數
-		void OnMouseMove(UINT nFlags, CPoint point);
-		void OnLButtonUp(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+		void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的移動
+		void OnLButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
@@ -77,14 +64,13 @@ namespace game_framework {
 		bool in;
 		CMovingBitmap intro;                            // intro的按鈕
 		CMovingBitmap intro_dark;                       // intro的按鈕_暗掉
-		CMovingBitmap instructions;                       // intro的按鈕_暗掉
+		CMovingBitmap instructions;                     // 說明的圖
 		bool intro_view;                                // 顯示說明
 		bool intro_in;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
-	// 這個class為遊戲的遊戲執行物件，主要的遊戲程式都在這裡
-	// 每個Member function的Implementation都要弄懂
+	// 這個class為遊戲的進行狀態(Game Run)
 	/////////////////////////////////////////////////////////////////////////////
 
 	class CGameStateRun : public CGameState {
@@ -94,29 +80,19 @@ namespace game_framework {
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnInit();  								// 遊戲的初值及圖形設定
 		void OnKeyDown(UINT, UINT, UINT);
-
 		void OnKeyUp(UINT, UINT, UINT);
-		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
 		void OnLButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
-		void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作 
-		void OnRButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
 		void OnRButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		const int		NUMBALLS;	// 球的總數
-		const int       NUMLASER;   // 雷射總數
-		const int       NUMLASER2;   // 雷射總數
-		const int       NUMBOXES;   // 箱子總數
-		int             Clearance;  //通關密技計數  先按左鍵再按又建材通關窩 一定要連續才可以 中間按其他的按鍵 就要再一次
-		CLife    Life;
-		CALaser    ALLoB;
+		int             Clearance;  // 通關密技計數  先按左鍵再按又建材通關窩 一定要連續才可以 中間按其他的按鍵 就要再一次
+		CALaser			ALLoB;      // 所有物件
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的結束狀態(Game Over)
-	// 每個Member function的Implementation都要弄懂
 	/////////////////////////////////////////////////////////////////////////////
 
 	class CGameStateOver : public CGameState {
@@ -130,13 +106,12 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		int counter;	// 倒數之計數器
-		CMovingBitmap lost;         //結束畫面
-		CMovingBitmap finish;       //finish image
-		CMovingBitmap lost_image;   //lost   image
-		CMovingBitmap again;        //again button
-		CMovingBitmap menu;         //menu button
-		CInteger points;
+		CMovingBitmap lost;				 //結束畫面
+		CMovingBitmap finish;			 //finish image
+		CMovingBitmap lost_image;		 //lost   image
+		CMovingBitmap again;			 //again button
+		CMovingBitmap menu;				 //menu button
+		CInteger points;				 //分數
 
 		CMovingBitmap again_dark;        //again_dark button
 		CMovingBitmap menu_dark;         //menu_dark button
@@ -147,8 +122,7 @@ namespace game_framework {
 
 
 	/////////////////////////////////////////////////////////////////////////////
-	// 這個class為選擇關卡及角色的部分
-	// 每個Member function的Implementation都要弄懂
+	// 這個class為選擇關卡的部分
 	/////////////////////////////////////////////////////////////////////////////
 
 	class CGameStateChoose : public CGameState {
@@ -156,20 +130,14 @@ namespace game_framework {
 		CGameStateChoose(CGame *g);
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnInit();  								// 遊戲的初值及圖形設定
-		//void OnKeyDown(UINT, UINT, UINT);
 		void OnLButtonUp(UINT nFlags, CPoint point);
-		//void OnKeyUp(UINT, UINT, UINT);
-		//void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
-		//void OnLButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
 		void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作 
-		//void OnRButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
-		//void OnRButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
 
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		CMovingBitmap select;                            // 地圖選擇畫面
-		CMovingBitmap return_dark;
+		CMovingBitmap return_dark;						 // 按紐_暗
 		bool in;
 	};
 }

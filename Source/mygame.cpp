@@ -61,9 +61,13 @@
 #include "mygame.h"
 #include <stdlib.h>
 
-int scores;
-int maps;
-bool isFinish = false;
+////////////////////////////////
+// 全域變數
+////////////////////////////////
+int scores;           // 分數
+int maps;			  // 選擇的地圖
+bool isFinish = false;// 是否有成功完成地圖
+
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -77,11 +81,7 @@ namespace game_framework {
 
 	void CGameStateInit::OnInit()
 	{
-		//
-		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
-		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
-		//
-		ShowInitProgress(0);	// 一開始的loading進度為0%
+		ShowInitProgress(0);	
 		//
 		// 開始載入資料
 		//
@@ -91,12 +91,7 @@ namespace game_framework {
 		intro.LoadBitmap(".\\Bitmaps\\background_instructionbutton.bmp", RGB(255, 255, 255));
 		intro_dark.LoadBitmap(".\\Bitmaps\\background_instructionbutton_dark.bmp", RGB(255, 255, 255));
 		instructions.LoadBitmap(".\\Bitmaps\\instruction.bmp", RGB(255, 255, 255));
-
-		//title.LoadBitmap("./game_image/background.bmp");
-		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
-		//
-		// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
-		//
+		CAudio::Instance()->Load(99, "sounds\\button.mp3");	// 載入按鈕聲音
 	}
 
 	void CGameStateInit::OnBeginState()
@@ -115,6 +110,7 @@ namespace game_framework {
 		if (new_point.x > 0 && new_point.y > 0) {
 			if (new_point.x < allx && new_point.y < ally) {
 				in = true;
+				CAudio::Instance()->Play(99);
 			}
 			else {
 				in = false;
@@ -127,6 +123,7 @@ namespace game_framework {
 		if (intro_point.x > 0 && intro_point.y > 0) {
 			if (intro_point.x < allx && intro_point.y < ally) {
 				intro_in = true;
+				CAudio::Instance()->Play(99);
 			}
 			else {
 				intro_in = false;
@@ -162,9 +159,6 @@ namespace game_framework {
 	}
 	void CGameStateInit::OnShow()
 	{
-		//
-		// 貼上logo
-		//
 		title.SetTopLeft(0, 0);
 		title.ShowBitmap();
 
@@ -188,22 +182,7 @@ namespace game_framework {
 			instructions.SetTopLeft(125, 110);
 			instructions.ShowBitmap();
 		}
-		//
-		// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
-		//
-		//CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
-		//CFont f,*fp;
-		//f.CreatePointFont(160,"Times New Roman");	// 產生 font f; 160表示16 point的字
-		//fp=pDC->SelectObject(&f);					// 選用 font f
-		//pDC->SetBkColor(RGB(0,0,0));
-		//pDC->SetTextColor(RGB(255,255,0));
-		//pDC->TextOut(120,220,"Please click mouse or press SPACE to begin.");
-		//pDC->TextOut(5,395,"Press Ctrl-F to switch in between window mode and full screen mode.");
-		//if (ENABLE_GAME_PAUSE)
-		//	pDC->TextOut(5,425,"Press Ctrl-Q to pause the Game.");
-		//pDC->TextOut(5,455,"Press Alt-F4 or ESC to Quit.");
-		//pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-		//CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+
 	}
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -221,14 +200,11 @@ namespace game_framework {
 			points.Add(1);
 		}
 
-		//counter--;
-		//if (counter < 0)
-			//GotoGameState(GAME_STATE_INIT);
+
 	}
 
 	void CGameStateOver::OnBeginState()
 	{
-		counter = 30 * 5; // 5 seconds
 		const int P = 0;
 		points.SetInteger(P);
 		points.SetTopLeft(200, 425);
@@ -242,10 +218,6 @@ namespace game_framework {
 
 	void CGameStateOver::OnInit()
 	{
-		//
-		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
-		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
-		//
 		ShowInitProgress(66);	// 接個前一個狀態的進度，此處進度視為66%
 		//
 		// 開始載入資料
@@ -263,9 +235,9 @@ namespace game_framework {
 		again_dark.LoadBitmap(".\\Bitmaps\\againbutton_dark.bmp");
 		menu_dark.LoadBitmap(".\\Bitmaps\\menubutton_dark.bmp");
 		points.LoadBitmap();
-		CAudio::Instance()->Load(16, "sounds\\finish.mp3");	// 載入編號0的聲音ding.wav
-		CAudio::Instance()->Load(17, "sounds\\fail.mp3");	// 載入編號0的聲音ding.wav
-
+		CAudio::Instance()->Load(16, "sounds\\finish.mp3");	// 載入完成的聲音
+		CAudio::Instance()->Load(17, "sounds\\fail.mp3");	// 載入失敗的聲音
+		CAudio::Instance()->Load(98, "sounds\\button.mp3");	// 載入按鈕聲音
 	}
 
 	void CGameStateOver::OnShow()
@@ -291,7 +263,7 @@ namespace game_framework {
 		}
 
 
-		if (!in1) {                              //目前兩個按鈕會同時暗，需修改
+		if (!in1) {                            
 			menu.SetTopLeft(243, 280);
 			menu.ShowBitmap();
 		}
@@ -299,19 +271,6 @@ namespace game_framework {
 			menu_dark.SetTopLeft(243, 280);
 			menu_dark.ShowBitmap();
 		}
-
-
-		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC      
-		CFont f, *fp;
-		f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-		fp = pDC->SelectObject(&f);					// 選用 font f
-		pDC->SetBkColor(RGB(0, 0, 0));
-		pDC->SetTextColor(RGB(255, 255, 0));
-		//char str[80];								// Demo 數字對字串的轉換
-		//sprintf(str, "Game Over ! (%d)", counter / 30);
-		//pDC->TextOut(240, 210, str);
-		pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 	}
 	void CGameStateOver::OnMouseMove(UINT nFlags, CPoint point)
 	{
@@ -322,6 +281,7 @@ namespace game_framework {
 		if (new_point.x > 0 && new_point.y > 0) {
 			if (new_point.x < allx && new_point.y < ally) {
 				in = true;
+				CAudio::Instance()->Play(98);
 			}
 			else {
 				in = false;
@@ -336,6 +296,7 @@ namespace game_framework {
 		if (ne_point.x > 0 && ne_point.y > 0) {
 			if (ne_point.x < allx && ne_point.y < ally) {
 				in1 = true;
+				CAudio::Instance()->Play(98);
 			}
 			else {
 				in1 = false;
@@ -372,14 +333,12 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	CGameStateRun::CGameStateRun(CGame *g)
-		: CGameState(g), NUMBALLS(28), NUMLASER(10), NUMLASER2(10), NUMBOXES(10)
+		: CGameState(g)
 	{
-
 	}
 
 	CGameStateRun::~CGameStateRun()
 	{
-		TRACE("del\n");
 	}
 	void CGameStateRun::OnBeginState()
 	{
@@ -388,16 +347,16 @@ namespace game_framework {
 		Clearance = 0;
 
 		if (maps == 1) {
-			CAudio::Instance()->Play(11, true);			// 撥放 MIDI
+			CAudio::Instance()->Play(11, true);			// 撥放 地圖一的聲音
 		}
 		else if (maps == 2) {
-			CAudio::Instance()->Play(12, true);			// 撥放 MIDI
+			CAudio::Instance()->Play(12, true);			// 撥放 地圖二的聲音
 		}
 		else if (maps == 3) {
-			CAudio::Instance()->Play(13, true);			// 撥放 MIDI
+			CAudio::Instance()->Play(13, true);			// 撥放 地圖三的聲音
 		}
 		else {
-			CAudio::Instance()->Play(14, true);			// 撥放 MIDI
+			CAudio::Instance()->Play(14, true);			// 撥放 地圖四的聲音
 		}
 	}
 	void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -406,7 +365,7 @@ namespace game_framework {
 		ALLoB.OnMove();
 		if (ALLoB.Audio_Coin()) {
 			TRACE("test\n");
-			CAudio::Instance()->Play(AUDIO_DING);
+			CAudio::Instance()->Play(0);
 			ALLoB.SetAudioCoin(false);
 		}
 		if (ALLoB.Audio_Laser()) {
@@ -416,55 +375,43 @@ namespace game_framework {
 		}
 		if (ALLoB.GetLife_n() <= 0) {
 			isFinish = false;
-			CAudio::Instance()->Stop(11);	// 停止 MIDI
-			CAudio::Instance()->Stop(12);	// 停止 MIDI
-			CAudio::Instance()->Stop(13);	// 停止 MIDI
-			CAudio::Instance()->Stop(14);	// 停止 MIDI
-			GotoGameState(GAME_STATE_OVER);
+			CAudio::Instance()->Stop(11);	// 停止 地圖一的聲音
+			CAudio::Instance()->Stop(12);	// 停止 地圖二的聲音
+			CAudio::Instance()->Stop(13);	// 停止 地圖三的聲音
+			CAudio::Instance()->Stop(14);	// 停止 地圖四的聲音
+			GotoGameState(GAME_STATE_OVER); // 切換至GAME_STATE_OVER
 		}
 		if (ALLoB.map_finish_map()) {
 			isFinish = true;
-			CAudio::Instance()->Stop(11);	// 停止 MIDI
-			CAudio::Instance()->Stop(12);	// 停止 MIDI
-			CAudio::Instance()->Stop(13);	// 停止 MIDI
-			CAudio::Instance()->Stop(14);	// 停止 MIDI
-			GotoGameState(GAME_STATE_OVER);
-
+			CAudio::Instance()->Stop(11);	// 停止 地圖一的聲音
+			CAudio::Instance()->Stop(12);	// 停止 地圖二的聲音
+			CAudio::Instance()->Stop(13);	// 停止 地圖三的聲音
+			CAudio::Instance()->Stop(14);	// 停止 M地圖四的聲音
+			GotoGameState(GAME_STATE_OVER); // 切換至GAME_STATE_OVER
 		}
 	}
 
 	void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	{
-		//
-		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
-		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
-		//
 		ShowInitProgress(33);	// 接個前一個狀態的進度，此處進度視為33%
 
-		//
-		// 完成部分Loading動作，提高進度
-		//
 		ShowInitProgress(50);
-		//Sleep(300); // 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 		//
-		// 繼續載入其他資料
+		// 載入資料
 		//
-		CAudio::Instance()->Load(AUDIO_DING, "sounds\\coin.mp3");	// 載入編號0的聲音ding.wav
-		CAudio::Instance()->Load(11, "sounds\\noob_00.mp3");	// 載入編號0的聲音ding.wav
-		CAudio::Instance()->Load(12, "sounds\\dream_01.mp3");	// 載入編號0的聲音ding.wav
-		CAudio::Instance()->Load(13, "sounds\\rock_10.mp3");	// 載入編號0的聲音ding.wav
-		CAudio::Instance()->Load(14, "sounds\\paradise_11.mp3");	// 載入編號0的聲音ding.wav
-		CAudio::Instance()->Load(15, "sounds\\laser.mp3");	// 載入編號0的聲音ding.wav
+		CAudio::Instance()->Load(0, "sounds\\coin.mp3");		// 載入金幣的聲音
+		CAudio::Instance()->Load(15, "sounds\\laser.mp3");		// 載入雷射的聲音
+		CAudio::Instance()->Load(11, "sounds\\noob_00.mp3");	// 載入地圖一的聲音
+		CAudio::Instance()->Load(12, "sounds\\dream_01.mp3");	// 載入地圖二的聲音
+		CAudio::Instance()->Load(13, "sounds\\rock_10.mp3");	// 載入地圖三的聲音
+		CAudio::Instance()->Load(14, "sounds\\paradise_11.mp3");// 載入地圖四的聲音
 	}
 
 	void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		const char KEY_LEFT = 0x25; // keyboard左箭頭
-		const char KEY_UP = 0x26; // keyboard上箭頭
-		const char KEY_RIGHT = 0x27; // keyboard右箭頭
-		const char KEY_DOWN = 0x28; // keyboard下箭頭
-		Clearance = 0;
-
+		const char KEY_LEFT = 0x25;		// keyboard左箭頭
+		const char KEY_RIGHT = 0x27;	// keyboard右箭頭
+		Clearance = 0;					// 通關密技順序歸零
 		if (nChar == KEY_LEFT) {
 			ALLoB.SetMovingLeft(true);
 		}
@@ -476,10 +423,8 @@ namespace game_framework {
 
 	void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	{
-		const char KEY_LEFT = 0x25; // keyboard左箭頭
-		const char KEY_UP = 0x26; // keyboard上箭頭
+		const char KEY_LEFT = 0x25;  // keyboard左箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
-		const char KEY_DOWN = 0x28; // keyboard下箭頭
 
 		Clearance = 0;
 		if (nChar == KEY_LEFT) {
@@ -490,35 +435,20 @@ namespace game_framework {
 		}
 	}
 
-	void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
-	{
-
-	}
-
 	void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
-		Clearance = 1;
-	}
-
-	void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
-	{
-		// 沒事。如果需要處理滑鼠移動的話，寫code在這裡
-	}
-
-	void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
-	{
-
+		Clearance = 1;  // 通關密技的第一個按鍵
 	}
 
 	void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
 	{
-		if (Clearance) {
+		if (Clearance) {  // 密技通關
 			isFinish = true;
-			CAudio::Instance()->Stop(11);	// 停止 MIDI
-			CAudio::Instance()->Stop(12);	// 停止 MIDI
-			CAudio::Instance()->Stop(13);	// 停止 MIDI
-			CAudio::Instance()->Stop(14);	// 停止 MIDI
-			GotoGameState(GAME_STATE_OVER);
+			CAudio::Instance()->Stop(11);	// 停止 地圖一的聲音
+			CAudio::Instance()->Stop(12);	// 停止 地圖二的聲音
+			CAudio::Instance()->Stop(13);	// 停止 地圖三的聲音
+			CAudio::Instance()->Stop(14);	// 停止 地圖四的聲音
+			GotoGameState(GAME_STATE_OVER); // 切換至GAME_STATE_OVER
 		}
 	}
 
@@ -537,22 +467,13 @@ namespace game_framework {
 
 	void CGameStateChoose::OnInit()
 	{
-		//
-		// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
-		//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
-		//
-		ShowInitProgress(0);	// 一開始的loading進度為0%
+		ShowInitProgress(0);	
 		//
 		// 開始載入資料
 		//
 		select.LoadBitmap(".\\Bitmaps\\mapselect.bmp");
 		return_dark.LoadBitmap(".\\Bitmaps\\return.bmp");
-
-		//title.LoadBitmap("./game_image/background.bmp");
-		//Sleep(300);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
-		//
-		// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
-		//
+		CAudio::Instance()->Load(96, "sounds\\button.mp3");	// 載入按鈕聲音
 	}
 
 	void CGameStateChoose::OnBeginState()
@@ -640,6 +561,7 @@ namespace game_framework {
 		if (new_point.x > 0 && new_point.y > 0) {
 			if (new_point.x < allx && new_point.y < ally) {
 				in = true;
+				CAudio::Instance()->Play(96);
 			}
 			else {
 				in = false;
@@ -651,8 +573,3 @@ namespace game_framework {
 		}
 	}
 }
-
-//154 67   351 272   地圖一
-//465 68   663 273   地圖二
-//154 291  351 497   地圖三
-//466 292  663 497   地圖四
