@@ -67,6 +67,12 @@ namespace game_framework {
 		CMovingBitmap instructions;                     // 說明的圖
 		bool intro_view;                                // 顯示說明
 		bool intro_in;
+
+		CMovingBitmap about_btn;                            // about的按鈕
+		CMovingBitmap about_dark;                       // about的按鈕_暗掉
+		CMovingBitmap about_img;                     // about的圖
+		bool about_view;                                // 顯示about
+		bool about_in;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

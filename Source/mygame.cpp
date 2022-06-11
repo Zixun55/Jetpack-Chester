@@ -91,6 +91,9 @@ namespace game_framework {
 		intro.LoadBitmap(".\\Bitmaps\\background_instructionbutton.bmp", RGB(255, 255, 255));
 		intro_dark.LoadBitmap(".\\Bitmaps\\background_instructionbutton_dark.bmp", RGB(255, 255, 255));
 		instructions.LoadBitmap(".\\Bitmaps\\instruction.bmp", RGB(255, 255, 255));
+		about_btn.LoadBitmap(".\\Bitmaps\\aboutbutton.bmp", RGB(255, 255, 255));
+		about_dark.LoadBitmap(".\\Bitmaps\\aboutbutton_dark.bmp", RGB(255, 255, 255));
+		about_img.LoadBitmap(".\\Bitmaps\\about.bmp", RGB(255, 255, 255));
 		CAudio::Instance()->Load(99, "sounds\\button.mp3");	// ¸ü¤J«ö¶sÁn­µ
 	}
 
@@ -98,15 +101,18 @@ namespace game_framework {
 	{
 		in = false;
 		intro_in = intro_view = false;
+		about_in = about_view = false;
 	}
 	void CGameStateInit::OnMouseMove(UINT nFlags, CPoint point)
 	{
 		CPoint start0(243, 250);
 		CPoint start_intro_point(243, 350);
+		CPoint start_about_point(620, 460);
 		int allx = 296;
 		int ally = 87;
 		CPoint new_point = point - start0;
 		CPoint intro_point = point - start_intro_point;
+		CPoint about_point = point - start_about_point;
 		if (new_point.x > 0 && new_point.y > 0) {
 			if (new_point.x < allx && new_point.y < ally) {
 				in = true;
@@ -133,6 +139,19 @@ namespace game_framework {
 		{
 			intro_in = false;
 		}
+		if (about_point.x > 0 && about_point.y > 0) {
+			if (about_point.x < allx && about_point.y < ally) {
+				about_in = true;
+				CAudio::Instance()->Play(99,false);
+			}
+			else {
+				about_in = false;
+			}
+		}
+		else
+		{
+			about_in = false;
+		}
 	}
 	void CGameStateInit::OnLButtonUp(UINT nFlags, CPoint point)
 	{
@@ -154,6 +173,16 @@ namespace game_framework {
 		else if (intro_point.x > 0 && intro_point.y > 0) {
 			if (intro_point.x < allx && intro_point.y < ally) {
 				intro_view = true;
+			}
+		}
+		CPoint start_about_point(620, 460);
+		CPoint about_point = point - start_about_point;
+		if (about_view) {
+			about_view = false;
+		}
+		else if (about_point.x > 0 && about_point.y > 0) {
+			if (about_point.x < allx && about_point.y < ally) {
+				about_view = true;
 			}
 		}
 	}
@@ -181,6 +210,18 @@ namespace game_framework {
 		if (intro_view) {
 			instructions.SetTopLeft(125, 110);
 			instructions.ShowBitmap();
+		}
+		if (about_in) {
+			about_dark.SetTopLeft(620, 460);
+			about_dark.ShowBitmap();
+		}
+		else {
+			about_btn.SetTopLeft(620, 460);
+			about_btn.ShowBitmap();
+		}
+		if (about_view) {
+			about_img.SetTopLeft(125, 110);
+			about_img.ShowBitmap();
 		}
 
 	}
