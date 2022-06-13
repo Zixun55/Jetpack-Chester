@@ -138,7 +138,6 @@ namespace game_framework {
 		void OnInit();  								// 遊戲的初值及圖形設定
 		void OnLButtonUp(UINT nFlags, CPoint point);
 		void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作 
-
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
