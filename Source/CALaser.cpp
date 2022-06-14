@@ -148,14 +148,12 @@ namespace game_framework {
 			check_chx2 = true;
 		}
 		for (int i = 0; i < 10; i++) {
-			
 			if (check_box) {
 				map.CantMoving(true);
 				boxes[i].CantMoving(true);
 				laser[i].CantMoving(true);
 				laser2[i].CantMoving(true);
 				coins[i].CantMoving(true);
-
 				map.MovingCheck(check_chx, check_chx2);
 				boxes[i].MovingCheck(check_chx, check_chx2);
 				laser[i].MovingCheck(check_chx, check_chx2);
