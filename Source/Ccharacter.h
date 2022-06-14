@@ -17,6 +17,7 @@ namespace game_framework {
 		void SetMovingRight(bool flag);		// 按下方向鍵右鍵
 		void SetXY(int nx, int ny);			// 設定角色的座標
 		void CantMoving(bool flag);			// 判斷物件是否能移動
+		bool isCantMoving();                // 回傳cantMoing
 	protected:
 		CAnimation animation;				// 用動畫做角色動畫
 		CMovingBitmap steam, steam1, steam2,steamR, steamR1, steamR2; // 用動畫做蒸氣的動畫
@@ -27,6 +28,7 @@ namespace game_framework {
 		bool isMovingUp;
 		bool cantMoving;
 		int Bigthanbox;
+
 	private:
 		bool con = true;
 		int counter;

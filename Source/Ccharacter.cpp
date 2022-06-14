@@ -96,6 +96,9 @@ namespace game_framework {
 				if (GetY2() < 512) {
 					y += 7;
 				}
+				else {
+					cantMoving = true;
+				}
 			}
 		}
 	}
@@ -186,5 +189,7 @@ namespace game_framework {
 	void Ccharacter::CantMoving(bool flag) {
 		cantMoving = flag;
 	}
-
+	bool Ccharacter::isCantMoving() {
+		return cantMoving;
+	}
 }
