@@ -196,7 +196,9 @@ namespace game_framework {
 		///////////////////////////////////////
 		chtest.OnMove();
 		bool ch_cantMoving = chtest.isCantMoving();
+		bool Map_zero = map.map_zero();
 		map.ch_CantMoving(ch_cantMoving);
+
 		map.OnMove();
 		for (int i = 0; i < 10; i++) {
 			laser[i].ch_CantMoving(ch_cantMoving);

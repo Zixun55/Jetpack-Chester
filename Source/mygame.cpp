@@ -278,7 +278,6 @@ namespace game_framework {
 		points.LoadBitmap();
 		CAudio::Instance()->Load(16, "sounds\\finish.mp3");	// 更ЧΘ羘
 		CAudio::Instance()->Load(17, "sounds\\fail.mp3");	// 更ア毖羘
-		CAudio::Instance()->Load(98, "sounds\\button.mp3");	// 更秙羘
 	}
 
 	void CGameStateOver::OnShow()
@@ -322,7 +321,7 @@ namespace game_framework {
 		if (new_point.x > 0 && new_point.y > 0) {
 			if (new_point.x < allx && new_point.y < ally) {
 				in = true;
-				CAudio::Instance()->Play(98,false);
+				CAudio::Instance()->Play(99,false);
 			}
 			else {
 				in = false;
@@ -337,7 +336,7 @@ namespace game_framework {
 		if (ne_point.x > 0 && ne_point.y > 0) {
 			if (ne_point.x < allx && ne_point.y < ally) {
 				in1 = true;
-				CAudio::Instance()->Play(98,false);
+				CAudio::Instance()->Play(99,false);
 			}
 			else {
 				in1 = false;
@@ -453,11 +452,16 @@ namespace game_framework {
 		const char KEY_LEFT = 0x25;		// keyboardオ絙繷
 		const char KEY_RIGHT = 0x27;	// keyboard絙繷
 		Clearance = 0;					// 硄闽盞м抖耴箂
-		if (nChar == KEY_LEFT) {
-			ALLoB.SetMovingLeft(true);
-		}
+		//if (nChar == KEY_LEFT && nChar == KEY_RIGHT) {
+
+		//}
 		if (nChar == KEY_RIGHT) {
+			ALLoB.SetMovingLeft(false);
 			ALLoB.SetMovingRight(true);
+		}
+		else if (nChar == KEY_LEFT) {
+			ALLoB.SetMovingRight(false);
+			ALLoB.SetMovingLeft(true);
 		}
 
 	}
@@ -514,7 +518,6 @@ namespace game_framework {
 		//
 		select.LoadBitmap(".\\Bitmaps\\mapselect.bmp");
 		return_dark.LoadBitmap(".\\Bitmaps\\return.bmp");
-		CAudio::Instance()->Load(96, "sounds\\button.mp3");	// 更秙羘
 	}
 
 	void CGameStateChoose::OnBeginState()
@@ -602,7 +605,7 @@ namespace game_framework {
 		if (new_point.x > 0 && new_point.y > 0) {
 			if (new_point.x < allx && new_point.y < ally) {
 				in = true;
-				CAudio::Instance()->Play(96,false);
+				CAudio::Instance()->Play(99,false);
 			}
 			else {
 				in = false;

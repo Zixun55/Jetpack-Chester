@@ -23,6 +23,7 @@ namespace game_framework {
 		bool FinishMap();							// 是否完成地圖
 		bool Left_Moving_Start();					// 地圖無法在初始點向左移動
 		void ch_CantMoving(bool flag);				// 設定角色之慣性
+		bool map_zero();
 	protected:
 		CAnimation animation;						// 圖
 		int x, y;									// 座標

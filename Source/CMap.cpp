@@ -55,14 +55,15 @@ namespace game_framework {
 	void CMap::OnMove()
 	{
 		const int STEP_SIZE = 5;
-		if (x < 100) {
+		if (x < 1000) {
 			if (isMovingLeft && x >= 0) {
 				x = 0;
-				
+			}
+			else if (x > 0) {
+				x = 0;
 			}
 			else if (isMovingRight && x <= -2324) {
 				x = -2324;
-				
 			}
 			else {
 				if (!cantMoving) {
@@ -161,5 +162,13 @@ namespace game_framework {
 	}
 	void CMap::ch_CantMoving(bool flag) {
 		ch_cantMoving = flag;
+	}
+	bool CMap::map_zero() {
+		if (x >= 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }
