@@ -39,7 +39,7 @@ namespace game_framework {
 		const int Y_POS = 0;
 		x = X_POS;
 		y = Y_POS;
-		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = cantMoving = left_moving_start = false;
+		isMovingLeft = isMovingRight = cantMoving = left_moving_start = false;
 		movingcheck = false;
 	}
 
@@ -66,12 +66,21 @@ namespace game_framework {
 			}
 			else {
 				if (!cantMoving) {
-					if (isMovingLeft) {
-						x += STEP_SIZE;
-					}
 					if (isMovingRight) {
-
-						x -= STEP_SIZE;
+						direct = 0;
+						x -= 1;
+					}
+					if (isMovingLeft) {
+						direct = 1;
+						x += 1;
+					}
+					if (!ch_cantMoving) {
+						if (direct) {
+							x += 3;
+						}
+						else {
+							x -= 3;
+						}
 					}
 				}
 				else if (movingcheck2 && isMovingRight) {
@@ -149,5 +158,8 @@ namespace game_framework {
 	}
 	bool CMap::Left_Moving_Start() {
 		return left_moving_start;
+	}
+	void CMap::ch_CantMoving(bool flag) {
+		ch_cantMoving = flag;
 	}
 }

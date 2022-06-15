@@ -192,10 +192,14 @@ namespace game_framework {
 				coins[i].MovingCheck(check_chx, check_chx2);
 				chtest.CantMoving(false);
 			}
-			boxes[i].OnMove();
 		}
 		///////////////////////////////////////
+		chtest.OnMove();
+		bool ch_cantMoving = chtest.isCantMoving();
+		map.ch_CantMoving(ch_cantMoving);
+		map.OnMove();
 		for (int i = 0; i < 10; i++) {
+			laser[i].ch_CantMoving(ch_cantMoving);
 			laser[i].OnMove();
 			if (laser[i].IsAlive() && laser[i].HitEraser(&chtest)) {
 				laser[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失       
@@ -205,6 +209,7 @@ namespace game_framework {
 			}
 		}
 		for (int i = 0; i < 10; i++) {
+			laser2[i].ch_CantMoving(ch_cantMoving);
 			laser2[i].OnMove();
 			if (laser2[i].IsAlive() && laser2[i].HitEraser(&chtest)) {
 				laser2[i].SetIsAlive(false);                                //如果角色碰到雷射，雷射會消失
@@ -214,6 +219,9 @@ namespace game_framework {
 			}
 		}
 		for (int i = 0; i < 10; i++) {
+			boxes[i].ch_CantMoving(ch_cantMoving);
+			boxes[i].OnMove();
+			coins[i].ch_CantMoving(ch_cantMoving);
 			coins[i].OnMove();
 			if (coins[i].IsAlive() && coins[i].HitEraser(&chtest)) {
 				coins[i].SetIsAlive(false);                                //如果角色碰到錢幣，錢幣會消失        
@@ -222,8 +230,7 @@ namespace game_framework {
 				audio_coin = true;
 			}
 		}
-		map.OnMove();
-		chtest.OnMove();
+		
 		check_box = 0;
 		check_ch = 0;
 	}

@@ -37,7 +37,7 @@ namespace game_framework {
 	void Ccharacter::Initialize()
 	{
 		const int X_POS = 340; //340
-		const int Y_POS = 414;
+		const int Y_POS = 512-75;
 		x = X_POS;
 		y = Y_POS;
 		isMovingLeft = isMovingRight = cantMoving = false;
@@ -62,7 +62,7 @@ namespace game_framework {
 		if (counter > 9) {
 			counter = 1;
 		}
-		const int STEP_SIZE = 20;
+		const int STEP_SIZE = 15;
 		if (y <= 0 && isMovingLeft) {
 			y = 0;
 			if (con) {

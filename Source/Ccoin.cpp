@@ -53,10 +53,20 @@ namespace game_framework {
 			return;
 		if (!cantMoving) {
 			if (isMovingRight) {
-				dx -= 5;
+				direct = 0;
+				dx -= 1;
 			}
 			if (isMovingLeft) {
-				dx += 5;
+				direct = 1;
+				dx += 1;
+			}
+			if (!ch_cantMoving) {
+				if (direct) {
+					dx += 3;
+				}
+				else {
+					dx -= 3;
+				}
 			}
 		}
 		else if (movingcheck2 && isMovingRight) {
@@ -99,5 +109,8 @@ namespace game_framework {
 	void Ccoin::MovingCheck(bool flag, bool flag2) {
 		movingcheck = flag;
 		movingcheck2 = flag2;
+	}
+	void Ccoin::ch_CantMoving(bool flag) {
+		ch_cantMoving = flag;
 	}
 }

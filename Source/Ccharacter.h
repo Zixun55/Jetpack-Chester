@@ -22,16 +22,13 @@ namespace game_framework {
 		CAnimation animation;				// 用動畫做角色動畫
 		CMovingBitmap steam, steam1, steam2,steamR, steamR1, steamR2; // 用動畫做蒸氣的動畫
 		int x, y;							// 角色的座標
-		bool isMovingDown;					// 
-		bool isMovingLeft;
-		bool isMovingRight;
-		bool isMovingUp;
-		bool cantMoving;
-		int Bigthanbox;
+		bool isMovingLeft;					// 按下左鍵
+		bool isMovingRight;					// 按下右鍵
+		bool cantMoving;					// 是否能移動
 
 	private:
-		bool con = true;
-		int counter;
+		bool con = true;					// 角色方向
+		int counter;						// 噴氣方向
 	};
 	
 }
