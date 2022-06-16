@@ -343,7 +343,7 @@ namespace game_framework {
 		Life_num.SetTopLeft(650, 10);
 		Life_num.OnShow();
 		if (judge == 1) {
-			Life_num_dark.SetTopLeft(580, 10);
+			Life_num_dark.SetTopLeft(650, 10);
 			Life_num_dark.OnShow();
 			judge = 0;
 		}
